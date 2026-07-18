@@ -11,7 +11,7 @@ function Player.new(x, y)
     local instance = {
         x = x, y = y,
         velX = 0, velY = 0,
-        width = 32, height = 64
+        width = TileSize, height = TileSize * 2
     }
     setmetatable(instance, Player)
     World:add(instance, instance.x, instance.y, instance.width, instance.height)
@@ -24,18 +24,22 @@ function Player:draw()
 end
 
 function Player:update(dt)
-    local velSpeed = 128
-    local gravity = 64
-    local jumpForce = -64
+    -- Values for character physics
+    local velSpeed = 200
+    local gravity = 6400
+    local jumpForce = -1200
+
+    -- Stops horizontal velocity to avoid sliding
+    self.velX = 0
 
     -- Left
     if love.keyboard.isDown('a') then
-        self.velX = self.velX - velSpeed * dt
+        self.velX = self.velX - velSpeed
     end
-    
-    -- Rigth
+
+    -- Right
     if love.keyboard.isDown('d') then
-        self.velX = self.velX + velSpeed * dt
+        self.velX = self.velX + velSpeed
     end
 
     -- Fall
@@ -63,7 +67,7 @@ function Player:update(dt)
 
     -- Jump
     if onGround and love.keyboard.isDown('w') then
-        self.velY = self.velY + jumpForce * dt
+        self.velY = self.velY + jumpForce
     end
 end
 
@@ -73,9 +77,14 @@ function love.load()
     VW = love.graphics.getWidth()
     VH = love.graphics.getHeight()
 
+    -- Tiling
+    TileSize = 32
+
     -- Create necessary objects
-    World = bump.newWorld(32)
+    World = bump.newWorld(TileSize)
     PlayerInst = Player.new(VW/2, VH/2)
+    COLLIDER_TEST_REMOVE_LATER = { x=VW/6, y=VH/2, sizeX=VW*(2/3), sizeY=VH/2 }
+    World:add(COLLIDER_TEST_REMOVE_LATER, COLLIDER_TEST_REMOVE_LATER.x, COLLIDER_TEST_REMOVE_LATER.y, COLLIDER_TEST_REMOVE_LATER.sizeX, COLLIDER_TEST_REMOVE_LATER.sizeY)
 end
 
 function love.update(dt)
@@ -85,4 +94,5 @@ end
 function love.draw()
     -- Render player
     PlayerInst:draw()
+    love.graphics.rectangle('fill', COLLIDER_TEST_REMOVE_LATER.x, COLLIDER_TEST_REMOVE_LATER.y, COLLIDER_TEST_REMOVE_LATER.sizeX, COLLIDER_TEST_REMOVE_LATER.sizeY)
 end
