@@ -111,7 +111,7 @@ function love.load()
     -- Load assets
     assets.load()
 
-    props.loadMap('maps/level1.lua')
+    props.loadMap('maps/level1.lua', player)
 end
 
 function love.update(dt)

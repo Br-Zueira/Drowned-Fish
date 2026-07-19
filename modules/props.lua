@@ -83,7 +83,7 @@ function props.draw()
 end
 
 -- Level renderer
-function props.loadMap(path)
+function props.loadMap(path, player)
     local map = sti(path)
     local layout = map.layers["Layout"]
     for y = 1, layout.height do
@@ -94,6 +94,18 @@ function props.loadMap(path)
                 local pixelY = (y - 1) * TileSize
                 props.Tile.new(pixelX, pixelY)
             end
+        end
+    end
+
+    local objectLayer = map.layers["Objects"]
+    if not objectLayer then return end
+    for _, obj in ipairs(objectLayer.objects) do
+        if obj.name == "Spawnpoint" then
+            player.spawnX = obj.x
+            player.spawnY = obj.y
+            player.x = obj.x
+            player.y = obj.y
+            World:move(player, obj.x, obj.y)
         end
     end
 end
