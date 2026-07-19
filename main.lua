@@ -1,6 +1,7 @@
 local bump = require 'libs.bump'
 local sti = require 'libs.sti'
 local props = require 'modules.props'
+local assets = require 'modules.assets'
 
 -- Player
 -- Table with metadata to simulate object behaviour
@@ -107,6 +108,9 @@ function love.load()
     -- Create necessary objects
     World = bump.newWorld(TileSize)
     player = Player.new(0, 0)
+
+    -- Load assets
+    assets.load()
 
     -- Test tiles
     props.Tile.new(0, VH-100)
