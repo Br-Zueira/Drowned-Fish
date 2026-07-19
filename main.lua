@@ -102,8 +102,6 @@ function love.load()
     -- Create necessary objects
     World = bump.newWorld(TileSize)
     PlayerInst = Player.new(VW/2, VH/2)
-    COLLIDER_TEST_REMOVE_LATER = { x=VW/6, y=VH/2, sizeX=VW*(2/3), sizeY=VH/2 }
-    World:add(COLLIDER_TEST_REMOVE_LATER, COLLIDER_TEST_REMOVE_LATER.x, COLLIDER_TEST_REMOVE_LATER.y, COLLIDER_TEST_REMOVE_LATER.sizeX, COLLIDER_TEST_REMOVE_LATER.sizeY)
 end
 
 function love.update(dt)
@@ -116,7 +114,4 @@ function love.draw()
 
     -- Render death counter
     love.graphics.print('Deaths: ' .. PlayerInst.deaths, 10, 10, 0, 2, 2)
-
-    -- Test prop
-    love.graphics.rectangle('fill', COLLIDER_TEST_REMOVE_LATER.x, COLLIDER_TEST_REMOVE_LATER.y, COLLIDER_TEST_REMOVE_LATER.sizeX, COLLIDER_TEST_REMOVE_LATER.sizeY)
 end
