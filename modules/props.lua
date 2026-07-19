@@ -82,9 +82,12 @@ function props.draw()
     end
 end
 
--- Level renderer
-function props.loadMap(path, player)
+-- Level renderer and reseter
+function props.reload(path, player)
+    props.propList = {}
     local map = sti(path)
+
+    -- Iterates through a tile layer
     local layout = map.layers["Layout"]
     for y = 1, layout.height do
         for x = 1, layout.width do
@@ -97,17 +100,23 @@ function props.loadMap(path, player)
         end
     end
 
+    -- Iterates through an object layer
     local objectLayer = map.layers["Objects"]
-    if not objectLayer then return end
     for _, obj in ipairs(objectLayer.objects) do
         if obj.name == "Spawnpoint" then
             player.spawnX = obj.x
             player.spawnY = obj.y
             player.x = obj.x
             player.y = obj.y
-            World:move(player, obj.x, obj.y)
+            World:update(player, obj.x, obj.y, player.width, player.height)
         end
     end
+end
+
+-- Custom logic to execute only while first loading the level
+function props.loadMap(path, player)
+    player.levelDeaths = 0
+    props.reload(path, player)
 end
 
 -- Returns props to every module that imports this one

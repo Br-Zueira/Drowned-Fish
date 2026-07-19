@@ -7,6 +7,8 @@ local assets = require 'modules.assets'
 local Player = {};
 Player.__index = Player;
 
+local level = 'maps/level1.lua'
+
 local player
 
 -- Player constructor
@@ -16,7 +18,7 @@ function Player.new(x, y)
         x = x, y = y,
         velX = 0, velY = 0,
         width = TileSize, height = TileSize * 2,
-        deaths = 0
+        deaths = 0, levelDeaths = 0
     }
     setmetatable(instance, Player)
     World:add(instance, instance.x, instance.y, instance.width, instance.height)
@@ -82,17 +84,10 @@ function Player:update(dt)
 end
 
 function Player:death()
-    -- Respawn
-    self.x = self.spawnX
-    self.y = self.spawnY
-    self.velX = 0
-    self.velY = 0
-
-    -- Updates position in physics evaluator
-    World:update(self, self.x, self.y, self.width, self.height)
-
     -- Death counter
     self.deaths = self.deaths + 1
+    -- Reloads map
+    props.reload(level, self)
 end
 
 -- Love standard implementations
@@ -111,7 +106,7 @@ function love.load()
     -- Load assets
     assets.load()
 
-    props.loadMap('maps/level1.lua', player)
+    props.loadMap(level, player)
 end
 
 function love.update(dt)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
  <editorsettings>
-  <export target="../../maps/level1" format="lua"/>
+  <export target="../../maps/level1.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="My tileset" tilewidth="32" tileheight="32" tilecount="2" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
@@ -37,6 +37,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="3" name="Spawnpoint" gid="2" x="160" y="512" width="32" height="32"/>
+  <object id="3" name="Spawnpoint" gid="2" x="160" y="480" width="32" height="32"/>
  </objectgroup>
 </map>
