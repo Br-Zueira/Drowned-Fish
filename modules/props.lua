@@ -1,3 +1,4 @@
+local sti = require 'libs.sti'
 local assets = require 'modules.assets'
 
 -- Wrapper to export everything
@@ -57,11 +58,17 @@ function props.draw()
             local imgW = img:getWidth()
             local imgH = img:getHeight()
 
+            -- Love uses radians, but I want to store in degrees. This solves it
+            local radians = 0
+            if instance.degrees then
+                radians = math.rad(instance.degrees)
+            end
+
             love.graphics.draw(
                 img,
                 instance.x + (instance.sizeX / 2), -- X Offset to match pivot point
                 instance.y + (instance.sizeY / 2), -- Y Offset to match pivot point
-                math.rad(instance.degrees) or 0, -- Love uses radians, but I want to store in degrees. This solves it
+                radians,
                 (instance.sizeX / imgW), -- Changes X pivot point to instance center
                 (instance.sizeY / imgH), -- Changes Y pivot point to instance center
                 imgW/2,
@@ -71,6 +78,22 @@ function props.draw()
         else
             love.graphics.setColor(instance.renderTable.rgba)
             love.graphics.rectangle('fill', instance.x, instance.y, instance.sizeX, instance.sizeY)
+        end
+    end
+end
+
+-- Level renderer
+function props.loadMap(path)
+    local map = sti(path)
+    local layout = map.layers["Layout"]
+    for y = 1, layout.height do
+        for x = 1, layout.width do
+            local tile = layout.data[y][x]
+            if tile then
+                local pixelX = (x - 1) * TileSize
+                local pixelY = (y - 1) * TileSize
+                props.Tile.new(pixelX, pixelY)
+            end
         end
     end
 end

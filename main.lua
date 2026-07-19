@@ -1,5 +1,4 @@
 local bump = require 'libs.bump'
-local sti = require 'libs.sti'
 local props = require 'modules.props'
 local assets = require 'modules.assets'
 
@@ -112,12 +111,7 @@ function love.load()
     -- Load assets
     assets.load()
 
-    -- Test tiles
-    props.Tile.new(0, VH-100)
-    props.Tile.new(32, VH-100)
-    props.Tile.new(64, VH-100)
-    props.Tile.new(96, VH-100)
-    props.Tile.new(128, VH-100)
+    props.loadMap('maps/level1.lua')
 end
 
 function love.update(dt)
