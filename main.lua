@@ -11,7 +11,8 @@ function Player.new(x, y)
     local instance = {
         x = x, y = y,
         velX = 0, velY = 0,
-        width = TileSize, height = TileSize * 2
+        width = TileSize, height = TileSize * 2,
+        deaths = 0
     }
     setmetatable(instance, Player)
     World:add(instance, instance.x, instance.y, instance.width, instance.height)
@@ -69,6 +70,24 @@ function Player:update(dt)
     if onGround and love.keyboard.isDown('w') then
         self.velY = self.velY + jumpForce
     end
+
+    if self.y > VH then
+        self:death(VW/2, VH/2)
+    end
+end
+
+function Player:death(x, y)
+    -- Respawn
+    self.x = x
+    self.y = y
+    self.velX = 0
+    self.velY = 0
+
+    -- Updates position in physics evaluator
+    World:update(self, self.x, self.y, self.width, self.height)
+
+    -- Death counter
+    self.deaths = self.deaths + 1
 end
 
 -- Love standard implementations
@@ -94,5 +113,10 @@ end
 function love.draw()
     -- Render player
     PlayerInst:draw()
+
+    -- Render death counter
+    love.graphics.print('Deaths: ' .. PlayerInst.deaths, 10, 10, 0, 2, 2)
+
+    -- Test prop
     love.graphics.rectangle('fill', COLLIDER_TEST_REMOVE_LATER.x, COLLIDER_TEST_REMOVE_LATER.y, COLLIDER_TEST_REMOVE_LATER.sizeX, COLLIDER_TEST_REMOVE_LATER.sizeY)
 end
