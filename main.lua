@@ -1,14 +1,18 @@
 local bump = require 'libs.bump'
 local sti = require 'libs.sti'
+local props = require 'modules.props'
 
 -- Player
 -- Table with metadata to simulate object behaviour
 local Player = {};
 Player.__index = Player;
 
+local player
+
 -- Player constructor
 function Player.new(x, y)
     local instance = {
+        spawnX = x, spawnY = y,
         x = x, y = y,
         velX = 0, velY = 0,
         width = TileSize, height = TileSize * 2,
@@ -21,6 +25,7 @@ end
 
 -- Player methods
 function Player:draw()
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
 
@@ -72,14 +77,14 @@ function Player:update(dt)
     end
 
     if self.y > VH then
-        self:death(VW/2, VH/2)
+        self:death()
     end
 end
 
-function Player:death(x, y)
+function Player:death()
     -- Respawn
-    self.x = x
-    self.y = y
+    self.x = self.spawnX
+    self.y = self.spawnY
     self.velX = 0
     self.velY = 0
 
@@ -101,17 +106,28 @@ function love.load()
 
     -- Create necessary objects
     World = bump.newWorld(TileSize)
-    PlayerInst = Player.new(VW/2, VH/2)
+    player = Player.new(0, 0)
+
+    -- Test tiles
+    props.Tile.new(0, VH-100)
+    props.Tile.new(32, VH-100)
+    props.Tile.new(64, VH-100)
+    props.Tile.new(96, VH-100)
+    props.Tile.new(128, VH-100)
 end
 
 function love.update(dt)
-    PlayerInst:update(dt)
+    player:update(dt)
 end
 
 function love.draw()
     -- Render player
-    PlayerInst:draw()
+    player:draw()
+
+    -- Render scenary
+    props.draw()
 
     -- Render death counter
-    love.graphics.print('Deaths: ' .. PlayerInst.deaths, 10, 10, 0, 2, 2)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print('Deaths: ' .. player.deaths, 10, 10, 0, 2, 2)
 end
