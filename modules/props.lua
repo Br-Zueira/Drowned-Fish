@@ -47,6 +47,34 @@ function props.Tile.new(x, y)
     return instance
 end
 
+-- Props that kill player if touched, such as spikes or saws
+props.Killable = {}
+props.Killable.__index = props.Killable
+setmetatable(props.Killable, props)
+
+function props.Killable.new(x, y, sizeX, sizeY, renderTable)
+    local instance = props.prop.new(x, y, sizeX, sizeY, renderTable)
+    setmetatable(instance, props.Killable)
+    return instance
+end
+
+function props.Killable:update(dt, player)
+    local cols, len = World:check(self)
+    for i = 1, len do
+        local col = cols[i]
+        if col.other == player then
+            player:death()
+            break
+        end
+    end
+end
+
+function props.update(dt, player)
+    for _, obj in ipairs(props.propList) do
+        if obj.update then obj:update(dt, player) end
+    end
+end
+
 -- Renders every prop in the map
 function props.draw()
     for _, instance in ipairs(props.propList) do
