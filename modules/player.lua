@@ -12,7 +12,9 @@ function Player.new()
         velX = 0, velY = 0,
         width = TileSize, height = TileSize * 2,
         deaths = 0, levelDeaths = 0,
-        coyoteMax = 0.1, coyoteTimer = 0
+        coyoteMax = 0.1, coyoteTimer = 0,
+        jumpBufferMax = 0.1, jumpBufferTimer = 0,
+        jumpCooldown = false
     }
     setmetatable(instance, Player)
     World:add(instance, instance.x, instance.y, instance.width, instance.height)
@@ -44,12 +46,12 @@ function Player:update(dt)
     -- Stops horizontal velocity to avoid sliding
     self.velX = 0
 
-    -- Left
+    -- Runs to left
     if love.keyboard.isDown('a') then
         self.velX = self.velX - velSpeed
     end
 
-    -- Right
+    -- Runs to right
     if love.keyboard.isDown('d') then
         self.velX = self.velX + velSpeed
     end
@@ -64,7 +66,7 @@ function Player:update(dt)
     self.x = realX
     self.y = realY
 
-    -- Loop through collisions to check if we are standing on the floor
+    -- Loop through collisions to check if player is standing on the floor
     local onGround = false
     for i = 1, len do
         local col = cols[i]
@@ -72,21 +74,36 @@ function Player:update(dt)
         if col.normal.y == -1 then -- Hit something below player
             self.velY = 0
             onGround = true -- Player is grounded
-            self.coyoteTimer = self.coyoteMax
+            self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
         end
     end
 
+    -- Coyote timer makes jumping feel smoother 
+    -- Because it gives an extra "pixel" or time to jump
     if not onGround then
-        self.coyoteTimer = self.coyoteTimer - dt
+        self.coyoteTimer = self.coyoteTimer - dt -- Timer counts down
     end
-    if self.coyoteTimer < 0 then self.coyoteTimer = 0 end
+    if self.coyoteTimer < 0 then self.coyoteTimer = 0 end -- Timer can't be negative
 
-    -- Jump
-    if (onGround or self.coyoteTimer > 0) and love.keyboard.isDown('w') then
-        self.velY = self.velY + jumpForce
-        self.coyoteTimer = 0
+    -- Buffer that saves if player tries to jump before hitting ground,
+    -- Making game feel more responsive
+    self.jumpBufferTimer = self.jumpBufferTimer - dt
+    if self.jumpBufferTimer < 0 then self.jumpBufferTimer = 0 end
+
+    -- Jump manager
+    if love.keyboard.isDown('w') then
+        if (onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 and not self.jumpCooldown then
+            self.velY = self.velY + jumpForce -- The jump itself
+            self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
+            self.jumpBufferTimer = 0 -- Resets the buffer
+            self.jumpCooldown = true -- Locks jumping ability until user presses key again
+        else
+            self.jumpBufferTimer = self.jumpBufferMax
+        end
+    else
+        self.jumpCooldown = false -- Removes cooldown if key not pressed
     end
 
     if self.y > VH then
