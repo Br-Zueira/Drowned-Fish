@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 13,
+  nextobjectid = 14,
   properties = {},
   tilesets = {
     {
@@ -36,7 +36,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 3,
+      tilecount = 4,
       tiles = {
         {
           id = 0,
@@ -58,6 +58,13 @@ return {
           image = "../assets/images/spike.png",
           width = 32,
           height = 16
+        },
+        {
+          id = 4,
+          type = "Goal",
+          image = "../assets/images/goal.png",
+          width = 32,
+          height = 32
         }
       }
     }
@@ -93,8 +100,8 @@ return {
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
         1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -148,21 +155,6 @@ return {
           properties = {}
         },
         {
-          id = 11,
-          name = "Spike",
-          type = "",
-          shape = "rectangle",
-          x = 896,
-          y = 544,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 12,
           name = "Spike",
           type = "",
@@ -174,6 +166,21 @@ return {
           rotation = 0,
           opacity = 1,
           gid = 4,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 13,
+          name = "Goal",
+          type = "",
+          shape = "rectangle",
+          x = 928,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 5,
           visible = true,
           properties = {}
         }

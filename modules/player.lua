@@ -7,7 +7,6 @@ Player.__index = Player;
 -- Player constructor
 function Player.new()
     local instance = {
-        spawnX = 0, spawnY = 0,
         x = 0, y = 0,
         velX = 0, velY = 0,
         width = TileSize, height = TileSize,
@@ -70,6 +69,15 @@ function Player:update(dt)
     local onGround = false
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
+
+        local type = col.other.type
+        if type == 'Hazard' then
+            self:death()
+            return
+        elseif type == 'Goal' then
+            world.nextLevel(self)
+            return
+        end
 
         if col.normal.y == -1 then -- Hit something below player
             self.velY = 0

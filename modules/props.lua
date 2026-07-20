@@ -44,37 +44,30 @@ function props.Tile.new(x, y)
     return instance
 end
 
--- Props that kill player if touched, such as spikes or saws
-props.Killable = {}
-props.Killable.__index = props.Killable
-setmetatable(props.Killable, props.Prop)
-
--- Lethal props
-function props.Killable.new(x, y, sizeX, sizeY, renderTable)
-    local instance = props.Prop.new(x, y, sizeX, sizeY, renderTable)
-    setmetatable(instance, props.Killable)
-    instance.isTrigger = true
-    return instance
-end
-
-function props.Killable:update(dt, player)
-    local items, len = World:queryRect(self.x, self.y, self.sizeX, self.sizeY)
-    for i = 1, len do
-        if items[i] == player then
-            player:death()
-            break
-        end
-    end
-end
-
 -- Spike
 props.Spike = {}
 props.Spike.__index = props.Spike
-setmetatable(props.Spike, props.Killable)
+setmetatable(props.Spike, props.Prop)
 
 function props.Spike.new(x, y)
-    local instance = props.Killable.new(x, y - TileSize/2, TileSize, TileSize/2, { isImg=true, imgName='spike' })
+    local instance = props.Prop.new(x, y - TileSize/2, TileSize, TileSize/2, { isImg=true, imgName='spike' })
+    instance.isTrigger = true
+    instance.type = 'Hazard'
     setmetatable(instance, props.Spike)
+    return instance
+end
+
+-- Goal
+props.Goal = {}
+props.Goal.__index = props.Goal
+setmetatable(props.Goal, props.Prop)
+
+function props.Goal.new(x, y)
+    y = y - TileSize
+    local instance = props.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
+    instance.isTrigger = true
+    instance.type = 'Goal'
+    setmetatable(instance, props.Goal)
     return instance
 end
 

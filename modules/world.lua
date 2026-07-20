@@ -9,7 +9,7 @@ local level
 -- Updates level
 function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
-        if obj.update then obj:update(dt, player) end
+        if obj.update then obj:update(dt, player, level) end
     end
 end
 
@@ -69,14 +69,13 @@ function world.reload(player)
     local objectLayer = map.layers["Objects"]
     for _, obj in ipairs(objectLayer.objects) do
         if obj.name == "Spawnpoint" then
-            player.spawnX = obj.x
-            player.spawnY = obj.y - TileSize
             player.x = obj.x
             player.y = obj.y - TileSize
             World:update(player, obj.x, obj.y - TileSize, player.width, player.height)
-        end
-        if obj.name == "Spike" then
+        elseif obj.name == "Spike" then
             props.Spike.new(obj.x, obj.y)
+        elseif obj.name == "Goal" then
+            props.Goal.new(obj.x, obj.y)
         end
     end
 end
@@ -86,6 +85,11 @@ function world.loadMap(newLevel, player)
     level = newLevel
     player.levelDeaths = 0
     world.reload(player)
+end
+
+function world.nextLevel(player)
+    level = level + 1
+    world.loadMap(level, player)
 end
 
 return world
