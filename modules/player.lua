@@ -95,7 +95,7 @@ function Player:update(dt)
     -- Jump manager
     if love.keyboard.isDown('w') then
         if (onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 and not self.jumpCooldown then
-            self.velY = self.velY + jumpForce -- The jump itself
+            self.velY = jumpForce -- The jump itself
             self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
             self.jumpBufferTimer = 0 -- Resets the buffer
             self.jumpCooldown = true -- Locks jumping ability until user presses key again
