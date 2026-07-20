@@ -16,7 +16,6 @@ function Player.new()
         jumpCooldown = false
     }
     setmetatable(instance, Player)
-    World:add(instance, instance.x, instance.y, instance.width, instance.height)
     return instance
 end
 

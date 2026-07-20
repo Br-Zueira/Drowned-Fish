@@ -1,3 +1,4 @@
+local bump = require 'libs.bump'
 local sti = require 'libs.sti'
 local assets = require 'modules.assets'
 local props = require 'modules.props'
@@ -49,16 +50,13 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
-    -- Cleans the physics world
-    local items, len = World:getItems()
-    for i = 1, len do
-        local item = items[i]
-        if item ~= player then World:remove(item) end
-    end
-
     -- Cleans the logic world
     props.propList = {}
     local map = sti('maps/level' .. level .. '.lua')
+
+    -- Recreates the physics world
+    World = bump.newWorld(TileSize)
+    World:add(player, player.x, player.y, player.width, player.height)
 
     -- Iterates through a tile layer
     local layout = map.layers["Layout"]

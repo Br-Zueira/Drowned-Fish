@@ -1,4 +1,3 @@
-local bump = require 'libs.bump'
 local world = require 'modules.world'
 local assets = require 'modules.assets'
 local Player = require 'modules.player'
@@ -15,7 +14,6 @@ function love.load()
     TileSize = 32
 
     -- Create necessary objects
-    World = bump.newWorld(TileSize)
     player = Player.new()
 
     -- Load assets
