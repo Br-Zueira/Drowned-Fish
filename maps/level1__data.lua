@@ -24,11 +24,33 @@ function customProps.FakeGoal:update(_, player)
     end
 end
 
+customProps.InviSpike = {}
+customProps.InviSpike.__index = customProps.InviSpike
+setmetatable(customProps.InviSpike, props.Prop)
 
-function customProps.handler(obj)
-    local ppt = obj.properties
-    if obj.name == 'FakeGoal' then
-        customProps.FakeGoal.new(obj.x, obj.y, ppt.newX, ppt.newY, ppt.radius)
+function customProps.InviSpike.new(x, y, radius)
+    y = y - TileSize/2
+    local instance = props.Prop.new(x, y, TileSize, TileSize/2, { isImg=nil })
+    instance.radius = radius
+    setmetatable(instance, customProps.InviSpike)
+    return instance
+end
+
+function customProps.InviSpike:update(_, player)
+    if props.isPlayerInRadius(self, player, self.radius) then
+        self:delete()
+        props.Spike.new(self.x, self.y+TileSize/2)
+    end
+end
+
+-- O is object
+function customProps.handler(o)
+    local n = o.name
+    local p = o.properties
+    if n == 'FakeGoal' then
+        customProps.FakeGoal.new(o.x, o.y, p.newX, p.newY, p.radius)
+    elseif n == 'InviSpike' then
+        customProps.InviSpike.new(o.x, o.y, p.radius)
     end
 end
 return customProps
