@@ -10,7 +10,7 @@ props.Prop.__index = props.Prop
 
 -- Creates a generic prop
 function props.Prop.new(x, y, sizeX, sizeY, renderTable)
-    -- Can be either {false, r, g, b, a} or {true, imgName}
+    -- Can be either {false, r, g, b, a}, {true, imgName} or {nil}
     renderTable = renderTable or { isImg=false, rgba={1, 1, 1, 1} }
 
     -- Creates instance

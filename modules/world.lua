@@ -17,7 +17,10 @@ end
 -- Renders every prop in the map
 function world.draw()
     for _, instance in ipairs(props.propList) do
-        if (instance.renderTable.isImg) then
+        -- If isImg is true, renders from asset
+        -- If it's false, renders from solid color
+        -- If it's nil, renders nothing (invisible)
+        if instance.renderTable.isImg then
             -- Get the image asset
             local img = assets.images[instance.renderTable.imgName]
 
@@ -41,7 +44,7 @@ function world.draw()
                 imgW/2,
                 imgH/2
             )
-        else
+        elseif instance.renderTable.isImg == false then
             love.graphics.setColor(instance.renderTable.rgba)
             love.graphics.rectangle('fill', instance.x, instance.y, instance.sizeX, instance.sizeY)
         end
