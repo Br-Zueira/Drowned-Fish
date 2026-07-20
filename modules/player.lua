@@ -69,7 +69,7 @@ function Player:update(dt)
     -- Loop through collisions to check if player is standing on the floor
     local onGround = false
     for i = 1, len do
-        local col = cols[i]
+        local col = cols[i] -- Colision of colisions
 
         if col.normal.y == -1 then -- Hit something below player
             self.velY = 0
@@ -106,6 +106,7 @@ function Player:update(dt)
         self.jumpCooldown = false -- Removes cooldown if key not pressed
     end
 
+    -- Kills player if they fall out of screen
     if self.y > VH then
         self:death()
     end
