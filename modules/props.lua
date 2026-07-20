@@ -55,13 +55,12 @@ setmetatable(props.Killable, props.Prop)
 function props.Killable.new(x, y, sizeX, sizeY, renderTable)
     local instance = props.Prop.new(x, y, sizeX, sizeY, renderTable)
     setmetatable(instance, props.Killable)
+    instance.isTrigger = true
     return instance
 end
 
 function props.Killable:update(dt, player)
-    local items, len = World:queryRect(self.x-2, self.y-2, self.sizeX+4, self.sizeY+4)
-    -- 2. Print positions to see if they actually overlap
-    local px, py, pw, ph = World:getRect(player)
+    local items, len = World:queryRect(self.x, self.y, self.sizeX, self.sizeY)
     for i = 1, len do
         if items[i] == player then
             player:death()

@@ -31,6 +31,16 @@ function Player:draw()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
 
+local function worldFilter(item, other)
+    -- If 'other' is a trigger zone or trap trigger
+    if other.isTrigger then
+        return 'cross'
+    end
+    
+    -- Default solid collision for walls/floors
+    return 'slide' 
+end
+
 function Player:update(dt)
     -- Values for character physics
     local velSpeed = 200
@@ -56,7 +66,7 @@ function Player:update(dt)
     local expectedY = self.y + (self.velY * dt)
 
     -- Colision
-    local realX, realY, cols, len = World:move(self, expectedX, expectedY)
+    local realX, realY, cols, len = World:move(self, expectedX, expectedY, worldFilter)
     self.x = realX
     self.y = realY
 
