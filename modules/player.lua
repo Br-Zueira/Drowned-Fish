@@ -10,7 +10,7 @@ function Player.new()
         spawnX = 0, spawnY = 0,
         x = 0, y = 0,
         velX = 0, velY = 0,
-        width = TileSize, height = TileSize * 2,
+        width = TileSize, height = TileSize,
         deaths = 0, levelDeaths = 0,
         coyoteMax = 0.1, coyoteTimer = 0,
         jumpBufferMax = 0.1, jumpBufferTimer = 0,
@@ -39,9 +39,9 @@ end
 
 function Player:update(dt)
     -- Values for character physics
-    local velSpeed = 200
+    local velSpeed = 250
     local gravity = 6400
-    local jumpForce = -1200
+    local jumpForce = -1300
 
     -- Stops horizontal velocity to avoid sliding
     self.velX = 0
