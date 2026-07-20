@@ -74,6 +74,7 @@ function world.reload(player)
     -- Iterates through an object layer
     local objectLayer = map.layers["Objects"]
     for _, obj in ipairs(objectLayer.objects) do
+        -- Basic/universal props
         if obj.name == "Spawnpoint" then
             player.x = obj.x
             player.y = obj.y - TileSize
@@ -82,8 +83,10 @@ function world.reload(player)
             props.Spike.new(obj.x, obj.y)
         elseif obj.name == "Goal" then
             props.Goal.new(obj.x, obj.y)
-        elseif obj.name == "FakeGoal" then
-            props.FakeGoal.new(obj.x, obj.y, obj.properties.newX, obj.properties.newY, obj.properties.radius)
+        else
+            -- Level individual props
+            local data = require('maps.level' .. level .. '__data')
+            data.handler(obj)
         end
     end
 end

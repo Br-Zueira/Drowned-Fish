@@ -102,27 +102,5 @@ function props.Goal.new(x, y)
     return instance
 end
 
--- Fake goal
-props.FakeGoal = {}
-props.FakeGoal.__index = props.FakeGoal
-setmetatable(props.FakeGoal, props.Prop)
-
-function props.FakeGoal.new(x, y, newX, newY, radius)
-    y = y - TileSize
-    local instance = props.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
-    instance.newX = newX
-    instance.newY = newY
-    instance.radius = radius
-    setmetatable(instance, props.FakeGoal)
-    return instance
-end
-
-function props.FakeGoal:update(_, player)
-    if props.isPlayerInRadius(self, player, self.radius) then
-        props.Goal.new(self.newX, self.newY)
-        self:delete()
-    end
-end
-
 -- Returns props to every module that imports this one
 return props
