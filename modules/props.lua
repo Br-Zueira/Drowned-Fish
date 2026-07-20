@@ -27,6 +27,37 @@ function props.Prop.new(x, y, sizeX, sizeY, renderTable)
     return instance
 end
 
+function props.Prop:delete()
+    -- Remove prop from physics
+    if World:hasItem(self) then World:remove(self) end
+
+    -- Remove prop form prop list
+    for i, p in ipairs(props.propList) do
+        if p == self then 
+            table.remove(props.propList, i)
+            return
+        end
+    end
+end
+
+-- Checks if player is closer from prop than given radius
+function props.isPlayerInRadius(prop, player, radius)
+    -- Find center point of player
+    local px = player.x + (player.width / 2)
+    local py = player.y + (player.height / 2)
+
+    -- Find center point of prop
+    local tx = prop.x + (prop.sizeX / 2)
+    local ty = prop.y + (prop.sizeY / 2)
+
+    -- Vector distance between centers
+    local dx = px - tx
+    local dy = py - ty
+
+    -- Circular radius check using squared distance to reduce performance cost
+    return (dx * dx + dy * dy) <= (radius * radius)
+end
+
 -- Inheriters
 props.Tile = {}
 props.Tile.__index = props.Tile
@@ -69,6 +100,28 @@ function props.Goal.new(x, y)
     instance.type = 'Goal'
     setmetatable(instance, props.Goal)
     return instance
+end
+
+-- Fake goal
+props.FakeGoal = {}
+props.FakeGoal.__index = props.FakeGoal
+setmetatable(props.FakeGoal, props.Prop)
+
+function props.FakeGoal.new(x, y, newX, newY, radius)
+    y = y - TileSize
+    local instance = props.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
+    instance.newX = newX
+    instance.newY = newY
+    instance.radius = radius
+    setmetatable(instance, props.FakeGoal)
+    return instance
+end
+
+function props.FakeGoal:update(_, player)
+    if props.isPlayerInRadius(self, player, self.radius) then
+        props.Goal.new(self.newX, self.newY)
+        self:delete()
+    end
 end
 
 -- Returns props to every module that imports this one

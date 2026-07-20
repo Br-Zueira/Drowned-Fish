@@ -9,7 +9,7 @@ local level
 -- Updates level
 function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
-        if obj.update then obj:update(dt, player, level) end
+        if obj.update then obj:update(dt, player) end
     end
 end
 
@@ -49,6 +49,14 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
+    -- Cleans the physics world
+    local items, len = World:getItems()
+    for i = 1, len do
+        local item = items[i]
+        if item ~= player then World:remove(item) end
+    end
+
+    -- Cleans the logic world
     props.propList = {}
     local map = sti('maps/level' .. level .. '.lua')
 
@@ -76,6 +84,8 @@ function world.reload(player)
             props.Spike.new(obj.x, obj.y)
         elseif obj.name == "Goal" then
             props.Goal.new(obj.x, obj.y)
+        elseif obj.name == "FakeGoal" then
+            props.FakeGoal.new(obj.x, obj.y, obj.properties.newX, obj.properties.newY, obj.properties.radius)
         end
     end
 end
