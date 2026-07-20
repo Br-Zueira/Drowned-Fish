@@ -70,10 +70,10 @@ function world.reload(player)
     for _, obj in ipairs(objectLayer.objects) do
         if obj.name == "Spawnpoint" then
             player.spawnX = obj.x
-            player.spawnY = obj.y
+            player.spawnY = obj.y - TileSize
             player.x = obj.x
-            player.y = obj.y
-            World:update(player, obj.x, obj.y, player.width, player.height)
+            player.y = obj.y - TileSize
+            World:update(player, obj.x, obj.y - TileSize, player.width, player.height)
         end
         if obj.name == "Spike" then
             props.Spike.new(obj.x, obj.y)
