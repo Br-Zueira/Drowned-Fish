@@ -111,6 +111,7 @@ end
 
 function love.update(dt)
     player:update(dt)
+    props.update(dt, player)
 end
 
 function love.draw()

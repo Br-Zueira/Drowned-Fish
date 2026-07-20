@@ -22,6 +22,7 @@ end
 
 function assets.load()
     assets.loadImage('tile', '/assets/images/test.png')
+    assets.loadImage('spike', '/assets/images/spike.png')
 end
 
 return assets

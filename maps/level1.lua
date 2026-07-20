@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 6,
+  nextobjectid = 11,
   properties = {},
   tilesets = {
     {
@@ -36,7 +36,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 2,
+      tilecount = 3,
       tiles = {
         {
           id = 0,
@@ -51,6 +51,13 @@ return {
           image = "../assets/images/savepoint.png",
           width = 32,
           height = 32
+        },
+        {
+          id = 3,
+          type = "Spike",
+          image = "../assets/images/spike.png",
+          width = 32,
+          height = 16
         }
       }
     }
@@ -122,6 +129,21 @@ return {
           rotation = 0,
           opacity = 1,
           gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 10,
+          name = "Spike",
+          type = "",
+          shape = "rectangle",
+          x = 800,
+          y = 544,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          opacity = 1,
+          gid = 4,
           visible = true,
           properties = {}
         }

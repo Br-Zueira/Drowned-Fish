@@ -17,7 +17,7 @@ function props.Prop.new(x, y, sizeX, sizeY, renderTable)
     renderTable = renderTable or { isImg=false, rgba={1, 1, 1, 1} }
 
     -- Creates instance
-    local instance = { x=x, y=y, sizeX=sizeX, sizeY=sizeY, renderTable=renderTable}
+    local instance = { x=x, y=y, sizeX=sizeX, sizeY=sizeY, renderTable=renderTable }
 
     -- Binds instance to props metatable
     setmetatable(instance, props.Prop)
@@ -50,23 +50,34 @@ end
 -- Props that kill player if touched, such as spikes or saws
 props.Killable = {}
 props.Killable.__index = props.Killable
-setmetatable(props.Killable, props)
+setmetatable(props.Killable, props.Prop)
 
 function props.Killable.new(x, y, sizeX, sizeY, renderTable)
-    local instance = props.prop.new(x, y, sizeX, sizeY, renderTable)
+    local instance = props.Prop.new(x, y, sizeX, sizeY, renderTable)
     setmetatable(instance, props.Killable)
     return instance
 end
 
 function props.Killable:update(dt, player)
-    local cols, len = World:check(self)
+    local items, len = World:queryRect(self.x-2, self.y-2, self.sizeX+4, self.sizeY+4)
+    -- 2. Print positions to see if they actually overlap
+    local px, py, pw, ph = World:getRect(player)
     for i = 1, len do
-        local col = cols[i]
-        if col.other == player then
+        if items[i] == player then
             player:death()
             break
         end
     end
+end
+
+props.Spike = {}
+props.Spike.__index = props.Spike
+setmetatable(props.Spike, props.Killable)
+
+function props.Spike.new(x, y)
+    local instance = props.Killable.new(x, y - TileSize/2, TileSize, TileSize/2, { isImg=true, imgName='spike' })
+    setmetatable(instance, props.Spike)
+    return instance
 end
 
 function props.update(dt, player)
@@ -100,8 +111,7 @@ function props.draw()
                 (instance.sizeX / imgW), -- Changes X pivot point to instance center
                 (instance.sizeY / imgH), -- Changes Y pivot point to instance center
                 imgW/2,
-                imgH/2,
-                0, 0
+                imgH/2
             )
         else
             love.graphics.setColor(instance.renderTable.rgba)
@@ -137,6 +147,9 @@ function props.reload(path, player)
             player.x = obj.x
             player.y = obj.y
             World:update(player, obj.x, obj.y, player.width, player.height)
+        end
+        if obj.name == "Spike" then
+            props.Spike.new(obj.x, obj.y)
         end
     end
 end
