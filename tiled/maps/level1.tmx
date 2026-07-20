@@ -44,7 +44,11 @@
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="3" name="Spawnpoint" gid="2" x="160" y="416" width="32" height="32"/>
-  <object id="10" name="Spike" gid="4" x="800" y="544" width="32" height="16"/>
+  <object id="10" name="InviSpike" gid="4" x="800" y="544" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="48"/>
+   </properties>
+  </object>
   <object id="12" name="Spike" gid="4" x="704" y="544" width="32" height="16"/>
   <object id="13" name="FakeGoal" gid="5" x="928" y="544" width="32" height="32">
    <properties>
