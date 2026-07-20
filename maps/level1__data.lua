@@ -1,42 +1,43 @@
 local props = require 'modules.props'
 
-local customProps = {}
+-- Custom, single level data
+local data = {}
 
 -- Fake goal that moves when player is close
-customProps.FakeGoal = {}
-customProps.FakeGoal.__index = customProps.FakeGoal
-setmetatable(customProps.FakeGoal, props.Prop)
+data.FakeGoal = {}
+data.FakeGoal.__index = data.FakeGoal
+setmetatable(data.FakeGoal, props.Prop)
 
-function customProps.FakeGoal.new(x, y, newX, newY, radius)
+function data.FakeGoal.new(x, y, newX, newY, radius)
     y = y - TileSize
     local instance = props.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
     instance.newX = newX
     instance.newY = newY
     instance.radius = radius
-    setmetatable(instance, customProps.FakeGoal)
+    setmetatable(instance, data.FakeGoal)
     return instance
 end
 
-function customProps.FakeGoal:update(_, player)
+function data.FakeGoal:update(_, player)
     if props.isPlayerInRadius(self, player, self.radius) then
         props.Goal.new(self.newX, self.newY)
         self:delete()
     end
 end
 
-customProps.InviSpike = {}
-customProps.InviSpike.__index = customProps.InviSpike
-setmetatable(customProps.InviSpike, props.Prop)
+data.InviSpike = {}
+data.InviSpike.__index = data.InviSpike
+setmetatable(data.InviSpike, props.Prop)
 
-function customProps.InviSpike.new(x, y, radius)
+function data.InviSpike.new(x, y, radius)
     y = y - TileSize/2
     local instance = props.Prop.new(x, y, TileSize, TileSize/2, { isImg=nil })
     instance.radius = radius
-    setmetatable(instance, customProps.InviSpike)
+    setmetatable(instance, data.InviSpike)
     return instance
 end
 
-function customProps.InviSpike:update(_, player)
+function data.InviSpike:update(_, player)
     if props.isPlayerInRadius(self, player, self.radius) then
         self:delete()
         props.Spike.new(self.x, self.y+TileSize/2)
@@ -44,13 +45,13 @@ function customProps.InviSpike:update(_, player)
 end
 
 -- O is object
-function customProps.handler(o)
+function data.handler(o)
     local n = o.name
     local p = o.properties
     if n == 'FakeGoal' then
-        customProps.FakeGoal.new(o.x, o.y, p.newX, p.newY, p.radius)
+        data.FakeGoal.new(o.x, o.y, p.newX, p.newY, p.radius)
     elseif n == 'InviSpike' then
-        customProps.InviSpike.new(o.x, o.y, p.radius)
+        data.InviSpike.new(o.x, o.y, p.radius)
     end
 end
-return customProps
+return data

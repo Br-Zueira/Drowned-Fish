@@ -53,6 +53,10 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
+    -- Single level logic for every loading
+    local data = require('maps.level' .. level .. '__data')
+    if data.whenReloaded then data.whenReloaded() end
+
     -- Cleans the logic world
     props.propList = {}
     local map = sti('maps/level' .. level .. '.lua')
@@ -96,8 +100,17 @@ end
 
 -- Custom logic to execute only while first loading the level
 function world.loadMap(newLevel, player)
+    -- Resets level
     level = newLevel
+
+    -- Single level logic for first loading
+    local data = require('maps.level' .. level .. '__data')
+    if data.whenLoaded then data.whenLoaded() end
+
+    -- Resets death per level
     player.levelDeaths = 0
+
+    -- Same logic as the one when level reloaded
     world.reload(player)
 end
 
