@@ -11,7 +11,8 @@ function Player.new()
         x = 0, y = 0,
         velX = 0, velY = 0,
         width = TileSize, height = TileSize * 2,
-        deaths = 0, levelDeaths = 0
+        deaths = 0, levelDeaths = 0,
+        coyoteMax = 0.1, coyoteTimer = 0
     }
     setmetatable(instance, Player)
     World:add(instance, instance.x, instance.y, instance.width, instance.height)
@@ -71,14 +72,21 @@ function Player:update(dt)
         if col.normal.y == -1 then -- Hit something below player
             self.velY = 0
             onGround = true -- Player is grounded
+            self.coyoteTimer = self.coyoteMax
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
         end
     end
 
+    if not onGround then
+        self.coyoteTimer = self.coyoteTimer - dt
+    end
+    if self.coyoteTimer < 0 then self.coyoteTimer = 0 end
+
     -- Jump
-    if onGround and love.keyboard.isDown('w') then
+    if (onGround or self.coyoteTimer > 0) and love.keyboard.isDown('w') then
         self.velY = self.velY + jumpForce
+        self.coyoteTimer = 0
     end
 
     if self.y > VH then
