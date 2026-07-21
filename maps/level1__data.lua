@@ -81,4 +81,12 @@ function data.handler(o)
         data.InviSpike.new(o.x, o.y, p.radius)
     end
 end
+
+function data.update()
+    if assets.isPlayingAny('voicelines') then
+        assets.songs.planetX:setVolume(0.5)
+    else
+        assets.songs.planetX:setVolume(1)
+    end
+end
 return data
