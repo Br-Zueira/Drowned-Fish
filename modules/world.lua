@@ -84,6 +84,7 @@ function world.reload(player)
     local objectLayer = map.layers["Objects"]
     for _, obj in ipairs(objectLayer.objects) do
         -- Basic/universal props
+        local p = obj.properties
         if obj.name == "Spawnpoint" then
             player.x = obj.x
             player.y = obj.y - TileSize
@@ -94,6 +95,8 @@ function world.reload(player)
             props.Goal.new(obj.x, obj.y)
         elseif obj.name == "Saw" then
             props.Saw.new(obj.x, obj.y)
+        elseif obj.name == "MoverSaw" then
+            props.MoverSaw.new(obj.x, obj.y, p.endX, p.endY, p.speed)
         else
             -- Level individual props
             local data = require('maps.level' .. level .. '__data')
