@@ -122,6 +122,7 @@ end
 function Player:death()
     -- Death counter
     self.deaths = self.deaths + 1
+    self.levelDeaths = self.levelDeaths + 1
     -- Reloads map
     world.reload(self)
 end
