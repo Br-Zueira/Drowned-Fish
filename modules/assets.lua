@@ -18,12 +18,19 @@ function assets.loadAudio(name, path, isOST)
         type = 'stream'
     end
     assets.audio[name] = love.audio.newSource(path, type)
+    assets.audio[name]:setVolume(1)
 end
 
 function assets.load()
     assets.loadImage('tile', '/assets/images/test.png')
     assets.loadImage('spike', '/assets/images/spike.png')
     assets.loadImage('goal', '/assets/images/goal.png')
+
+    love.audio.setVolume(1)
+    assets.loadAudio('intro', '/assets/audio/intro.wav', false)
+    assets.loadAudio('oopsie', '/assets/audio/oopsie.wav', false)
+    assets.loadAudio('loser', '/assets/audio/loser.wav', false)
+    assets.loadAudio('cmon', '/assets/audio/cmon.wav', false)
 end
 
 return assets

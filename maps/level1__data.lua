@@ -1,7 +1,30 @@
 local props = require 'modules.props'
+local assets = require 'modules.assets'
 
 -- Custom, single level data
 local data = {}
+
+function data.whenLoaded()
+    love.audio.play(assets.audio.intro)
+end
+
+function data.whenReloaded(player)
+    local d = player.levelDeaths
+    if d == 1 then
+        love.audio.play(assets.audio.oopsie)
+    elseif d == 2 then
+        love.audio.play(assets.audio.cmon)
+    elseif d == 3 then
+        love.audio.play(assets.audio.loser)
+    else
+        local odd = math.random(1, 4)
+        if odd == 1 then
+            love.audio.play(assets.audio.oopsie)
+        elseif odd == 2 then
+            love.audio.play(assets.audio.cmon)
+        end
+    end
+end
 
 -- Fake goal that moves when player is close
 data.FakeGoal = {}
