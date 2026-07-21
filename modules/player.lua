@@ -25,14 +25,19 @@ function Player:draw()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
 
-local function worldFilter(item, other)
-    -- If 'other' is a trigger zone or trap trigger
-    if other.isTrigger then
+local function worldFilter(_, other)
+    -- Pass through but detects colision and has "drag"
+    if other.isCross then
         return 'cross'
     end
 
+    -- Ignores completely colision
+    if other.isTrigger then
+        return nil
+    end
+
     -- Default solid collision for walls/floors
-    return 'slide' 
+    return 'slide'
 end
 
 function Player:update(dt)

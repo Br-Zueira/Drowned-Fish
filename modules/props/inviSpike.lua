@@ -8,6 +8,7 @@ setmetatable(InviSpike, prop.Prop)
 function InviSpike.new(x, y, radius)
     y = y - TileSize/2
     local instance = prop.Prop.new(x, y, TileSize, TileSize/2, { isImg=nil })
+    instance.isCross = true
     instance.radius = radius
     setmetatable(instance, InviSpike)
     return instance

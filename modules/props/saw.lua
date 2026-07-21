@@ -9,7 +9,7 @@ function Saw.new(x, y)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='saw' })
     instance.degrees = 0
-    instance.isTrigger = true
+    instance.isCross = true
     instance.type = 'Hazard'
     setmetatable(instance, prop.Saw)
     return instance

@@ -8,7 +8,7 @@ setmetatable(Goal, prop.Prop)
 function Goal.new(x, y)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
-    instance.isTrigger = true
+    instance.isCross = true
     instance.type = 'Goal'
     setmetatable(instance, Goal)
     return instance

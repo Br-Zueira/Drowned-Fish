@@ -55,10 +55,6 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
-    -- Single level logic for every loading
-    local data = require('maps.level' .. level .. '__data')
-    if data.whenReloaded then data.whenReloaded(player) end
-
     -- Cleans the logic world
     props.propList = {}
     local map = sti('maps/level' .. level .. '.lua')
@@ -66,6 +62,10 @@ function world.reload(player)
     -- Recreates the physics world
     World = bump.newWorld(TileSize)
     World:add(player, player.x, player.y, player.width, player.height)
+
+    -- Single level logic for every loading
+    local data = require('maps.level' .. level .. '__data')
+    if data.whenReloaded then data.whenReloaded(player) end
 
     -- Iterates through a tile layer
     local layout = map.layers["Layout"]
