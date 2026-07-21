@@ -97,9 +97,12 @@ function world.reload(player)
             props.Saw.new(obj.x, obj.y)
         elseif obj.name == "MoverSaw" then
             props.MoverSaw.new(obj.x, obj.y, p.endX, p.endY, p.speed)
+        elseif obj.name == "InviSpike" then
+            props.InviSpike.new(obj.x, obj.y, p.radius)
+        elseif obj.name == "FakeGoal" then
+            props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
         else
             -- Level individual props
-            local data = require('maps.level' .. level .. '__data')
             data.handler(obj)
         end
     end
