@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug LÖVE",
+            "program": {
+                "command": "love"
+            },
+            "args": [
+                "${workspaceFolder}"
+            ],
+            "windows": {
+                "program": {
+                    "command": "C:/Program Files/LOVE/love.exe"
+                }
+            },
+            "osx": {
+                "program": {
+                    "command": "/Applications/love.app/Contents/MacOS/love"
+                }
+            },
+            "linux": {
+                "program": {
+                    "command": "love"
+                }
+            }
+        }
+    ]
+}

@@ -4,6 +4,11 @@ local Player = require 'modules.player'
 
 local player
 
+-- Lua debugger extension support
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+    require("lldebugger").start()
+end
+
 -- Love standard implementations
 function love.load()
     -- Window dimensions
