@@ -12,6 +12,8 @@ function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
         if obj.update then obj:update(dt, player) end
     end
+    local data = require('maps.level' .. level .. '__data')
+    if data.update then data.update(dt, player) end
 end
 
 -- Renders every prop in the map
