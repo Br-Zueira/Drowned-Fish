@@ -65,11 +65,12 @@ function assets.load()
     assets.loadImage('tile', 'test.png')
     assets.loadImage('spike', 'spike.png')
     assets.loadImage('goal', 'goal.png')
+    assets.loadImage('saw', 'saw.png')
 
     assets.loadVoiceLine('intro', 'intro.wav')
     assets.loadVoiceLine('oopsie', 'oopsie.wav')
     assets.loadVoiceLine('loser', 'loser.wav')
-    assets.loadVoiceLine('cmon', '/cmon.wav')
+    assets.loadVoiceLine('cmon', 'cmon.wav')
 
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')
 end

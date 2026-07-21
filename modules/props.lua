@@ -102,5 +102,24 @@ function props.Goal.new(x, y)
     return instance
 end
 
+-- Saw
+props.Saw = {}
+props.Saw.__index = props.Saw
+setmetatable(props.Saw, props.Prop)
+
+function props.Saw.new(x, y)
+    y = y - TileSize
+    local instance = props.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='saw' })
+    instance.degrees = 0
+    instance.isTrigger = true
+    instance.type = 'Hazard'
+    setmetatable(instance, props.Saw)
+    return instance
+end
+
+function props.Saw:update(dt)
+    self.degrees = (self.degrees + (720*dt)) % 360
+end
+
 -- Returns props to every module that imports this one
 return props

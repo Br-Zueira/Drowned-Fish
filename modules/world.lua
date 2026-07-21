@@ -92,6 +92,8 @@ function world.reload(player)
             props.Spike.new(obj.x, obj.y)
         elseif obj.name == "Goal" then
             props.Goal.new(obj.x, obj.y)
+        elseif obj.name == "Saw" then
+            props.Saw.new(obj.x, obj.y)
         else
             -- Level individual props
             local data = require('maps.level' .. level .. '__data')

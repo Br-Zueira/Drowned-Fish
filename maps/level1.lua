@@ -10,13 +10,13 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 16,
+  nextobjectid = 17,
   properties = {},
   tilesets = {
     {
-      name = "My tileset",
+      name = "Saw",
       firstgid = 1,
-      class = "",
+      class = "Saw",
       tilewidth = 32,
       tileheight = 32,
       spacing = 0,
@@ -36,7 +36,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 4,
+      tilecount = 5,
       tiles = {
         {
           id = 0,
@@ -63,6 +63,13 @@ return {
           id = 4,
           type = "Goal",
           image = "../assets/images/goal.png",
+          width = 32,
+          height = 32
+        },
+        {
+          id = 5,
+          type = "Saw",
+          image = "../assets/images/saw.png",
           width = 32,
           height = 32
         }
@@ -189,6 +196,21 @@ return {
             ["newY"] = 448,
             ["radius"] = 48
           }
+        },
+        {
+          id = 16,
+          name = "Saw",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 6,
+          visible = true,
+          properties = {}
         }
       }
     }

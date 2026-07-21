@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="16">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="17">
  <editorsettings>
   <export target="../../maps/level1.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="My tileset" tilewidth="32" tileheight="32" tilecount="4" columns="0">
+ <tileset firstgid="1" name="Saw" class="Saw" tilewidth="32" tileheight="32" tilecount="5" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Tile">
    <image source="../../assets/images/test.png" width="32" height="32"/>
@@ -16,6 +16,9 @@
   </tile>
   <tile id="4" type="Goal">
    <image source="../../assets/images/goal.png" width="32" height="32"/>
+  </tile>
+  <tile id="5" type="Saw">
+   <image source="../../assets/images/saw.png" width="32" height="32"/>
   </tile>
  </tileset>
  <layer id="1" name="Layout" width="30" height="20">
@@ -57,5 +60,6 @@
     <property name="radius" type="int" value="48"/>
    </properties>
   </object>
+  <object id="16" name="Saw" gid="6" x="64" y="416" width="32" height="32"/>
  </objectgroup>
 </map>
