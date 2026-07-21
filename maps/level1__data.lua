@@ -45,7 +45,13 @@ end
 function levelTrigger:update(_, player)
     if props.isPlayerInRadius(self, player, self.radius) then
         if self.id == "fakeTiles" then
-            for _, prop in pairs(props.propList) do
+            --[[ 
+                Traditional for loop because 
+                Removing requires reverse interation 
+                In order to avoid errors
+            ]]
+            for i = #props.propList, 1, -1 do
+                local prop = props.propList[i]
                 if prop.isFake then prop:delete() end
             end
             self:delete()

@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 4,
-  nextobjectid = 26,
+  nextobjectid = 25,
   properties = {},
   tilesets = {
     {
@@ -184,7 +184,7 @@ return {
           name = "Trigger",
           type = "",
           shape = "rectangle",
-          x = 704,
+          x = 720,
           y = 416,
           width = 32,
           height = 32,

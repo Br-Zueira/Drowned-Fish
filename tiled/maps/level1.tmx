@@ -54,7 +54,7 @@
     <property name="radius" type="int" value="48"/>
    </properties>
   </object>
-  <object id="24" name="Trigger" gid="2" x="704" y="416" width="32" height="32">
+  <object id="24" name="Trigger" gid="2" x="720" y="416" width="32" height="32">
    <properties>
     <property name="id" value="saw"/>
     <property name="radius" type="int" value="32"/>
