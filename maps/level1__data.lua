@@ -5,23 +5,27 @@ local assets = require 'modules.assets'
 local data = {}
 
 function data.whenLoaded()
-    love.audio.play(assets.audio.intro)
+    love.audio.play(assets.songs.planetX)
+    assets.songs.planetX:setLooping(true)
+
+    love.audio.play(assets.voicelines.intro)
 end
 
-function data.whenReloaded(player)
-    local d = player.levelDeaths
-    if d == 1 then
-        love.audio.play(assets.audio.oopsie)
-    elseif d == 2 then
-        love.audio.play(assets.audio.cmon)
-    elseif d == 3 then
-        love.audio.play(assets.audio.loser)
-    else
-        local odd = math.random(1, 4)
+local l = 0
+function data.whenReloaded()
+    if not assets.isPlayingAny('voicelines') then l = l + 1 end
+    if l == 1 then
+        love.audio.play(assets.voicelines.oopsie)
+    elseif l == 2 then
+        love.audio.play(assets.voicelines.cmon)
+    elseif l == 5 then
+        love.audio.play(assets.voicelines.loser)
+    elseif l > 5 then
+        local odd = math.random(4)
         if odd == 1 then
-            love.audio.play(assets.audio.oopsie)
+            love.audio.play(assets.voicelines.oopsie)
         elseif odd == 2 then
-            love.audio.play(assets.audio.cmon)
+            love.audio.play(assets.voicelines.cmon)
         end
     end
 end
