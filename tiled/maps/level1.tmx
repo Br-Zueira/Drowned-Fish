@@ -48,7 +48,7 @@
  <objectgroup id="2" name="Objects">
   <object id="3" name="Spawnpoint" gid="2" x="160" y="416" width="32" height="32"/>
   <object id="20" name="Goal" gid="5" x="800" y="448" width="32" height="32"/>
-  <object id="23" name="Trigger" gid="2" x="512" y="448" width="32" height="32">
+  <object id="23" name="Trigger" gid="2" x="512" y="432" width="32" height="32">
    <properties>
     <property name="id" value="fakeTiles"/>
     <property name="radius" type="int" value="48"/>

@@ -49,7 +49,7 @@ function MoverSaw:update(dt)
         -- Normalize vector so length is 1
         local dirX = dx/distance
         local dirY = dy/distance
-        self.x, self.y = World:move(self, self.x + dirX*speed, self.y + dirY*speed)
+        self.x, self.y = World:move(self, self.x + dirX*speed, self.y + dirY*speed, function(o) return nil end)
     else
         -- Avoids overshooting target
         self.x, self.y = World:move(self, pointX, pointY)
