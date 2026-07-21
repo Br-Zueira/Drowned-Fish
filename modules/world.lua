@@ -103,9 +103,11 @@ function world.reload(player)
             props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
         else
             -- Level individual props
-            data.handler(obj)
+            if data.ObjHandler then data.ObjHandler(obj) end
         end
     end
+    -- Handles everythin else, such as other layers
+    if data.MiscHandler then data.MiscHandler(map) end
 end
 
 -- Custom logic to execute only while first loading the level
