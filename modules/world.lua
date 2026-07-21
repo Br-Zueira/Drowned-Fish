@@ -55,7 +55,7 @@ end
 function world.reload(player)
     -- Single level logic for every loading
     local data = require('maps.level' .. level .. '__data')
-    if data.whenReloaded then data.whenReloaded() end
+    if data.whenReloaded then data.whenReloaded(player) end
 
     -- Cleans the logic world
     props.propList = {}
