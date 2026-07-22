@@ -24,6 +24,9 @@ end
 
 -- Renders every prop in the map
 function world.draw()
+    -- Draws background before anything
+    love.graphics.draw(assets.images.background, 0, 0)
+
     for _, instance in ipairs(props.propList) do
         -- If isImg is true, renders from asset
         -- If it's false, renders from solid color

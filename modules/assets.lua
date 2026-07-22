@@ -19,7 +19,8 @@ end
 ---@param file string The file name
 ---@param size number The font size
 function assets.loadFont(name, file, size)
-    assets.fonts[name] = love.graphics.loadFont('assets/fonts/' .. file, size)
+    assets.fonts[name] = love.graphics.newFont('assets/fonts/' .. file, size)
+    assets.fonts[name]:setFilter('nearest', 'nearest')
 end
 
 ---@param name string The name of the asset
@@ -78,6 +79,7 @@ end
 
 -- Loads every game asset
 function assets.load()
+    assets.loadImage('background', 'background.jpg')
     assets.loadImage('tile', 'test.png')
     assets.loadImage('spike', 'spike.png')
     assets.loadImage('goal', 'goal.png')
@@ -90,6 +92,8 @@ function assets.load()
     assets.loadVoiceLine('cmon', 'cmon.wav')
 
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')
+
+    assets.loadFont('VT323', 'VT323-Regular.ttf', 24)
 end
 
 return assets

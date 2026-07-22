@@ -36,11 +36,12 @@ end
 function love.draw() 
     -- Render scenary
     world.draw()
-    
+
     -- Render player
     player:draw()
 
     -- Render death counter
     love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(assets.fonts.VT323)
     love.graphics.print('Deaths: ' .. player.deaths, 10, 10, 0, 2, 2)
 end
