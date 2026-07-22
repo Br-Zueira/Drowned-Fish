@@ -2,6 +2,7 @@ local bump = require 'libs.bump'
 local sti = require 'libs.sti'
 local assets = require 'modules.assets'
 local props = require 'modules.props'
+local voicelines = require 'modules.voicelines'
 
 local world = {}
 
@@ -55,6 +56,9 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
+    -- Updates voiceline manager
+    voicelines.update()
+
     -- Resets player values that may have been changed
     player.gravity = player.gravityDefault
     player.jumpForce = player.jumpForceDefault
@@ -119,6 +123,9 @@ end
 function world.loadMap(newLevel, player)
     -- Resets level
     level = newLevel
+
+    -- Resets voiceline manager
+    voicelines.reset()
 
     -- Single level logic for first loading
     local data = require('maps.level' .. level .. '__data')
