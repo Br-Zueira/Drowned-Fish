@@ -55,6 +55,11 @@ end
 
 -- Level renderer and reseter
 function world.reload(player)
+    -- Resets player values that may have been changed
+    player.gravity = player.gravityDefault
+    player.jumpForce = player.jumpForceDefault
+    player.velSpeed = player.velSpeedDefault
+    
     -- Cleans the logic world
     props.propList = {}
     local map = sti('maps/level' .. level .. '.lua')

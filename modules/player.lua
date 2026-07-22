@@ -13,7 +13,10 @@ function Player.new()
         deaths = 0, levelDeaths = 0,
         coyoteMax = 0.1, coyoteTimer = 0,
         jumpBufferMax = 0.1, jumpBufferTimer = 0,
-        jumpCooldown = false
+        jumpCooldown = false,
+        velSpeedDefault = 250, velSpeed = 250,
+        gravityDefault = 6400, gravity = 6400,
+        jumpForceDefault = -1300, jumpForce = -1300
     }
     setmetatable(instance, Player)
     return instance
@@ -41,26 +44,21 @@ local function worldFilter(_, other)
 end
 
 function Player:update(dt)
-    -- Values for character physics
-    local velSpeed = 250
-    local gravity = 6400
-    local jumpForce = -1300
-
     -- Stops horizontal velocity to avoid sliding
     self.velX = 0
 
     -- Runs to left
     if love.keyboard.isDown('a') then
-        self.velX = self.velX - velSpeed
+        self.velX = self.velX - self.velSpeed
     end
 
     -- Runs to right
     if love.keyboard.isDown('d') then
-        self.velX = self.velX + velSpeed
+        self.velX = self.velX + self.velSpeed
     end
 
     -- Fall
-    self.velY = self.velY + (gravity * dt)
+    self.velY = self.velY + (self.gravity * dt)
     local expectedX = self.x + (self.velX * dt)
     local expectedY = self.y + (self.velY * dt)
 
@@ -107,7 +105,7 @@ function Player:update(dt)
     -- Jump manager
     if love.keyboard.isDown('w') then
         if (onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 and not self.jumpCooldown then
-            self.velY = jumpForce -- The jump itself
+            self.velY = self.jumpForce -- The jump itself
             self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
             self.jumpBufferTimer = 0 -- Resets the buffer
             self.jumpCooldown = true -- Locks jumping ability until user presses key again
