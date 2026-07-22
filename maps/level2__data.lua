@@ -33,7 +33,13 @@ function FakeGoalDeleter:update(_, player)
             if prop.isFake then prop:delete() end
         end
         for _, s in ipairs(afterSpikes) do
-            props.Spike.new(s.x, s.y)
+            local p = s.properties
+            if p.ChosenOne then
+                local instance = props.InviSpike.new(s.x, s.y, p.range)
+                instance.degrees = 180
+            else
+                props.Spike.new(s.x, s.y)
+            end
         end
         props.Goal.new(self.newX, self.newY)
         player.gravity = player.gravity/3 -- 1/3 of original value

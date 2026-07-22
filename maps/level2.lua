@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 4,
-  nextobjectid = 15,
+  nextobjectid = 16,
   properties = {},
   tilesets = {
     {
@@ -301,6 +301,24 @@ return {
           gid = 4,
           visible = true,
           properties = {}
+        },
+        {
+          id = 15,
+          name = "AfterSpike",
+          type = "",
+          shape = "rectangle",
+          x = 352,
+          y = 496,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          opacity = 1,
+          gid = 1073741828,
+          visible = true,
+          properties = {
+            ["ChosenOne"] = true,
+            ["range"] = 48
+          }
         }
       }
     },
@@ -313,7 +331,7 @@ return {
       id = 3,
       name = "FakeTiles",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
