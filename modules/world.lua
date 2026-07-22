@@ -4,11 +4,16 @@ local assets = require 'modules.assets'
 local props = require 'modules.props'
 local voicelines = require 'modules.voicelines'
 
+-- Wrapper for world.lua
 local world = {}
 
+-- The current level
+---@type integer
 local level
 
 -- Updates level
+---@param dt number The delta time for each rendered frame
+---@param player Player The player instance
 function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
         if obj.update then obj:update(dt, player) end
@@ -55,6 +60,7 @@ function world.draw()
 end
 
 -- Level renderer and reseter
+---@param player Player The player instance
 function world.reload(player)
     -- Updates voiceline manager
     voicelines.update()
@@ -120,6 +126,8 @@ function world.reload(player)
 end
 
 -- Custom logic to execute only while first loading the level
+---@param newLevel integer The new level to be set in manager
+---@param player Player The player instance
 function world.loadMap(newLevel, player)
     -- Resets level
     level = newLevel

@@ -1,6 +1,26 @@
 local world = require 'modules.world'
 
--- Table with metadata to simulate object behaviour
+-- Class that defines a player and its behaviour
+---@class Player
+---@field x integer
+---@field y integer
+---@field velX integer
+---@field velY integer
+---@field width integer
+---@field height integer
+---@field deaths integer
+---@field levelDeaths integer
+---@field coyoteMax integer
+---@field coyoteTimer integer
+---@field jumpBufferMax integer
+---@field jumpBufferTimer integer
+---@field jumpCooldown boolean
+---@field velSpeedDefault integer
+---@field velSpeed integer
+---@field gravityDefault integer
+---@field gravity integer
+---@field jumpForceDefault integer
+---@field jumpForce integer
 local Player = {};
 Player.__index = Player;
 
@@ -43,6 +63,8 @@ local function worldFilter(_, other)
     return 'slide'
 end
 
+-- Updates player each frame
+---@param dt integer Delta time for each rendered frame
 function Player:update(dt)
     -- Stops horizontal velocity to avoid sliding
     self.velX = 0
@@ -122,6 +144,7 @@ function Player:update(dt)
     end
 end
 
+-- Kills player and reloads level, passing self as player instance
 function Player:death()
     -- Death counter
     self.deaths = self.deaths + 1

@@ -1,16 +1,26 @@
 -- Wrapper to export everything
 local props = {}
 
--- Stores all props in the world
+-- Stores all props in the world (logic world)
 props.propList = {}
 
 -- Prop parent metatable
+---@class Prop
+---@field x number X position of prop
+---@field y number Y position of prop
+---@field sizeX number Width of prop
+---@field sizeY number Heigth of prop
+---@field renderTable table -- Can be either {false, r, g, b, a}, {true, imgName} or {nil}
 props.Prop = {}
 props.Prop.__index = props.Prop
 
 -- Creates a generic prop
+---@param x number X position of prop
+---@param y number Y position of prop
+---@param sizeX number Width of prop
+---@param sizeY number Heigth of prop
+---@param renderTable table -- Can be either {false, r, g, b, a}, {true, imgName} or {nil}
 function props.Prop.new(x, y, sizeX, sizeY, renderTable)
-    -- Can be either {false, r, g, b, a}, {true, imgName} or {nil}
     renderTable = renderTable or { isImg=false, rgba={1, 1, 1, 1} }
 
     -- Creates instance
@@ -27,6 +37,7 @@ function props.Prop.new(x, y, sizeX, sizeY, renderTable)
     return instance
 end
 
+-- Deletes a prop, both from physics world and from propList (logic world)
 function props.Prop:delete()
     -- Remove prop from physics
     if World:hasItem(self) then World:remove(self) end
@@ -41,6 +52,9 @@ function props.Prop:delete()
 end
 
 -- Checks if player is closer from prop than given radius
+---@param prop Prop 
+---@param player Player
+---@param radius integer
 function props.isPlayerInRadius(prop, player, radius)
     -- Find center point of player
     local px = player.x + (player.width / 2)

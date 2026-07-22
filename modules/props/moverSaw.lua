@@ -1,10 +1,24 @@
 local Saw = require 'modules.props.saw'
 
 -- Saw that deslocates
-MoverSaw = {}
+---@class MoverSaw : Prop
+---@field x number X coordinate of mover saw
+---@field y number Y coordinate of mover saw
+---@field startX number Starting X coordinate of mover saw
+---@field startY number Starting Y coordinate of mover saw
+---@field endX number Ending X coordinate of mover saw
+---@field endY number Ending X coordinate of mover saw
+---@field speed number Speed of mover saw
+local MoverSaw = {}
 MoverSaw.__index = MoverSaw
 setmetatable(MoverSaw, Saw)
 
+-- Creates a new MoverSaw
+---@param x number Starting X coordinate of mover saw
+---@param y number Starting Y coordinate of mover saw
+---@param endX number Ending X coordinate of mover saw
+---@param endY number Ending X coordinate of mover saw
+---@param speed number Speed of mover saw
 function MoverSaw.new(x, y, endX, endY, speed)
     y = y - TileSize
     endY = endY - TileSize
@@ -20,6 +34,8 @@ function MoverSaw.new(x, y, endX, endY, speed)
     setmetatable(instance, MoverSaw)
 end
 
+-- Updates the mover saw, moving and rotating it
+---@param dt number Delta time for each rendered frame
 function MoverSaw:update(dt)
     -- Usual saw rotation
     self.degrees = (self.degrees + (720*dt)) % 360
