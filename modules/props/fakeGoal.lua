@@ -18,9 +18,11 @@ setmetatable(FakeGoal, prop.Prop)
 ---@param newX number The new X coordinate which the goal will move to
 ---@param newY number The new Y coordinate which the goal will move to
 ---@param radius number The radius in which the player must be close in order to the goal to move
+---@return FakeGoal instance
 function FakeGoal.new(x, y, newX, newY, radius)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='goal' })
+    ---@cast instance FakeGoal
     instance.newX = newX
     instance.newY = newY
     instance.radius = radius

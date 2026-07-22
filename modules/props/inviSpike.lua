@@ -16,10 +16,11 @@ setmetatable(InviSpike, prop.Prop)
 ---@param y number Y coordinate of spike
 ---@param radius number Radius in which player must be close in order to reveal the spike
 ---@param d? number Number in degrees in order to make a rotated invispike
+---@return InviSpike
 function InviSpike.new(x, y, radius, d)
     y = y - TileSize/2
     local instance = prop.Prop.new(x, y, TileSize, TileSize/2, { isImg=nil })
-    instance.isCross = true
+    ---@cast instance InviSpike
     instance.radius = radius
     instance.degrees = d or 0
     setmetatable(instance, InviSpike)

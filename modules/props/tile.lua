@@ -13,10 +13,12 @@ setmetatable(Tile, prop.Prop)
 -- Creates a tile (simple square that serves as wall, floor or ceiling)
 ---@param x number X coordinates of tile
 ---@param y number Y coordinates of tile
+---@return Tile
 function Tile.new(x, y)
     -- Creates instance of parent metatable
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='tile'})
 
+    ---@cast instance Tile
     -- Binds instance into tile metatable
     setmetatable(instance, Tile)
     return instance

@@ -25,6 +25,7 @@ local Player = {};
 Player.__index = Player;
 
 -- Player constructor
+---@return Player
 function Player.new()
     local instance = {
         x = 0, y = 0,

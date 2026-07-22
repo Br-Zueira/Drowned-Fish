@@ -1,7 +1,7 @@
 local Saw = require 'modules.props.saw'
 
 -- Saw that deslocates
----@class MoverSaw : Prop
+---@class MoverSaw : Saw
 ---@field x number X coordinate of mover saw
 ---@field y number Y coordinate of mover saw
 ---@field startX number Starting X coordinate of mover saw
@@ -19,10 +19,12 @@ setmetatable(MoverSaw, Saw)
 ---@param endX number Ending X coordinate of mover saw
 ---@param endY number Ending X coordinate of mover saw
 ---@param speed number Speed of mover saw
+---@return MoverSaw
 function MoverSaw.new(x, y, endX, endY, speed)
     y = y - TileSize
     endY = endY - TileSize
     local instance = Saw.new(x, y)
+    ---@cast instance MoverSaw
     instance.x = x
     instance.y = y
     instance.startX = x
@@ -32,6 +34,7 @@ function MoverSaw.new(x, y, endX, endY, speed)
     instance.speed = speed
     instance.isComingBack = false
     setmetatable(instance, MoverSaw)
+    return instance
 end
 
 -- Updates the mover saw, moving and rotating it

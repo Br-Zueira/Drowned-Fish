@@ -6,6 +6,7 @@ local prop = require 'modules.props.prop'
 ---@field y number Y coordinates of trigger
 ---@field id string Id of each trigger
 ---@field radius number Detection radius
+---@field isTrigger true Makes player ignore colision with trigger
 local Trigger = {}
 Trigger.__index = Trigger
 setmetatable(Trigger, prop.Prop)
@@ -15,9 +16,11 @@ setmetatable(Trigger, prop.Prop)
 ---@param y number Y coordinates of trigger
 ---@param id string Id of each trigger
 ---@param radius number Detection radius
+---@return Trigger
 function Trigger.new(x, y, id, radius)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=nil })
+    ---@cast instance Trigger
     instance.isTrigger = true
     instance.id = id
     instance.radius = radius

@@ -27,6 +27,7 @@ function love.load()
     world.loadMap(1, player)
 end
 
+---@param dt number Delta time for each rendered frame
 function love.update(dt)
     player:update(dt)
     world.update(dt, player)
