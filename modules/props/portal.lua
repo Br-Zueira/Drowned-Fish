@@ -8,6 +8,7 @@ local prop = require 'modules.props.prop'
 ---@field isTrigger true Makes portal a 'ghost' to player
 ---@field hasJustTeleported boolean Avoids getting player stuck on portal
 ---@field otherPortal Portal Cache for the target portal of this instance
+---@field isInvisible boolean Makes portals possibly invisible
 local Portal = {}
 Portal.__index = Portal
 setmetatable(Portal, prop.Prop)
@@ -16,8 +17,9 @@ setmetatable(Portal, prop.Prop)
 ---@param x number
 ---@param y number
 ---@param pair integer
+---@param isInvisible boolean
 ---@return Portal instance
-function Portal.new(x, y, pair)
+function Portal.new(x, y, pair, isInvisible)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='placeholder' })
     setmetatable(instance, Portal)
@@ -25,6 +27,7 @@ function Portal.new(x, y, pair)
     instance.pair = pair
     instance.isTrigger = true
     instance.hasJustTeleported = false
+    instance.isInvisible = isInvisible
     return instance
 end
 
@@ -64,6 +67,8 @@ function Portal:update(_, player)
             -- Avoids going back and forth (stuck)
             self.hasJustTeleported = true
             self.otherPortal.hasJustTeleported = true
+            self.isInvisible = false
+            self.otherPortal.isInvisible = false
         end
     else
         -- Resets this portal if player is not touching

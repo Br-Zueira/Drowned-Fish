@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 20,
+  nextobjectid = 21,
   properties = {},
   tilesets = {
     {
@@ -166,7 +166,7 @@ return {
           name = "Portal",
           type = "",
           shape = "rectangle",
-          x = 320,
+          x = 288,
           y = 320,
           width = 32,
           height = 32,
@@ -394,6 +394,24 @@ return {
           visible = true,
           properties = {
             ["pair"] = 3
+          }
+        },
+        {
+          id = 20,
+          name = "Portal",
+          type = "",
+          shape = "rectangle",
+          x = 480,
+          y = 128,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["isInvisible"] = true,
+            ["pair"] = 2
           }
         }
       }

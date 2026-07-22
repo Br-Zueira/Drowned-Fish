@@ -28,7 +28,7 @@ function world.draw()
         -- If isImg is true, renders from asset
         -- If it's false, renders from solid color
         -- If it's nil, renders nothing (invisible)
-        if instance.renderTable.isImg then
+        if not instance.isInvisible and instance.renderTable.isImg then
             -- Get the image asset
             local img = assets.images[instance.renderTable.imgName]
 
@@ -52,7 +52,7 @@ function world.draw()
                 imgW/2,
                 imgH/2
             )
-        elseif instance.renderTable.isImg == false then
+        elseif not instance.isInvisible and instance.renderTable.isImg == false then
             love.graphics.setColor(instance.renderTable.rgba)
             love.graphics.rectangle('fill', instance.x, instance.y, instance.sizeX, instance.sizeY)
         end
@@ -117,7 +117,7 @@ function world.reload(player)
         elseif obj.name == "FakeGoal" then
             props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
         elseif obj.name == "Portal" then
-            props.Portal.new(obj.x, obj.y, p.pair)
+            props.Portal.new(obj.x, obj.y, p.pair, p.isInvisible)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end
