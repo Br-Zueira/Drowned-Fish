@@ -19,7 +19,7 @@ function levelTrigger:update(_, player)
             local prop = props.propList[i]
             if prop.isFake then prop:delete() end
         end
-        props.Portal.new(portalHid.x, portalHid.y)
+        props.Portal.new(portalHid.x, portalHid.y, portalHid.properties.pair)
         self:delete()
     end
 end
