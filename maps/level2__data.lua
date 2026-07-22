@@ -35,8 +35,7 @@ function FakeGoalDeleter:update(_, player)
         for _, s in ipairs(afterSpikes) do
             local p = s.properties
             if p.ChosenOne then
-                local instance = props.InviSpike.new(s.x, s.y, p.range)
-                instance.degrees = 180
+                props.InviSpike.new(s.x, s.y, p.range, 180)
             else
                 props.Spike.new(s.x, s.y)
             end
