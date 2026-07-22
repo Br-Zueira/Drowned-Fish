@@ -82,6 +82,7 @@ function assets.load()
     assets.loadImage('spike', 'spike.png')
     assets.loadImage('goal', 'goal.png')
     assets.loadImage('saw', 'saw.png')
+    assets.loadImage('placeholder', 'placeholder.png')
 
     assets.loadVoiceLine('intro', 'intro.wav')
     assets.loadVoiceLine('oopsie', 'oopsie.wav')

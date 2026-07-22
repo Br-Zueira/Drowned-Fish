@@ -48,7 +48,7 @@ return {
         {
           id = 1,
           type = "Placeholder",
-          image = "../assets/images/savepoint.png",
+          image = "../assets/images/placeholder.png",
           width = 32,
           height = 32
         },

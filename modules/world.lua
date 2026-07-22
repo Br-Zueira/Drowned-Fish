@@ -116,6 +116,8 @@ function world.reload(player)
             props.InviSpike.new(obj.x, obj.y, p.radius)
         elseif obj.name == "FakeGoal" then
             props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
+        elseif obj.name == "Portal" then
+            props.Portal.new(obj.x, obj.y, p.pair)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end

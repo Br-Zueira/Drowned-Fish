@@ -19,7 +19,7 @@ props.Prop.__index = props.Prop
 ---@param y number Y position of prop
 ---@param sizeX number Width of prop
 ---@param sizeY number Heigth of prop
----@param renderTable table -- Can be either {false, r, g, b, a}, {true, imgName} or {nil}
+---@param renderTable table -- Can be either {false, {r, g, b, a}}, {true, imgName} or {nil}
 ---@return Prop
 function props.Prop.new(x, y, sizeX, sizeY, renderTable)
     renderTable = renderTable or { isImg=false, rgba={1, 1, 1, 1} }

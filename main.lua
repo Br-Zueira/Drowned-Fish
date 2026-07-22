@@ -33,12 +33,12 @@ function love.update(dt)
     world.update(dt, player)
 end
 
-function love.draw()
-    -- Render player
-    player:draw()
-
+function love.draw() 
     -- Render scenary
     world.draw()
+    
+    -- Render player
+    player:draw()
 
     -- Render death counter
     love.graphics.setColor(1, 1, 1, 1)

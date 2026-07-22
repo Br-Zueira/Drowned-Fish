@@ -9,7 +9,7 @@
    <image source="../../assets/images/test.png" width="32" height="32"/>
   </tile>
   <tile id="1" type="Placeholder">
-   <image source="../../assets/images/savepoint.png" width="32" height="32"/>
+   <image source="../../assets/images/placeholder.png" width="32" height="32"/>
   </tile>
   <tile id="3" type="Spike">
    <image source="../../assets/images/spike.png" width="32" height="16"/>
