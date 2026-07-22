@@ -1,5 +1,4 @@
 local props = require 'modules.props'
-local assets = require 'modules.assets'
 
 -- Custom, single level data
 local data = {}
