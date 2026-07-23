@@ -81,6 +81,7 @@
   <object id="63" name="DeslocSaw" gid="6" x="704" y="288" width="32" height="32"/>
   <object id="64" name="Trigger" gid="2" x="672" y="256" width="32" height="32">
    <properties>
+    <property name="id" value="MoveSaws"/>
     <property name="radius" type="int" value="96"/>
    </properties>
   </object>
@@ -88,7 +89,12 @@
   <object id="66" name="Saw" gid="6" x="64" y="96" width="32" height="32"/>
   <object id="67" name="Saw" gid="6" x="64" y="64" width="32" height="32"/>
   <object id="68" name="Saw" gid="6" x="64" y="128" width="32" height="32"/>
-  <object id="69" gid="2" x="800" y="576" width="32" height="32"/>
+  <object id="69" name="Trigger" gid="2" x="800" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="MoveGoal"/>
+    <property name="radius" type="int" value="80"/>
+   </properties>
+  </object>
   <object id="71" name="FakeTile" gid="1" x="672" y="128" width="32" height="32"/>
   <object id="72" name="FakeTile" gid="1" x="640" y="128" width="32" height="32"/>
  </objectgroup>

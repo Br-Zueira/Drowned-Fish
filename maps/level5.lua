@@ -438,7 +438,8 @@ return {
           gid = 2,
           visible = true,
           properties = {
-            ["radius"] = 80
+            ["id"] = "MoveSaws",
+            ["radius"] = 96
           }
         },
         {
@@ -503,7 +504,7 @@ return {
         },
         {
           id = 69,
-          name = "",
+          name = "Trigger",
           type = "",
           shape = "rectangle",
           x = 800,
@@ -514,7 +515,10 @@ return {
           opacity = 1,
           gid = 2,
           visible = true,
-          properties = {}
+          properties = {
+            ["id"] = "MoveGoal",
+            ["radius"] = 128
+          }
         },
         {
           id = 71,

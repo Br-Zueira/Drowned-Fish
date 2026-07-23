@@ -16,11 +16,22 @@ setmetatable(levelTrigger, props.Trigger)
 function levelTrigger:update(_, player)
     if props.isPlayerInRadius(self, player, self.radius) then
         self:delete()
-        for i = #props.propList, 1, -1 do
-            local p = props.propList[i]
-            if p.isDesloc then
-                p:delete()
-                props.Saw.new(p.x, p.y - TileSize) -- "Moves" each saw two tiles up (two even with tilesize*1 because its buggy, yeah)
+        if self.id == "MoveSaws" then
+            for i = #props.propList, 1, -1 do
+                local p = props.propList[i]
+                if p.isDesloc then
+                    p:delete()
+                    props.Saw.new(p.x, p.y - TileSize) -- "Moves" each saw two tiles up (two even with tilesize*1 because its buggy, yeah)
+                end
+            end
+        elseif self.id == "MoveGoal" then
+            for i = #props.propList, 1, -1 do
+                local p = props.propList[i]
+                if getmetatable(p) == props.FakeGoal then
+                    p:delete()
+                    props.Goal.new(self.x, self.y + TileSize)
+                    break
+                end
             end
         end
     end
@@ -50,6 +61,10 @@ function data.ObjHandler(obj)
         local i = props.Tile.new(obj.x, obj.y - TileSize)
         i.isCross = true
         i.type = 'Hazard'
+    elseif obj.name == "FakeSpike" then
+        local i = props.Spike.new(obj.x, obj.y)
+        i.isCross = false
+        i.type = 'Solid'
     end
 end
 
