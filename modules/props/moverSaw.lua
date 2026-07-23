@@ -43,6 +43,14 @@ function MoverSaw.new(x, y, endX, endY, speed, isOneWay, isSinglePass)
     return instance
 end
 
+-- Filter that ignores every colision with saw
+local colFilter = function(o)
+    if o.type == 'Player' then
+        return 'slide'
+    end
+    return 'cross'
+end
+
 -- Updates the mover saw, moving and rotating it
 ---@param dt number Delta time for each rendered frame
 function MoverSaw:update(dt)
@@ -74,17 +82,18 @@ function MoverSaw:update(dt)
         -- Normalize vector so length is 1
         local dirX = dx/distance
         local dirY = dy/distance
-        self.x, self.y = World:move(self, self.x + dirX*speed, self.y + dirY*speed, function(o) return nil end)
+        self.x, self.y = World:move(self, self.x + dirX*speed, self.y + dirY*speed, colFilter)
     else
         -- If single pass, deletes itself and aborts execution of the rest of the script
         if self.isSinglePass then self:delete() return end
 
         if self.isOneWay then
             -- Goes back to starting point
-            self.x, self.y = World:move(self, self.startX, self.startY)
+            World:update(self, self.startX, self.startY, self.sizeX, self.sizeY)
+            self.x, self.y = self.startX, self.startY
         else
             -- Avoids overshooting target
-            self.x, self.y = World:move(self, pointX, pointY)
+            self.x, self.y = World:move(self, pointX, pointY, colFilter)
 
             -- If in target, inverses boolean
             self.isComingBack = not self.isComingBack

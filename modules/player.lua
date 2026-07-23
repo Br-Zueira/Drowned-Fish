@@ -22,6 +22,7 @@ local assets = require 'modules.assets'
 ---@field gravity integer
 ---@field jumpForceDefault integer
 ---@field jumpForce integer
+---@field type 'Player'
 local Player = {};
 Player.__index = Player;
 
@@ -38,7 +39,8 @@ function Player.new()
         jumpCooldown = false,
         velSpeedDefault = 250, velSpeed = 250,
         gravityDefault = 6400, gravity = 6400,
-        jumpForceDefault = -1300, jumpForce = -1300
+        jumpForceDefault = -1300, jumpForce = -1300,
+        type = 'Player'
     }
     setmetatable(instance, Player)
     return instance
@@ -46,7 +48,6 @@ end
 
 -- Player methods
 function Player:draw()
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(assets.images.player, self.x, self.y)
 end
 
@@ -86,6 +87,10 @@ function Player:update(dt)
     local expectedX = self.x + (self.velX * dt)
     local expectedY = self.y + (self.velY * dt)
 
+    -- Crushed/Squeezed
+    local isBeingLifted = false
+    local didBonk = false
+
     -- Colision
     local realX, realY, cols, len = World:move(self, expectedX, expectedY, worldFilter)
     self.x = realX
@@ -93,6 +98,7 @@ function Player:update(dt)
 
     -- Loop through collisions to check if player is standing on the floor
     local onGround = false
+    local standingOnSpeed = 0
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
 
@@ -106,17 +112,28 @@ function Player:update(dt)
         end
 
         if col.normal.y == -1 then -- Hit something below player
-            self.velY = 0
+            standingOnSpeed = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
             onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
+            if standingOnSpeed < 0 then isBeingLifted = true end
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
+            didBonk = true
         end
+    end
+
+    -- Kills player if they go out of screen or if they get squished
+    if self.y > VH or self.y < 0 or self.x > VW or self.x < 0 or (isBeingLifted and didBonk) then
+        self:death()
     end
 
     -- Coyote timer makes jumping feel smoother 
     -- Because it gives an extra "pixel" or time to jump
-    if not onGround then
+    if onGround then
+        if self.velY >= 0 then
+            self.velY = standingOnSpeed
+        end
+    else
         self.coyoteTimer = self.coyoteTimer - dt -- Timer counts down
     end
     if self.coyoteTimer < 0 then self.coyoteTimer = 0 end -- Timer can't be negative
@@ -129,20 +146,17 @@ function Player:update(dt)
     -- Jump manager
     if love.keyboard.isDown('w') then
         if (onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 and not self.jumpCooldown then
-            self.velY = self.jumpForce -- The jump itself
+            self.velY = self.jumpForce + standingOnSpeed -- The jump itself (conserves upwards momentum)
             self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
             self.jumpBufferTimer = 0 -- Resets the buffer
             self.jumpCooldown = true -- Locks jumping ability until user presses key again
+            self.y = self.y + (standingOnSpeed*dt) - 2 -- Avoids clipping through a moving object
+            World:update(self, self.x, self.y, self.width, self.height) -- Pushes the player 2px up to stop coliding with the saw
         else
             self.jumpBufferTimer = self.jumpBufferMax
         end
     else
         self.jumpCooldown = false -- Removes cooldown if key not pressed
-    end
-
-    -- Kills player if they fall out of screen
-    if self.y > VH then
-        self:death()
     end
 end
 
