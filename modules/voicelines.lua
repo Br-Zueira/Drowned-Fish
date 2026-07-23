@@ -13,6 +13,7 @@ local voicelines = {
 function voicelines.reset()
     voicelines.v = {}
     voicelines.step = 0
+    assets.stopAudio('voicelines')
 end
 
 -- This function adds a voiceline to the list
