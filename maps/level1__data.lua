@@ -6,9 +6,6 @@ local voicelines = require 'modules.voicelines'
 local data = {}
 
 function data.whenLoaded()
-    love.audio.play(assets.songs.planetX)
-    assets.songs.planetX:setLooping(true)
-
     voicelines.add('intro', 1)
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
@@ -65,11 +62,6 @@ function data.MiscHandler(map)
     end
 end
 
-function data.update()
-    if assets.isPlayingAny('voicelines') then
-        assets.songs.planetX:setVolume(0.5)
-    else
-        assets.songs.planetX:setVolume(1)
-    end
-end
+function data.update() end
+
 return data

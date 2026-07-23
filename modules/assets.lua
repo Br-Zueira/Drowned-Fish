@@ -95,6 +95,8 @@ function assets.load()
     assets.loadVoiceLine('oopsie', 'oopsie.wav')
     assets.loadVoiceLine('loser', 'loser.wav')
     assets.loadVoiceLine('cmon', 'cmon.wav')
+    assets.loadVoiceLine('gma', 'gma.wav')
+    assets.loadVoiceLine('portals', 'portals.wav')
 
     -- Song
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')

@@ -24,7 +24,12 @@ function love.load()
     -- Load assets
     assets.load()
 
+    -- Song
+    love.audio.play(assets.songs.planetX)
+    assets.songs.planetX:setLooping(true)
+
     world.loadMap(1, player)
+
 end
 
 ---@param dt number Delta time for each rendered frame

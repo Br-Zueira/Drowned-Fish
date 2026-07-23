@@ -20,6 +20,12 @@ function world.update(dt, player)
     end
     local data = require('maps.level' .. level .. '__data')
     if data.update then data.update(dt, player) end
+
+    if assets.isPlayingAny('voicelines') then
+        assets.songs.planetX:setVolume(0.5)
+    else
+        assets.songs.planetX:setVolume(1)
+    end
 end
 
 -- Renders every prop in the map
