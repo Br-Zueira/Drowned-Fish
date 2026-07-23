@@ -79,20 +79,27 @@ end
 
 -- Loads every game asset
 function assets.load()
+    -- Misc
     assets.loadImage('background', 'background.jpg')
+    assets.loadImage('player', 'player.png')
+
+    -- Props
     assets.loadImage('tile', 'test.png')
     assets.loadImage('spike', 'spike.png')
     assets.loadImage('goal', 'goal.png')
     assets.loadImage('saw', 'saw.png')
     assets.loadImage('placeholder', 'placeholder.png')
 
+    -- Voicelines
     assets.loadVoiceLine('intro', 'intro.wav')
     assets.loadVoiceLine('oopsie', 'oopsie.wav')
     assets.loadVoiceLine('loser', 'loser.wav')
     assets.loadVoiceLine('cmon', 'cmon.wav')
 
+    -- Song
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')
 
+    -- Font
     assets.loadFont('VT323', 'VT323-Regular.ttf', 24)
 end
 

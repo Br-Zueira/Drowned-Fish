@@ -1,4 +1,5 @@
 local world = require 'modules.world'
+local assets = require 'modules.assets'
 
 -- Class that defines a player and its behaviour
 ---@class Player
@@ -46,7 +47,7 @@ end
 -- Player methods
 function Player:draw()
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+    love.graphics.draw(assets.images.player, self.x, self.y)
 end
 
 local function worldFilter(_, other)
