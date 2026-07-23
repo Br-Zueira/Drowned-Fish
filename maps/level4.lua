@@ -375,21 +375,6 @@ return {
           gid = 2,
           visible = true,
           properties = {}
-        },
-        {
-          id = 43,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 608,
-          y = 672,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          opacity = 1,
-          gid = 2,
-          visible = true,
-          properties = {}
         }
       }
     }

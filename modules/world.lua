@@ -71,6 +71,10 @@ end
 -- Level renderer and reseter
 ---@param player Player The player instance
 function world.reload(player)
+    -- Resets player speed
+    player.velX = 0
+    player.velY = 0
+
     -- Updates voiceline manager
     voicelines.update()
 

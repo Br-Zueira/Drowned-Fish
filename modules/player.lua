@@ -123,7 +123,7 @@ function Player:update(dt)
     end
 
     -- Kills player if they go out of screen or if they get squished
-    if self.y > VH or self.y < 0 or self.x > VW or self.x < 0 or (isBeingLifted and didBonk) then
+    if self.y > VH or (self.y < 0 and onGround) or self.x > VW or self.x < 0 or (isBeingLifted and didBonk) then
         self:death()
     end
 
