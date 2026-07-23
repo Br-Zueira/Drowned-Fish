@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="44">
+ <editorsettings>
+  <export target="../../maps/level4.lua" format="lua"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="5" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0" type="Tile">
+   <image source="../../assets/images/test.png" width="32" height="32"/>
+  </tile>
+  <tile id="1" type="Placeholder">
+   <image source="../../assets/images/placeholder.png" width="32" height="32"/>
+  </tile>
+  <tile id="3" type="Spike">
+   <image source="../../assets/images/spike.png" width="32" height="16"/>
+  </tile>
+  <tile id="4" type="Goal">
+   <image source="../../assets/images/goal.png" width="32" height="32"/>
+  </tile>
+  <tile id="5" type="Saw">
+   <image source="../../assets/images/saw.png" width="32" height="32"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="Layout" width="30" height="20">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="3" name="Spawnpoint" gid="2" x="160" y="416" width="32" height="32"/>
+  <object id="20" name="Goal" gid="5" x="800" y="448" width="32" height="32"/>
+  <object id="26" name="MoverSaw" gid="6" x="336" y="0" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="336"/>
+    <property name="endY" type="int" value="672"/>
+    <property name="isOneWay" type="bool" value="true"/>
+    <property name="speed" type="int" value="500"/>
+   </properties>
+  </object>
+  <object id="29" name="MoverSaw" gid="6" x="528" y="0" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="528"/>
+    <property name="endY" type="int" value="672"/>
+    <property name="isOneWay" type="bool" value="true"/>
+    <property name="speed" type="int" value="500"/>
+   </properties>
+  </object>
+  <object id="30" name="MoverSaw" gid="6" x="639" y="672" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="639"/>
+    <property name="endY" type="int" value="0"/>
+    <property name="isOneWay" type="bool" value="true"/>
+    <property name="speed" type="int" value="500"/>
+   </properties>
+  </object>
+  <object id="31" name="MoverSaw" gid="6" x="432" y="672" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="432"/>
+    <property name="endY" type="int" value="0"/>
+    <property name="isOneWay" type="bool" value="true"/>
+    <property name="speed" type="int" value="500"/>
+   </properties>
+  </object>
+  <object id="33" name="InviSpike" gid="4" x="736" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="35" name="InviSpike" gid="4" x="736" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="36" name="InviSpike" gid="4" x="768" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="37" name="InviSpike" gid="4" x="768" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="38" name="InviSpike" gid="4" x="704" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="39" name="InviSpike" gid="4" x="704" y="448" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="41" name="Trigger" gid="2" x="640" y="416" width="32" height="32">
+   <properties>
+    <property name="id" value="moreSaws"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="42" gid="2" x="672" y="672" width="32" height="32"/>
+  <object id="43" gid="2" x="608" y="672" width="32" height="32"/>
+ </objectgroup>
+</map>
