@@ -7,9 +7,16 @@ local voicelines = require 'modules.voicelines'
 -- Wrapper for world.lua
 local world = {}
 
--- The current level
+-- The current sector and level
+---@type integer
+local sector
 ---@type integer
 local level
+
+local levelsSchema = {
+    [0] = {1},
+    [1] = {1, 2, 3, 4, 5}
+}
 
 -- Updates level
 ---@param dt number The delta time for each rendered frame
@@ -18,7 +25,7 @@ function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
         if obj.update then obj:update(dt, player) end
     end
-    local data = require('maps.level' .. level .. '__data')
+    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
     if data.update then data.update(dt, player) end
 
     if assets.isPlayingAny('voicelines') then
@@ -85,14 +92,14 @@ function world.reload(player)
 
     -- Cleans the logic world
     props.propList = {}
-    local map = sti('maps/level' .. level .. '.lua')
+    local map = sti('maps/sector' .. sector .. '/level' .. level .. '.lua')
 
     -- Recreates the physics world
     World = bump.newWorld(TileSize)
     World:add(player, player.x, player.y, player.width, player.height)
 
     -- Single level logic for every loading
-    local data = require('maps.level' .. level .. '__data')
+    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
     if data.whenReloaded then data.whenReloaded(player) end
 
     -- Iterates through a tile layer
@@ -141,17 +148,19 @@ function world.reload(player)
 end
 
 -- Custom logic to execute only while first loading the level
+---@param newSector integer The new sector to be set in manager
 ---@param newLevel integer The new level to be set in manager
 ---@param player Player The player instance
-function world.loadMap(newLevel, player)
-    -- Resets level
+function world.loadMap(newSector, newLevel, player)
+    -- Resets module and level
+    sector = newSector
     level = newLevel
 
     -- Resets voiceline manager
     voicelines.reset()
 
     -- Single level logic for first loading
-    local data = require('maps.level' .. level .. '__data')
+    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
     if data.whenLoaded then data.whenLoaded() end
 
     -- Resets death per level
@@ -162,8 +171,13 @@ function world.loadMap(newLevel, player)
 end
 
 function world.nextLevel(player)
-    level = level + 1
-    world.loadMap(level, player)
+    if levelsSchema[sector][level + 1] then
+        level = level + 1
+    else
+        sector = sector + 1
+        level = 1
+    end
+    world.loadMap(sector, level, player)
 end
 
 return world

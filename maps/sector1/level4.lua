@@ -41,35 +41,35 @@ return {
         {
           id = 0,
           type = "Tile",
-          image = "../assets/images/test.png",
+          image = "../../assets/images/test.png",
           width = 32,
           height = 32
         },
         {
           id = 1,
           type = "Placeholder",
-          image = "../assets/images/placeholder.png",
+          image = "../../assets/images/placeholder.png",
           width = 32,
           height = 32
         },
         {
           id = 3,
           type = "Spike",
-          image = "../assets/images/spike.png",
+          image = "../../assets/images/spike.png",
           width = 32,
           height = 16
         },
         {
           id = 4,
           type = "Goal",
-          image = "../assets/images/goal.png",
+          image = "../../assets/images/goal.png",
           width = 32,
           height = 32
         },
         {
           id = 5,
           type = "Saw",
-          image = "../assets/images/saw.png",
+          image = "../../assets/images/saw.png",
           width = 32,
           height = 32
         }
@@ -160,6 +160,86 @@ return {
           gid = 5,
           visible = true,
           properties = {}
+        },
+        {
+          id = 26,
+          name = "MoverSaw",
+          type = "",
+          shape = "rectangle",
+          x = 336,
+          y = 0,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["endX"] = 336,
+            ["endY"] = 672,
+            ["isOneWay"] = true,
+            ["speed"] = 500
+          }
+        },
+        {
+          id = 29,
+          name = "MoverSaw",
+          type = "",
+          shape = "rectangle",
+          x = 528,
+          y = 0,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["endX"] = 528,
+            ["endY"] = 672,
+            ["isOneWay"] = true,
+            ["speed"] = 500
+          }
+        },
+        {
+          id = 30,
+          name = "MoverSaw",
+          type = "",
+          shape = "rectangle",
+          x = 639,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["endX"] = 639,
+            ["endY"] = 0,
+            ["isOneWay"] = true,
+            ["speed"] = 500
+          }
+        },
+        {
+          id = 31,
+          name = "MoverSaw",
+          type = "",
+          shape = "rectangle",
+          x = 432,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["endX"] = 432,
+            ["endY"] = 0,
+            ["isOneWay"] = true,
+            ["speed"] = 500
+          }
         },
         {
           id = 33,

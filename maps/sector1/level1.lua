@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 4,
-  nextobjectid = 16,
+  nextobjectid = 25,
   properties = {},
   tilesets = {
     {
@@ -41,35 +41,35 @@ return {
         {
           id = 0,
           type = "Tile",
-          image = "../assets/images/test.png",
+          image = "../../assets/images/test.png",
           width = 32,
           height = 32
         },
         {
           id = 1,
           type = "Placeholder",
-          image = "../assets/images/placeholder.png",
+          image = "../../assets/images/placeholder.png",
           width = 32,
           height = 32
         },
         {
           id = 3,
           type = "Spike",
-          image = "../assets/images/spike.png",
+          image = "../../assets/images/spike.png",
           width = 32,
           height = 16
         },
         {
           id = 4,
           type = "Goal",
-          image = "../assets/images/goal.png",
+          image = "../../assets/images/goal.png",
           width = 32,
           height = 32
         },
         {
           id = 5,
           type = "Saw",
-          image = "../assets/images/saw.png",
+          image = "../../assets/images/saw.png",
           width = 32,
           height = 32
         }
@@ -95,11 +95,10 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
@@ -109,12 +108,13 @@ return {
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1
       }
     },
     {
@@ -132,11 +132,11 @@ return {
       properties = {},
       objects = {
         {
-          id = 1,
+          id = 3,
           name = "Spawnpoint",
           type = "",
           shape = "rectangle",
-          x = 128,
+          x = 160,
           y = 416,
           width = 32,
           height = 32,
@@ -147,68 +147,8 @@ return {
           properties = {}
         },
         {
-          id = 3,
-          name = "Spike",
-          type = "",
-          shape = "rectangle",
-          x = 256,
-          y = 448,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 4,
-          name = "Spike",
-          type = "",
-          shape = "rectangle",
-          x = 352,
-          y = 448,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 5,
-          name = "Spike",
-          type = "",
-          shape = "rectangle",
-          x = 448,
-          y = 448,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 6,
-          name = "Spike",
-          type = "",
-          shape = "rectangle",
-          x = 544,
-          y = 448,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 7,
-          name = "FakeGoalDeleter",
+          id = 20,
+          name = "Goal",
           type = "",
           shape = "rectangle",
           x = 800,
@@ -219,105 +159,42 @@ return {
           opacity = 1,
           gid = 5,
           visible = true,
-          properties = {
-            ["newX"] = 128,
-            ["newY"] = 608,
-            ["radius"] = 48
-          }
-        },
-        {
-          id = 8,
-          name = "InviSpike",
-          type = "",
-          shape = "rectangle",
-          x = 672,
-          y = 448,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {
-            ["radius"] = 48
-          }
-        },
-        {
-          id = 11,
-          name = "AfterSpike",
-          type = "",
-          shape = "rectangle",
-          x = 640,
-          y = 608,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
           properties = {}
         },
         {
-          id = 12,
-          name = "AfterSpike",
-          type = "",
-          shape = "rectangle",
-          x = 544,
-          y = 608,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 13,
-          name = "AfterSpike",
+          id = 23,
+          name = "Trigger",
           type = "",
           shape = "rectangle",
           x = 448,
-          y = 608,
+          y = 416,
           width = 32,
-          height = 16,
+          height = 32,
           rotation = 0,
           opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 14,
-          name = "AfterSpike",
-          type = "",
-          shape = "rectangle",
-          x = 256,
-          y = 608,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 4,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 15,
-          name = "AfterSpike",
-          type = "",
-          shape = "rectangle",
-          x = 352,
-          y = 496,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          opacity = 1,
-          gid = 1073741828,
+          gid = 2,
           visible = true,
           properties = {
-            ["ChosenOne"] = true,
-            ["range"] = 48
+            ["id"] = "fakeTiles",
+            ["radius"] = 48
+          }
+        },
+        {
+          id = 24,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 704,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "saw",
+            ["radius"] = 48
           }
         }
       }
@@ -331,7 +208,7 @@ return {
       id = 3,
       name = "FakeTiles",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -354,12 +231,12 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
     }
   }

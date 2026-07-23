@@ -29,16 +29,21 @@ function love.load(args)
     assets.songs.planetX:setLooping(true)
 
     local level = 1
+    local sector = 1
     for _, param in ipairs(args) do
-        local test = tonumber(param:match("^%-%-level=(%d+)$"))
+        local sectorParam = tonumber(param:match("^%-%-sector=(%d+)$"))
+        local levelParam = tonumber(param:match("^%-%-level=(%d+)$"))
         if param == "--dev-map" then
-            level = 0
-        elseif test then
-            level = test
+            sector = 0
+            level = 1
+        elseif sectorParam then
+            sector = sectorParam
+        elseif levelParam then
+            level = levelParam
         end
     end
 
-    world.loadMap(level, player)
+    world.loadMap(sector, level, player)
 
 end
 
