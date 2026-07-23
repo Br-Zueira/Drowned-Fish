@@ -173,9 +173,16 @@ end
 function world.nextLevel(player)
     if levelsSchema[sector][level + 1] then
         level = level + 1
-    else
+    elseif levelsSchema[sector + 1] then
         sector = sector + 1
         level = 1
+    else
+        -- This would be an endgame thing, but we don't have it yet, so a placeholder here
+        print("You won! (I could do it way faster, you loser)")
+        local deathText = player.deaths == 0 and "(Pure luck, I can do it with my eyes closed)" or "(I'd have done it without ever dying)"
+        print("Deaths:" .. " " .. player.deaths .. " " .. deathText)
+        level = 1
+        sector = 1
     end
     world.loadMap(sector, level, player)
 end
