@@ -10,7 +10,7 @@ if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
 end
 
 -- Love standard implementations
-function love.load()
+function love.load(args)
     -- Window dimensions
     VW = love.graphics.getWidth()
     VH = love.graphics.getHeight()
@@ -28,17 +28,28 @@ function love.load()
     love.audio.play(assets.songs.planetX)
     assets.songs.planetX:setLooping(true)
 
-    world.loadMap(1, player)
+    local level = 1
+    for _, param in ipairs(args) do
+        local test = tonumber(param:match("^%-%-level=(%d+)$"))
+        if param == "--dev-map" then
+            level = 0
+        elseif test then
+            level = test
+        end
+    end
+
+    world.loadMap(level, player)
 
 end
 
 ---@param dt number Delta time for each rendered frame
 function love.update(dt)
-    player:update(dt)
+    dt = math.min(dt, 1/30)
     world.update(dt, player)
+    player:update(dt)
 end
 
-function love.draw() 
+function love.draw()
     -- Render scenary
     world.draw()
 
