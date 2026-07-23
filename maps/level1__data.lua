@@ -40,7 +40,7 @@ function levelTrigger:update(_, player)
             end
             self:delete()
         elseif self.id == "saw" then
-            props.MoverSaw.new(self.x, VH, self.x, -999, 2000)
+            props.MoverSaw.new(self.x, VH, self.x, -999, 2000, true, true)
             self:delete()
         end
     end

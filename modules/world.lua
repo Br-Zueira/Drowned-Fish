@@ -120,7 +120,7 @@ function world.reload(player)
         elseif obj.name == "Saw" then
             props.Saw.new(obj.x, obj.y)
         elseif obj.name == "MoverSaw" then
-            props.MoverSaw.new(obj.x, obj.y, p.endX, p.endY, p.speed)
+            props.MoverSaw.new(obj.x, obj.y, p.endX, p.endY, p.speed, p.isOneWay, p.isSinglePass)
         elseif obj.name == "InviSpike" then
             props.InviSpike.new(obj.x, obj.y, p.radius)
         elseif obj.name == "FakeGoal" then

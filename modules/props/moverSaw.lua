@@ -9,6 +9,8 @@ local Saw = require 'modules.props.saw'
 ---@field endX number Ending X coordinate of mover saw
 ---@field endY number Ending X coordinate of mover saw
 ---@field speed number Speed of mover saw
+---@field isOneWay boolean If true, the saw moves in a single direction
+---@field isSinglePass boolean If true, the saw will be deleted after reaching the end point
 local MoverSaw = {}
 MoverSaw.__index = MoverSaw
 setmetatable(MoverSaw, Saw)
@@ -19,8 +21,10 @@ setmetatable(MoverSaw, Saw)
 ---@param endX number Ending X coordinate of mover saw
 ---@param endY number Ending X coordinate of mover saw
 ---@param speed number Speed of mover saw
+---@param isOneWay? boolean If true, the saw moves in a single direction
+---@param isSinglePass? boolean If true, the saw will be deleted after reaching the end point
 ---@return MoverSaw
-function MoverSaw.new(x, y, endX, endY, speed)
+function MoverSaw.new(x, y, endX, endY, speed, isOneWay, isSinglePass)
     y = y - TileSize
     endY = endY - TileSize
     local instance = Saw.new(x, y)
@@ -33,6 +37,8 @@ function MoverSaw.new(x, y, endX, endY, speed)
     instance.endY = endY
     instance.speed = speed
     instance.isComingBack = false
+    instance.isOneWay = isOneWay or false
+    instance.isSinglePass = isSinglePass or false
     setmetatable(instance, MoverSaw)
     return instance
 end
@@ -70,11 +76,19 @@ function MoverSaw:update(dt)
         local dirY = dy/distance
         self.x, self.y = World:move(self, self.x + dirX*speed, self.y + dirY*speed, function(o) return nil end)
     else
-        -- Avoids overshooting target
-        self.x, self.y = World:move(self, pointX, pointY)
+        -- If single pass, deletes itself and aborts execution of the rest of the script
+        if self.isSinglePass then self:delete() return end
 
-        -- If in target, inverses boolean
-        self.isComingBack = not self.isComingBack
+        if self.isOneWay then
+            -- Goes back to starting point
+            self.x, self.y = World:move(self, self.startX, self.startY)
+        else
+            -- Avoids overshooting target
+            self.x, self.y = World:move(self, pointX, pointY)
+
+            -- If in target, inverses boolean
+            self.isComingBack = not self.isComingBack
+        end
     end
 end
 
