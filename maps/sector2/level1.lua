@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 10,
+  nextobjectid = 12,
   properties = {},
   tilesets = {
     {
@@ -246,6 +246,43 @@ return {
           gid = 2,
           visible = true,
           properties = {}
+        },
+        {
+          id = 10,
+          name = "SpawnSaw",
+          type = "",
+          shape = "rectangle",
+          x = -64,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["order"] = 4,
+            ["speed"] = 100
+          }
+        },
+        {
+          id = 11,
+          name = "SpawnSaw",
+          type = "",
+          shape = "rectangle",
+          x = -64,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["isFake"] = true,
+            ["order"] = 5,
+            ["speed"] = 100
+          }
         }
       }
     }

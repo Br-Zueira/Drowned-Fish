@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="10">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="12">
  <editorsettings>
   <export target="../../../maps/sector2/level1.lua" format="lua"/>
  </editorsettings>
@@ -72,5 +72,18 @@
    </properties>
   </object>
   <object id="9" gid="2" x="480" y="320" width="32" height="32"/>
+  <object id="10" name="SpawnSaw" gid="2" x="-64" y="512" width="32" height="32">
+   <properties>
+    <property name="order" type="int" value="4"/>
+    <property name="speed" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="11" name="SpawnSaw" gid="2" x="-64" y="544" width="32" height="32">
+   <properties>
+    <property name="isFake" type="bool" value="true"/>
+    <property name="order" type="int" value="5"/>
+    <property name="speed" type="int" value="100"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

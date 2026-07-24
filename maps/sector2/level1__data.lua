@@ -7,7 +7,7 @@ local data = {}
 
 local sawList = {}
 local canSpawnSaws = false
-local secs = 5
+local secs = 2
 local timer = secs
 local step = 1
 
@@ -15,6 +15,8 @@ function data.whenLoaded() end
 function data.whenReloaded()
     canSpawnSaws = false
     sawList = {}
+    timer = secs
+    step = 1
 end
 
 function data.update(dt)
@@ -22,6 +24,18 @@ function data.update(dt)
         timer = timer - dt
         if timer <= 0 then
             timer = secs
+            for i = #sawList, 1, -1 do
+                local p = sawList[i]
+                if p.properties.order == step then
+                    table.remove(sawList, i)
+                    local i = props.MoverSaw.new(p.x, p.y, VW, p.y, p.properties.speed, true, true)
+                    if p.properties.isFake then
+                        i.isCross = false
+                        i.type = 'Solid'
+                    end
+                end
+            end
+            step = step + 1
         end
     end
 end
@@ -41,9 +55,10 @@ function data.ObjHandler(obj)
                 self.isComingBack = false
                 self.isSinglePass = true
                 self.endY = VH
+                canSpawnSaws = true
             end
         end
-    elseif obj.name == 'SpawnSaw' then 
+    elseif obj.name == 'SpawnSaw' then
         table.insert(sawList, obj)
     end
 end

@@ -48,7 +48,7 @@ local colFilter = function(o)
     if o.type == 'Player' then
         return 'slide'
     end
-    return 'cross'
+    return nil
 end
 
 -- Updates the mover saw, moving and rotating it
