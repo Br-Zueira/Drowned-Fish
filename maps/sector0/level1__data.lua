@@ -9,25 +9,11 @@ function data.whenLoaded() end
 function data.whenReloaded() end
 function data.update() end
 
-local levelTrigger = {}
-levelTrigger.__index = levelTrigger
-setmetatable(levelTrigger, props.Trigger)
-
-function levelTrigger:update(_, player)
-    if props.isPlayerInRadius(self, player, self.radius) then
-        self:delete()
-        local fake = props.MoverSaw.new(672, 672, 672, 0, 100, true)
-        fake.type = 'Solid'
-        fake.isCross = false
-        fake.velY = -100
-    end
-end
-
 function data.ObjHandler(obj)
     local p = obj.properties
-    if obj.name == 'Trigger' then
-        local i = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
-        setmetatable(i, levelTrigger)
+    if obj.name == 'Moveable' then
+        local i = props.Tile.new(obj.x, obj.y)
+        props.Moveable.set(i, i.x, i.y, p.endX, p.endY, p.speed, p.isOneWay)
     end
 end
 

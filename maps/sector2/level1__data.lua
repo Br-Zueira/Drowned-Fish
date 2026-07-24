@@ -11,7 +11,14 @@ local secs = 2
 local timer = secs
 local step = 1
 
-function data.whenLoaded() end
+function data.whenLoaded()
+    voicelines.add('oopsie', 2)
+    voicelines.add('cmon', 4)
+    voicelines.add('loser', 6)
+    voicelines.add('cmon', 6, 1, 4, true)
+    voicelines.add('oopsie', 6, 1, 4, true)
+end
+
 function data.whenReloaded()
     canSpawnSaws = false
     sawList = {}
@@ -40,24 +47,20 @@ function data.update(dt)
     end
 end
 
+local function customUpdate(self)
+    if self.isComingBack then
+        self.isComingBack = false
+        self.isSinglePass = true
+        self.endY = VH
+        canSpawnSaws = true
+    end
+end
+
 function data.ObjHandler(obj)
     local p = obj.properties
     if obj.name == 'MovPlat' then
-        local i = props.MoverSaw.new(obj.x, obj.y, 480, 320, p.speed)
-        i.renderTable.imgName = 'tile'
-        i.type = 'Solid'
-        i.isCross = false
-        i.didReachPoint = false
-        function i:update(dt, player)
-            props.MoverSaw.update(self, dt, player)
-            self.degrees = 0
-            if self.isComingBack then
-                self.isComingBack = false
-                self.isSinglePass = true
-                self.endY = VH
-                canSpawnSaws = true
-            end
-        end
+        local i = props.Tile.new(obj.x, obj.y)
+        props.Moveable.set(i, i.x, i.y, 480, 320, p.speed, false, false, customUpdate)
     elseif obj.name == 'SpawnSaw' then
         table.insert(sawList, obj)
     end
