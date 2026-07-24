@@ -10,5 +10,6 @@ props.InviSpike = require(p .. 'inviSpike')
 props.FakeGoal = require(p .. 'fakeGoal')
 props.Trigger = require(p .. 'trigger')
 props.Portal = require(p .. 'portal')
+props.Moveable = require(p .. 'moveable')
 
 return props
