@@ -9,11 +9,11 @@ local world = {}
 
 -- The current sector and level
 ---@type integer
-local sector
+world.sector = 1
 ---@type integer
-local level
+world.level = 1
 
-local levelsSchema = {
+world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
     [2] = {1}
@@ -26,7 +26,7 @@ function world.update(dt, player)
     for _, obj in ipairs(props.propList) do
         if obj.update then obj:update(dt, player) end
     end
-    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
+    local data = require('maps.sector' .. world.sector .. '.level' .. world.level .. '__data')
     if data.update then data.update(dt, player) end
 
     if assets.isPlayingAny('voicelines') then
@@ -93,14 +93,14 @@ function world.reload(player)
 
     -- Cleans the logic world
     props.propList = {}
-    local map = sti('maps/sector' .. sector .. '/level' .. level .. '.lua')
+    local map = sti('maps/sector' .. world.sector .. '/level' .. world.level .. '.lua')
 
     -- Recreates the physics world
     World = bump.newWorld(TileSize)
     World:add(player, player.x, player.y, player.width, player.height)
 
     -- Single level logic for every loading
-    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
+    local data = require('maps.sector' .. world.sector .. '.level' .. world.level .. '__data')
     if data.whenReloaded then data.whenReloaded(player) end
 
     -- Iterates through a tile layer
@@ -154,14 +154,14 @@ end
 ---@param player Player The player instance
 function world.loadMap(newSector, newLevel, player)
     -- Resets module and level
-    sector = newSector
-    level = newLevel
+    world.sector = newSector
+    world.level = newLevel
 
     -- Resets voiceline manager
     voicelines.reset()
 
     -- Single level logic for first loading
-    local data = require('maps.sector' .. sector .. '.level' .. level .. '__data')
+    local data = require('maps.sector' .. world.sector .. '.level' .. world.level .. '__data')
     if data.whenLoaded then data.whenLoaded() end
 
     -- Resets death per level
@@ -172,20 +172,20 @@ function world.loadMap(newSector, newLevel, player)
 end
 
 function world.nextLevel(player)
-    if levelsSchema[sector][level + 1] then
-        level = level + 1
-    elseif levelsSchema[sector + 1] then
-        sector = sector + 1
-        level = 1
+    if world.levelsSchema[world.sector][world.level + 1] then
+        world.level = world.level + 1
+    elseif world.levelsSchema[world.sector + 1] then
+        world.sector = world.sector + 1
+        world.level = 1
     else
         -- This would be an endgame thing, but we don't have it yet, so a placeholder here
         print("You won! (I could do it way faster, you loser)")
         local deathText = player.deaths == 0 and "(Pure luck, I can do it with my eyes closed)" or "(I'd have done it without ever dying)"
         print("Deaths:" .. " " .. player.deaths .. " " .. deathText)
-        level = 1
-        sector = 1
+        world.level = 1
+        world.sector = 1
     end
-    world.loadMap(sector, level, player)
+    world.loadMap(world.sector, world.level, player)
 end
 
 return world

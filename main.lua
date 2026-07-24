@@ -1,6 +1,7 @@
 local world = require 'modules.world'
 local assets = require 'modules.assets'
 local Player = require 'modules.player'
+local ui = require 'modules.ui'
 
 local player
 
@@ -55,14 +56,15 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- Resets color
+    love.graphics.setColor(1, 1, 1, 1)
+
     -- Render scenary
     world.draw()
 
     -- Render player
     player:draw()
 
-    -- Render death counter
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setFont(assets.fonts.VT323)
-    love.graphics.print('Deaths: ' .. player.deaths, 10, 10, 0, 2, 2)
+    -- Render UI
+    ui.draw(player)
 end
