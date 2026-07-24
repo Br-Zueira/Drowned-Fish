@@ -1,5 +1,4 @@
 local props = require 'modules.props'
-local assets = require 'modules.assets'
 local voicelines = require 'modules.voicelines'
 
 -- Custom, single level data
