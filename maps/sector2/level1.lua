@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 12,
+  nextobjectid = 14,
   properties = {},
   tilesets = {
     {
@@ -281,6 +281,40 @@ return {
           properties = {
             ["isFake"] = true,
             ["order"] = 5,
+            ["speed"] = 100
+          }
+        },
+        {
+          id = 12,
+          name = "MovPlat",
+          type = "",
+          shape = "rectangle",
+          x = -32,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["speed"] = 100
+          }
+        },
+        {
+          id = 13,
+          name = "MovPlat",
+          type = "",
+          shape = "rectangle",
+          x = -96,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
             ["speed"] = 100
           }
         }

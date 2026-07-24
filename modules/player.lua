@@ -78,18 +78,19 @@ function Player:update(dt)
     if love.keyboard.isDown('d') then
         self.velX = self.velX + self.velSpeed
     end
+    
+    -- Fall
+    self.velY = self.velY + (self.gravity * dt)
 
     -- Expected coordinates for player to be at
     local expectedX = self.x + (self.velX * dt)
     local expectedY = self.y + (self.velY * dt)
 
-    -- Fall
-    self.velY = self.velY + (self.gravity * dt)
-
     -- Crushed/Squeezed
     local isBeingLifted = false
     local didBonk = false
 
+    -- Colision manager
     local realX, realY, cols, len = World:move(self, expectedX, expectedY, worldFilter)
     self.x = realX
     self.y = realY

@@ -60,7 +60,7 @@ function data.ObjHandler(obj)
     local p = obj.properties
     if obj.name == 'MovPlat' then
         local i = props.Tile.new(obj.x, obj.y)
-        props.Moveable.set(i, i.x, i.y, 480, 320, p.speed, false, false, customUpdate)
+        props.Moveable.set(i, i.x, i.y, i.x + 480 + TileSize*2, 320, p.speed, false, false, customUpdate)
     elseif obj.name == 'SpawnSaw' then
         table.insert(sawList, obj)
     end
