@@ -7,8 +7,18 @@ local data = {}
 
 local growList = {}
 
-function data.whenLoaded() end
-function data.whenReloaded() growList = {} end
+function data.whenLoaded()
+    voicelines.add('oopsie', 2)
+    voicelines.add('cmon', 4)
+    voicelines.add('loser', 6)
+    voicelines.add('cmon', 6, 1, 4, true)
+    voicelines.add('oopsie', 6, 1, 4, true)
+end
+
+function data.whenReloaded()
+    growList = {}
+end
+
 function data.update() end
 
 local levelTrigger = {}
@@ -67,6 +77,19 @@ function data.MiscHandler(map)
                 local pixelX = (x - 1) * TileSize
                 local pixelY = (y - 1) * TileSize
                 table.insert(growList, {x=pixelX, y=pixelY})
+            end
+        end
+    end
+
+    local layout = map.layers["InvisiTiles"]
+    for y = 1, layout.height do
+        for x = 1, layout.width do
+            local tile = layout.data[y][x]
+            if tile then
+                local pixelX = (x - 1) * TileSize
+                local pixelY = (y - 1) * TileSize
+                local t = props.Tile.new(pixelX, pixelY)
+                t.renderTable = { isImg=nil }
             end
         end
     end
