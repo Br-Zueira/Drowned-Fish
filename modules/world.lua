@@ -16,7 +16,7 @@ world.level = 1
 world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
-    [2] = {1}
+    [2] = {1, 2}
 }
 
 -- Updates level

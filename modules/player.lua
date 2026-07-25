@@ -78,17 +78,13 @@ function Player:update(dt)
     if love.keyboard.isDown('d') then
         self.velX = self.velX + self.velSpeed
     end
-    
+
     -- Fall
     self.velY = self.velY + (self.gravity * dt)
 
     -- Expected coordinates for player to be at
     local expectedX = self.x + (self.velX * dt)
     local expectedY = self.y + (self.velY * dt)
-
-    -- Crushed/Squeezed
-    local isBeingLifted = false
-    local didBonk = false
 
     -- Colision manager
     local realX, realY, cols, len = World:move(self, expectedX, expectedY, worldFilter)
@@ -119,15 +115,13 @@ function Player:update(dt)
             standingOnSpeedY = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
             onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
-            if standingOnSpeedY < 0 then isBeingLifted = true end
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
-            didBonk = true
         end
     end
 
     -- Kills player if they go out of screen or if they get squished
-    if self.y > VH or (self.y < 0 and onGround) or self.x > VW or self.x < 0 or (isBeingLifted and didBonk) then
+    if self.y > VH or self.x > VW + TileSize or self.x < -TileSize then
         self:death()
     end
 
