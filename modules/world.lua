@@ -8,15 +8,16 @@ local voicelines = require 'modules.voicelines'
 local world = {}
 
 -- The current sector and level
----@type integer
+---@type integer | string
 world.sector = 1
----@type integer
+---@type integer | string
 world.level = 1
 
 world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
-    [2] = {1, 2}
+    [2] = {1, 2},
+    ["Special"] = {"Hub"}
 }
 
 -- Updates level
@@ -72,6 +73,15 @@ function world.draw()
         elseif not instance.isInvisible and instance.renderTable.isImg == false then
             love.graphics.setColor(instance.renderTable.rgba)
             love.graphics.rectangle('fill', instance.x, instance.y, instance.sizeX, instance.sizeY)
+        end
+
+        if instance.type == "SectorGate" then
+            local f = assets.fonts.VT323
+            love.graphics.setFont(f)
+            local display = "Sector " .. instance.sector
+            local dX = math.floor(instance.x + TileSize/2 - f:getWidth(display)/2)
+            local dY = instance.y - TileSize*2
+            love.graphics.print(display, dX, dY)
         end
     end
 end
@@ -149,8 +159,8 @@ function world.reload(player)
 end
 
 -- Custom logic to execute only while first loading the level
----@param newSector integer The new sector to be set in manager
----@param newLevel integer The new level to be set in manager
+---@param newSector integer | string The new sector to be set in manager
+---@param newLevel integer | string The new level to be set in manager
 ---@param player Player The player instance
 function world.loadMap(newSector, newLevel, player)
     -- Resets module and level
@@ -174,16 +184,10 @@ end
 function world.nextLevel(player)
     if world.levelsSchema[world.sector][world.level + 1] then
         world.level = world.level + 1
-    elseif world.levelsSchema[world.sector + 1] then
-        world.sector = world.sector + 1
-        world.level = 1
     else
-        -- This would be an endgame thing, but we don't have it yet, so a placeholder here
-        print("You won! (I could do it way faster, you loser)")
-        local deathText = player.deaths == 0 and "(Pure luck, I can do it with my eyes closed)" or "(I'd have done it without ever dying)"
-        print("Deaths:" .. " " .. player.deaths .. " " .. deathText)
-        world.level = 1
-        world.sector = 1
+        -- Takes player to sector hub after finishing a sector
+        world.sector = "Special"
+        world.level = "Hub"
     end
     world.loadMap(world.sector, world.level, player)
 end

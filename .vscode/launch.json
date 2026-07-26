@@ -9,7 +9,7 @@
                 "command": "love"
             },
             "args": [
-                "${workspaceFolder} --sector=2"
+                "${workspaceFolder}"
             ],
             "windows": {
                 "program": {

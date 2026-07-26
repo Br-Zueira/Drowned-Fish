@@ -35,6 +35,22 @@ end
 -- Draws the level list element
 ---@param f any The font source
 function ui.drawLevelList(f)
+    -- Changes the display name to be cooler
+    local sector = world.sector
+    if sector == "Special" then
+        sector = "UNKNOWN"
+    end
+
+    -- Text for sector
+    local secText = 'Sector: ' .. sector
+    local posX = (VW - f:getWidth(secText)) / 2 -- Centralizes text
+    local posY = VH - f:getHeight() - 8 -- Sits at bottom with a small margin
+    love.graphics.setColor(1, 1, 1, 0.75) -- White
+    love.graphics.print(secText, posX, posY)
+
+    -- As those levels contain string instead of numeric names, they'd break the rest of the UI
+    if world.sector == "Special" then return end
+
     -- Levels and sectors
     local squareSize = 32
     local margin = 32
@@ -94,13 +110,6 @@ function ui.drawLevelList(f)
             love.graphics.rectangle('fill', posX, posY, squareSize, squareSize)
         end
     end
-
-    -- Text for sector
-    local secText = 'Sector: ' .. world.sector
-    local posX = (VW - f:getWidth(secText)) / 2 -- Centralizes text
-    local posY = VH - f:getHeight() - 8 -- Sits at bottom with a small margin
-    love.graphics.setColor(1, 1, 1, 0.75) -- White
-    love.graphics.print(secText, posX, posY)
 end
 
 return ui

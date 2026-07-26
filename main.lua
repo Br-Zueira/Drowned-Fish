@@ -29,8 +29,8 @@ function love.load(args)
     love.audio.play(assets.songs.planetX)
     assets.songs.planetX:setLooping(true)
 
-    local level = 1
-    local sector = 1
+    local level = "Hub"
+    local sector = "Special"
     for _, param in ipairs(args) do
         local sectorParam = tonumber(param:match("^%-%-sector=(%d+)$"))
         local levelParam = tonumber(param:match("^%-%-level=(%d+)$"))
