@@ -44,10 +44,10 @@ function Moveable.set(instance, x, y, endX, endY, speed, isOneWay, isSinglePass,
     return instance
 end
 
--- Filter that ignores every colision with saw
-local colFilter = function(o)
+-- Filter that ignores every colision with moveable
+local colFilter = function(_, o)
     if o.type == 'Player' then
-        return 'slide'
+        return 'cross'
     end
     return nil
 end
@@ -81,9 +81,19 @@ function Moveable:update(dt, player)
     if distance > speedDT then
         local dirX = dx/distance
         local dirY = dy/distance
-        self.x, self.y = World:move(self, self.x + dirX*speedDT, self.y + dirY*speedDT, colFilter)
+        local cols, len
+        self.x, self.y, cols, len = World:move(self, self.x + dirX*speedDT, self.y + dirY*speedDT, colFilter)
         self.velX = dirX*self.speed
         self.velY = dirY*self.speed
+        for i = 1, len do
+            local col = cols[i]
+            local o = col.other
+            if col.normal.y == 1 and o.type == "Player" then
+                local targetX = o.x + (self.velX*dt)
+                local targetY = o.y - (self.velY*dt)
+                o.x, o.y = World:move(o, targetX, targetY)
+            end
+        end
     else
         -- If single pass, deletes itself and aborts execution of the rest of the script
         if self.isSinglePass then self:delete() return end

@@ -40,7 +40,9 @@ function Player.new()
         velSpeedDefault = 250, velSpeed = 250,
         gravityDefault = 6400, gravity = 6400,
         jumpForceDefault = -1300, jumpForce = -1300,
-        type = 'Player'
+        type = 'Player',
+        onGround = false,
+        standingOnSpeedX = 0, standingOnSpeedY = 0
     }
     setmetatable(instance, Player)
     return instance
@@ -69,6 +71,30 @@ end
 -- Updates player each frame
 ---@param dt integer Delta time for each rendered frame
 function Player:update(dt)
+    -- Jump manager
+    if love.keyboard.isDown('w') then
+        if not self.jumpCooldown then
+            self.jumpBufferTimer = self.jumpBufferMax
+            self.jumpCooldown = true
+        end
+    else
+        self.jumpCooldown = false -- Removes cooldown if key not pressed
+        self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
+    end
+
+    -- Actual jump
+    if (self.onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 then
+        self.velY = self.jumpForce
+
+        if self.standingOnSpeedY < 0 then
+            self.velY = self.velY + self.standingOnSpeedY
+        end
+
+        self.onGround = false
+        self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
+        self.jumpBufferTimer = 0 -- Resets the buffer
+    end
+
     -- Runs to left
     if love.keyboard.isDown('a') then
         self.velX = self.velX - self.velSpeed
@@ -83,7 +109,12 @@ function Player:update(dt)
     self.velY = self.velY + (self.gravity * dt)
 
     -- Expected coordinates for player to be at
-    local expectedX = self.x + (self.velX * dt)
+    local moveX = self.velX
+    if self.onGround then
+        moveX = moveX + self.standingOnSpeedX
+    end
+
+    local expectedX = self.x + (moveX * dt)
     local expectedY = self.y + (self.velY * dt)
 
     -- Colision manager
@@ -95,9 +126,9 @@ function Player:update(dt)
     self.velX = 0
 
     -- Loop through collisions to check if player is standing on the floor
-    local onGround = false
-    local standingOnSpeedX = 0
-    local standingOnSpeedY = 0
+    self.onGround = false
+    self.standingOnSpeedX = 0
+    self.standingOnSpeedY = 0
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
 
@@ -111,51 +142,29 @@ function Player:update(dt)
         end
 
         if col.normal.y == -1 then -- Hit something below player
-            standingOnSpeedX = col.other.velX or 0
-            standingOnSpeedY = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
-            onGround = true -- Player is grounded
+            self.standingOnSpeedX = col.other.velX or 0
+            self.standingOnSpeedY = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
+            self.onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
+            self.velY = 0
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
         end
     end
 
-    -- Kills player if they go out of screen or if they get squished
-    if self.y > VH or self.x > VW + TileSize or self.x < -TileSize then
-        self:death()
-    end
-
     -- Coyote timer makes jumping feel smoother 
     -- Because it gives an extra "pixel" or time to jump
-    if onGround then
-        if self.velY >= 0 then
-            self.velY = standingOnSpeedY
-        end
-        self.velX = self.velX + standingOnSpeedX
-    else
-        self.coyoteTimer = self.coyoteTimer - dt -- Timer counts down
+    if not self.onGround then
+        self.coyoteTimer = math.max(0, self.coyoteTimer - dt) -- Timer counts down
     end
-    if self.coyoteTimer < 0 then self.coyoteTimer = 0 end -- Timer can't be negative
 
     -- Buffer that saves if player tries to jump before hitting ground,
     -- Making game feel more responsive
-    self.jumpBufferTimer = self.jumpBufferTimer - dt
-    if self.jumpBufferTimer < 0 then self.jumpBufferTimer = 0 end
+    self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
-    -- Jump manager
-    if love.keyboard.isDown('w') then
-        if (onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 and not self.jumpCooldown then
-            self.velY = self.jumpForce + standingOnSpeedY -- The jump itself (conserves upwards momentum)
-            self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
-            self.jumpBufferTimer = 0 -- Resets the buffer
-            self.jumpCooldown = true -- Locks jumping ability until user presses key again
-            self.y = self.y + (standingOnSpeedY*dt) - 2 -- Avoids clipping through a moving object
-            World:update(self, self.x, self.y, self.width, self.height) -- Pushes the player 2px up to stop coliding with the saw
-        else
-            self.jumpBufferTimer = self.jumpBufferMax
-        end
-    else
-        self.jumpCooldown = false -- Removes cooldown if key not pressed
+    -- Kills player if they go out of screen
+    if self.y > VH or self.x > VW + TileSize or self.x < -TileSize then
+        self:death()
     end
 end
 
