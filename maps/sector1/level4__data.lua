@@ -22,7 +22,7 @@ setmetatable(levelTrigger, props.Trigger)
 function levelTrigger:update(_, player)
     if props.isPlayerInRadius(self, player, self.radius) then
         self:delete()
-        props.MoverSaw.new(608, 672, 608, 0, 500, true)
+        props.MoverSaw.new(608, 672, 608, 0, 250, true)
         local fake = props.MoverSaw.new(672, 672, 672, 0, 250, true)
         fake.type = 'Solid'
         fake.isCross = false
