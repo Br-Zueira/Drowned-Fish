@@ -53,7 +53,7 @@ function Player:draw()
     love.graphics.draw(assets.images.player, self.x, self.y)
 end
 
-local function worldFilter(_, other)
+function Player.worldFilter(_, other)
     -- Pass through but detects colision and has "drag"
     if other.isCross then
         return 'cross'
@@ -118,7 +118,7 @@ function Player:update(dt)
     local expectedY = self.y + (self.velY * dt)
 
     -- Colision manager
-    local realX, realY, cols, len = World:move(self, expectedX, expectedY, worldFilter)
+    local realX, realY, cols, len = World:move(self, expectedX, expectedY, self.worldFilter)
     self.x = realX
     self.y = realY
 

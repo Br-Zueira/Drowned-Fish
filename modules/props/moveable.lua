@@ -89,9 +89,8 @@ function Moveable:update(dt, player)
             local col = cols[i]
             local o = col.other
             if col.normal.y == 1 and o.type == "Player" then
-                local targetX = o.x + (self.velX*dt)
                 local targetY = o.y - (self.velY*dt)
-                o.x, o.y = World:move(o, targetX, targetY)
+                o.x, o.y = World:move(o, o.x, targetY, player.worldFilter)
             end
         end
     else
