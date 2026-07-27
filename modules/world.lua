@@ -21,10 +21,12 @@ world.levelsSchema = {
     ["Special"] = {"Hub"}
 }
 
-world.unlocked = save.loadJson("progress")
-if not world.unlocked then
-    world.unlocked = {
-        [1] = true
+world.save = save.loadJson("save")
+if not world.save then
+    world.save = {
+        [1] = {
+            unlocked=true
+        }
     }
 end
 
@@ -90,6 +92,15 @@ function world.draw()
             local dX = math.floor(instance.x + TileSize/2 - f:getWidth(display)/2)
             local dY = instance.y - TileSize*2
             love.graphics.print(display, dX, dY)
+
+            -- Shows sector deaths
+            local deaths = world.save[instance.sector].deaths
+            if deaths then
+                display = "Fewest Deaths: " .. deaths
+                dX = math.floor(instance.x + TileSize/2 - f:getWidth(display)/2)
+                dY = dY + f:getHeight()
+                love.graphics.print(display, dX, dY)
+            end
         end
     end
 end
@@ -191,10 +202,27 @@ end
 
 function world.nextLevel(player)
     if world.levelsSchema[world.sector][world.level + 1] then
+        -- Goes to next level
         world.level = world.level + 1
     else
-        world.unlocked[world.sector+1] = true
-        save.saveJson("progress", world.unlocked)
+        -- Initializes next sector if not initialized
+        if not world.save[world.sector+1] then
+            world.save[world.sector+1] = {}
+        end
+
+        -- Unlocks next sector
+        world.save[world.sector+1].unlocked = true
+
+        -- Gets the registered lowest death count (defaults to math.huge if first run in sector)
+        local lowestDeathCount = (world.save[world.sector].deaths or math.huge)
+        -- Saves best death count
+        if player.deaths < lowestDeathCount then
+            world.save[world.sector].deaths = player.deaths
+        end
+
+        -- Saves all this info
+        save.saveJson("save", world.save)
+
         -- Takes player to sector hub after finishing a sector
         player.deaths = 0
         world.sector = "Special"

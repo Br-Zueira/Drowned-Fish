@@ -47,7 +47,7 @@ end
 function data.ObjHandler(obj)
     local p = obj.properties
     if obj.name == "Sector" then
-        if not world.unlocked[p.sector] then return end
+        if not world.save[p.sector] or not world.save[p.sector].unlocked then return end
         sectorGate.new(obj.x, obj.y, p.sector)
     end
 end

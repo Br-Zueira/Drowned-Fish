@@ -27,6 +27,7 @@ function ui.drawDeathCounter(player, f)
     love.graphics.print(deathsText, marginX, marginYDeaths, 0, scaleFactor, scaleFactor)
 
     -- Shows info for level death counter right below the bigger total death counter
+    if world.sector == "Special" then return end
     local levelDeathsText = 'Level deaths: ' .. player.levelDeaths
     local marginYLevelDeaths = marginYDeaths + f:getHeight()*scaleFactor
     love.graphics.print(levelDeathsText, marginX, marginYLevelDeaths)
