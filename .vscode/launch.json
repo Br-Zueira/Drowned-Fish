@@ -9,7 +9,9 @@
                 "command": "love"
             },
             "args": [
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "--sector=${input:sector}",
+                "--level=${input:level}"
             ],
             "windows": {
                 "program": {
@@ -26,6 +28,20 @@
                     "command": "love"
                 }
             }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "sector",
+            "type": "promptString",
+            "description": "Enter sector to test",
+            "default": "Special"
+        },
+        {
+            "id": "level",
+            "type": "promptString",
+            "description": "Enter level to test",
+            "default": "Hub"
         }
     ]
 }
