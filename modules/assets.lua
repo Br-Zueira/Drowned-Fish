@@ -90,6 +90,7 @@ function assets.load()
     assets.loadImage('saw', 'saw.png')
     assets.loadImage('placeholder', 'placeholder.png')
     assets.loadImage('spring', 'spring.png')
+    assets.loadImage('booster', 'booster.png')
 
     -- Voicelines
     assets.loadVoiceLine('intro', 'intro.wav')

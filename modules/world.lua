@@ -170,6 +170,8 @@ function world.reload(player)
             props.Portal.new(obj.x, obj.y, p.pair, p.isInvisible)
         elseif obj.name == "Spring" then
             props.Spring.new(obj.x, obj.y)
+        elseif obj.name == "Booster" then
+            props.Booster.new(obj.x, obj.y, p.speed, obj.rotation)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end

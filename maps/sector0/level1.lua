@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 4,
-  nextobjectid = 47,
+  nextobjectid = 48,
   properties = {},
   tilesets = {
     {
@@ -36,7 +36,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 6,
+      tilecount = 7,
       tiles = {
         {
           id = 0,
@@ -77,6 +77,13 @@ return {
           id = 6,
           type = "Spring",
           image = "../../assets/images/spring.png",
+          width = 32,
+          height = 32
+        },
+        {
+          id = 7,
+          type = "Booster",
+          image = "../../assets/images/booster.png",
           width = 32,
           height = 32
         }
@@ -182,6 +189,23 @@ return {
           gid = 7,
           visible = true,
           properties = {}
+        },
+        {
+          id = 47,
+          name = "Booster",
+          type = "",
+          shape = "rectangle",
+          x = 352,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 45,
+          opacity = 1,
+          gid = 8,
+          visible = true,
+          properties = {
+            ["speed"] = 2000
+          }
         }
       }
     }

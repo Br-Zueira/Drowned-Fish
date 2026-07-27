@@ -11,6 +11,7 @@ props.FakeGoal = require(p .. 'fakeGoal')
 props.Trigger = require(p .. 'trigger')
 props.Portal = require(p .. 'portal')
 props.Moveable = require(p .. 'moveable')
-props.Spring = require(p.. 'spring')
+props.Spring = require(p .. 'spring')
+props.Booster = require(p ..'booster')
 
 return props

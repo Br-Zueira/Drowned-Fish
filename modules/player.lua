@@ -22,6 +22,7 @@ local assets = require 'modules.assets'
 ---@field gravity integer
 ---@field jumpForceDefault integer
 ---@field jumpForce integer
+---@field boostedX integer
 ---@field type 'Player'
 local Player = {};
 Player.__index = Player;
@@ -42,7 +43,8 @@ function Player.new()
         jumpForceDefault = -1300, jumpForce = -1300,
         type = 'Player',
         onGround = false,
-        standingOnSpeedX = 0, standingOnSpeedY = 0
+        standingOnSpeedX = 0, standingOnSpeedY = 0,
+        boostedX = 0
     }
     setmetatable(instance, Player)
     return instance
@@ -122,8 +124,13 @@ function Player:update(dt)
     self.x = realX
     self.y = realY
 
-    -- Stops horizontal velocity to avoid sliding
-    self.velX = 0
+    -- Avoid sliding, but keep booster momentum
+    self.velX = self.boostedX
+    local friction = 6
+    self.boostedX = self.boostedX * math.max(0, 1 - (friction*dt))
+    if math.abs(self.boostedX) < 0.1 then
+        self.boostedX = 0
+    end
 
     -- Loop through collisions to check if player is standing on the floor
     self.onGround = false
@@ -148,6 +155,7 @@ function Player:update(dt)
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
             if type == 'Spring' then
                 self.velY = -self.velY
+                return
             else
                 self.velY = 0
             end
