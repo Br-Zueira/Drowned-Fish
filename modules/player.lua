@@ -170,6 +170,8 @@ end
 
 -- Kills player and reloads level, passing self as player instance
 function Player:death()
+    -- Breaks momentum after death
+    self.velX, self.velY = 0, 0
     -- Death counter
     self.deaths = self.deaths + 1
     self.levelDeaths = self.levelDeaths + 1
