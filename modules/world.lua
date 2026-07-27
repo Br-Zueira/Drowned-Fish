@@ -17,7 +17,7 @@ world.level = 1
 world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
-    [2] = {1, 2},
+    [2] = {1, 2, 3},
     ["Special"] = {"Hub"}
 }
 
@@ -96,7 +96,7 @@ function world.draw()
             -- Shows sector deaths
             local deaths = world.save[instance.sector].deaths
             if deaths then
-                display = "Fewest Deaths: " .. deaths
+                display = "Least Deaths: " .. deaths
                 dX = math.floor(instance.x + TileSize/2 - f:getWidth(display)/2)
                 dY = dY + f:getHeight()
                 love.graphics.print(display, dX, dY)
