@@ -3,6 +3,7 @@ local sti = require 'libs.sti'
 local assets = require 'modules.assets'
 local props = require 'modules.props'
 local voicelines = require 'modules.voicelines'
+local save = require 'modules.save'
 
 -- Wrapper for world.lua
 local world = {}
@@ -19,6 +20,13 @@ world.levelsSchema = {
     [2] = {1, 2},
     ["Special"] = {"Hub"}
 }
+
+world.unlocked = save.loadJson("progress")
+if not world.unlocked then
+    world.unlocked = {
+        [1] = true
+    }
+end
 
 -- Updates level
 ---@param dt number The delta time for each rendered frame
@@ -185,7 +193,10 @@ function world.nextLevel(player)
     if world.levelsSchema[world.sector][world.level + 1] then
         world.level = world.level + 1
     else
+        world.unlocked[world.sector+1] = true
+        save.saveJson("progress", world.unlocked)
         -- Takes player to sector hub after finishing a sector
+        player.deaths = 0
         world.sector = "Special"
         world.level = "Hub"
     end

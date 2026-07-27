@@ -2,8 +2,8 @@ local json = require "libs.json"
 
 local save = {}
 
-local function saveJson(file, rawData)
-    local temp = file '.temp.json'
+function save.saveJson(file, rawData)
+    local temp = file .. '.temp.json'
     local main = file .. '.json'
 
     -- Clean up any leftover temp files from past failed saves
@@ -43,7 +43,7 @@ local function tryToLoad(file)
     return table -- Returns decoded json
 end
 
-local function loadJson(file)
+function save.loadJson(file)
     -- Tries to load the main file
     local content = tryToLoad(file .. '.json')
     if content then return content end -- If successful, returns it right away
@@ -52,7 +52,7 @@ local function loadJson(file)
     local backup = tryToLoad(file .. '.temp.json')
     if backup then
         -- Autorepair if possible
-        saveJson(file, backup)
+        save.saveJson(file, backup)
         return backup
     end
 
