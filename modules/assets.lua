@@ -89,6 +89,7 @@ function assets.load()
     assets.loadImage('goal', 'goal.png')
     assets.loadImage('saw', 'saw.png')
     assets.loadImage('placeholder', 'placeholder.png')
+    assets.loadImage('spring', 'spring.png')
 
     -- Voicelines
     assets.loadVoiceLine('intro', 'intro.wav')

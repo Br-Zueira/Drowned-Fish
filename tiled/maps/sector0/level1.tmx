@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="45">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="47">
  <editorsettings>
   <export target="../../../maps/sector0/level1.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="5" columns="0">
+ <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="6" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Tile">
    <image source="../../../assets/images/test.png" width="32" height="32"/>
@@ -20,6 +20,9 @@
   <tile id="5" type="Saw">
    <image source="../../../assets/images/saw.png" width="32" height="32"/>
   </tile>
+  <tile id="6" type="Spring">
+   <image source="../../../assets/images/spring.png" width="32" height="32"/>
+  </tile>
  </tileset>
  <layer id="1" name="Layout" width="30" height="20">
   <data encoding="csv">
@@ -35,26 +38,19 @@
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="3" name="Spawnpoint" gid="2" x="160" y="512" width="32" height="32"/>
   <object id="20" name="Goal" gid="5" x="800" y="448" width="32" height="32"/>
-  <object id="44" name="Moveable" gid="1" x="160" y="608" width="32" height="32">
-   <properties>
-    <property name="endX" type="int" value="160"/>
-    <property name="endY" type="int" value="128"/>
-    <property name="isOneWay" type="bool" value="false"/>
-    <property name="speed" type="int" value="500"/>
-   </properties>
-  </object>
+  <object id="45" name="Spring" gid="7" x="288" y="608" width="32" height="32"/>
  </objectgroup>
 </map>

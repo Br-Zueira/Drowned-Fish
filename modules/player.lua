@@ -146,7 +146,11 @@ function Player:update(dt)
             self.standingOnSpeedY = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
             self.onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
-            self.velY = 0
+            if type == 'Spring' then
+                self.velY = -self.velY
+            else
+                self.velY = 0
+            end
         elseif col.normal.y == 1 then -- Hit a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
         end

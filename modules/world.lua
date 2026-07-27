@@ -168,6 +168,8 @@ function world.reload(player)
             props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
         elseif obj.name == "Portal" then
             props.Portal.new(obj.x, obj.y, p.pair, p.isInvisible)
+        elseif obj.name == "Spring" then
+            props.Spring.new(obj.x, obj.y)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end
