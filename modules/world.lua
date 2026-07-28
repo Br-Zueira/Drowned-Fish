@@ -18,16 +18,13 @@ world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
     [2] = {1, 2, 3, 4, 5},
+    [3] = {1},
     ["Special"] = {"Hub"}
 }
 
 world.save = save.loadJson("save")
 if not world.save then
-    world.save = {
-        [1] = {
-            unlocked=true
-        }
-    }
+    world.save = { [1] = { unlocked=true } }
 end
 
 -- Updates level
