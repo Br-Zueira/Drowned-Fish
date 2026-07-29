@@ -122,6 +122,9 @@ end
 -- Updates the song manager
 ---@param paused boolean Tells if the game is paused
 function assets.songManager.update(paused)
+    -- Avoids crashed if no songs
+    if #keys == 0 then return end
+
     -- Gets the current song
     local s = assets.songs[keys[assets.songManager.current]]
     if assets.isPlayingAny('songs') then
@@ -148,11 +151,10 @@ function assets.songManager.update(paused)
             love.audio.play(s)
 
             -- Gets next index to be played
-            if assets.songManager.current + 1 <= #keys then
-                assets.songManager.next = assets.songManager.current + 1
-            else
-                assets.songManager.next = 1
-            end
+            if #keys == 1 then return end -- Avoids infinite loop (with single song, next will always be equal to current)
+            repeat
+                assets.songManager.next = math.random(#keys)
+            until assets.songManager.next ~= assets.songManager.current -- Avoids a song playing more than once straight
         end
     end
 end
