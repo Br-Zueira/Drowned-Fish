@@ -79,5 +79,5 @@ function love.draw()
     player:draw()
 
     -- Render UI
-    ui.draw(player)
+    ui.draw(player, paused)
 end

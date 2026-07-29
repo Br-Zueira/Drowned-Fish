@@ -5,11 +5,13 @@ local ui = {}
 
 -- Draws all ui elements
 ---@param player Player The player instance
-function ui.draw(player)
+---@param paused boolean Tells if game is paused
+function ui.draw(player, paused)
     local f = assets.fonts.VT323
     love.graphics.setFont(f)
     ui.drawDeathCounter(player, f)
     ui.drawLevelList(f)
+    if paused then ui.drawPauseMenu(f) end
 end
 
 -- Draws the death counter
@@ -111,6 +113,14 @@ function ui.drawLevelList(f)
             love.graphics.rectangle('fill', posX, posY, squareSize, squareSize)
         end
     end
+end
+
+-- Draws the pause menu
+---@param f any The font source
+function ui.drawPauseMenu(f)
+    -- Slightly green for terminal style
+    love.graphics.setColor(0, 0.1, 0.0, 0.5)
+    love.graphics.rectangle('fill', 0, 0, VW, VH)
 end
 
 return ui
