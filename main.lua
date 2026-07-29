@@ -4,6 +4,8 @@ local Player = require 'modules.player'
 local ui = require 'modules.ui'
 
 local player
+local paused = false
+local wasPausePressed = false
 
 -- Lua debugger extension support
 if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
@@ -25,11 +27,9 @@ function love.load(args)
     -- Load assets
     assets.load()
 
-    -- Song
-    love.audio.play(assets.songs.planetX)
-    assets.songs.planetX:setLooping(true)
-
+    ---@type string | integer
     local level = "Hub"
+    ---@type string | integer
     local sector = "Special"
     for _, param in ipairs(args) do
         local sectorParam = tonumber(param:match("^%-%-sector=(%d+)$"))
@@ -51,8 +51,21 @@ end
 ---@param dt number Delta time for each rendered frame
 function love.update(dt)
     dt = math.min(dt, 1/30)
-    world.update(dt, player)
-    player:update(dt)
+    if love.keyboard.isDown("p") then
+        if not wasPausePressed then
+            paused = not paused
+        end
+        wasPausePressed = true
+    else
+        wasPausePressed = false
+    end
+
+    if not paused then
+        world.update(dt, player)
+        player:update(dt)
+    end
+
+    assets.songManager.update(paused)
 end
 
 function love.draw()
