@@ -195,8 +195,8 @@ function ui.drawVolumeControler(f)
             [true] = {0, 0.1, 0, 0.8} -- Hovered
         },
         [true] = { -- Checked
-            [false] = {0, 0.5, 0.5, 1}, -- Unhovered
-            [true] = {0, 0.5, 0.5, 0.8}, -- Hovered
+            [false] = {0, 0.5, 0.1, 1}, -- Unhovered
+            [true] = {0, 0.5, 0.1, 0.8}, -- Hovered
         }
     }
 
