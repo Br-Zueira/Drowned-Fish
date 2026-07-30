@@ -115,18 +115,109 @@ function ui.drawLevelList(f)
     end
 end
 
+ui.pauseMenuInfo = {
+    textColor = {0, 0, 0, 1},
+    sizeX = 650, sizeY = 400
+}
+ui.eventEmitters = {}
+
 -- Draws the pause menu
 ---@param f any The font source
 function ui.drawPauseMenu(f)
-    -- Slightly green for terminal style
+    ui.drawPauseBG(f)
+    ui.drawVolumeControler(f)
+end
+
+function ui.drawPauseBG()
+    -- The whole screen overlay to darker the game, slightly green for terminal style
     love.graphics.setColor(0, 0.1, 0.0, 0.5)
     love.graphics.rectangle('fill', 0, 0, VW, VH)
 
-    local sizeX, sizeY = 650, 400
+    -- Aliases
+    local sizeX, sizeY = ui.pauseMenuInfo.sizeX, ui.pauseMenuInfo.sizeY
+
+    -- Centralizes background
     local gapX = (VW-sizeX)/2
     local gapY = (VH-sizeY)/2
-    love.graphics.setColor(0.8, 1, 1, 0.75)
+
+    -- Draws background
+    love.graphics.setColor(0, 0.5, 0, 0.75)
     love.graphics.rectangle('fill', gapX, gapY, sizeX, sizeY)
+
+    -- Draws the 'Game paused' thing
+    local offset = 16
+    local scaleFac = 1.5
+    love.graphics.setColor(ui.pauseMenuInfo.textColor)
+    love.graphics.printf(
+        "Game paused", -- Text
+        0, gapY + offset, -- Start
+        math.floor(VW/scaleFac), -- Maximum Width
+        'center', -- Align method
+        0, -- Rotation
+        scaleFac, scaleFac -- SX and SY
+    )
+end
+
+local function isHovered(x, y, width, height)
+    local mX, mY = love.mouse.getPosition()
+    return mX >= x and mX <= x + width and
+            mY >= y and mY <= y + height
+end
+
+function ui.drawVolumeControler(f)
+    ui.eventEmitters = {}
+
+    local sizeX, sizeY = ui.pauseMenuInfo.sizeX, ui.pauseMenuInfo.sizeY
+    local gapX = (VW - sizeX)/2
+    local gapY = (VH - sizeY)/2
+    local borderX, borderY = gapX + sizeX, gapY + sizeY
+
+    local squareSize = 32
+    local squareColor = {0, 0, 0, 1}
+    local squareHoverColor = {0, 0, 0, 0.8}
+    local squarePaddingX = 16
+    local squareX = borderX - squarePaddingX - squareSize
+
+    local textLimitX = squareX - squarePaddingX - gapX
+
+    local paddingY = 32
+
+    local marginY = 100
+
+    local volumes = {"Music", "SFX", "Voicelines"}
+    for i, v in ipairs(volumes) do
+        local squareY = gapY + (paddingY + squareSize) * (i - 1) + marginY
+        if isHovered(squareX, squareY, squareSize, squareSize) then
+            love.graphics.setColor(squareHoverColor)
+        else
+            love.graphics.setColor(squareColor)
+        end
+        love.graphics.rectangle(
+            "fill",
+            squareX, squareY,
+            squareSize, squareSize
+        )
+
+        local textY = squareY + (squareSize - f:getHeight())/2
+        love.graphics.setColor(ui.pauseMenuInfo.textColor)
+        love.graphics.printf(v, gapX, textY, textLimitX, 'right')
+
+        table.insert(ui.eventEmitters, {
+            x=squareX, y=squareY,
+            width=squareSize, height=squareSize,
+            type="square", properties={v}
+        })
+    end
+end
+
+function ui.mouseVolumeControler(mX, mY)
+    for _, e in ipairs(ui.eventEmitters) do
+        if isHovered(e.x, e.y, e.width, e.height) then
+            if e.type == "square" then
+                print("CLICKED!")
+            end
+        end
+    end
 end
 
 return ui

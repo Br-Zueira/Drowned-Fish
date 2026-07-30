@@ -84,3 +84,9 @@ function love.draw()
     -- Render UI
     ui.draw(player, paused)
 end
+
+function love.mousereleased(mX, mY, mouseButton)
+    if mouseButton == 1 then
+        ui.mouseVolumeControler(mX, mY)
+    end
+end
