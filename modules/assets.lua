@@ -7,6 +7,12 @@ local assets = {
     songs = {}
 }
 
+assets.volume = {
+    songs = {muted=false, volume=1},
+    sfx = {muted=false, volume=1},
+    voicelines = {muted=false, volume=1}
+}
+
 -- Loaders for each type of asset in the game
 
 ---@param name string The name of the asset
@@ -169,6 +175,16 @@ function assets.pauseManager(paused)
 
         -- Marks that audio is not paused anymore
         assets.isAudioPaused = false
+    end
+end
+
+function assets.updateVolume()
+    for channelName, channel in pairs(assets.volume) do
+        if channel.muted then
+            assets.setVolume(channelName, 0)
+        else
+            assets.setVolume(channelName, channel.volume)
+        end
     end
 end
 

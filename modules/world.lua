@@ -37,10 +37,11 @@ function world.update(dt, player)
     local data = require('maps.sector' .. world.sector .. '.level' .. world.level .. '__data')
     if data.update then data.update(dt, player) end
 
+    local songsVolume = assets.volume.songs.muted and 0 or assets.volume.songs.volume
     if assets.isPlayingAny('voicelines') then
-        assets.songs.planetX:setVolume(0.5)
+        assets.songs.planetX:setVolume(songsVolume/2)
     else
-        assets.songs.planetX:setVolume(1)
+        assets.songs.planetX:setVolume(songsVolume)
     end
 end
 

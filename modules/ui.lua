@@ -124,7 +124,7 @@ ui.eventEmitters = {}
 -- Draws the pause menu
 ---@param f any The font source
 function ui.drawPauseMenu(f)
-    ui.drawPauseBG(f)
+    ui.drawPauseBG()
     ui.drawVolumeControler(f)
 end
 
@@ -158,63 +158,103 @@ function ui.drawPauseBG()
     )
 end
 
+-- Helper to see if element is being hovered
+---@param x number
+---@param y number
+---@param width number
+---@param height number
 local function isHovered(x, y, width, height)
     local mX, mY = love.mouse.getPosition()
     return mX >= x and mX <= x + width and
             mY >= y and mY <= y + height
 end
 
+-- Draws the audio channels volume controler
+---@param f any The font source
 function ui.drawVolumeControler(f)
+    -- Resets the event limiter list
     ui.eventEmitters = {}
 
+    -- Size of background (aliases to shrink variable names)
     local sizeX, sizeY = ui.pauseMenuInfo.sizeX, ui.pauseMenuInfo.sizeY
+
+    -- Left and upper gap
     local gapX = (VW - sizeX)/2
     local gapY = (VH - sizeY)/2
-    local borderX, borderY = gapX + sizeX, gapY + sizeY
 
+    -- X limit of background
+    local borderX = gapX + sizeX
+
+    -- Each square size
     local squareSize = 32
-    local squareColor = {0, 0, 0, 1}
-    local squareHoverColor = {0, 0, 0, 0.8}
+
+    -- Color schema for squares, booleans as index to let logic simple and avoid if hell
+    local squareColors = {
+        [false] = { -- Unchecked
+            [false] = {0, 0.1, 0, 1}, -- Unhovered
+            [true] = {0, 0.1, 0, 0.8} -- Hovered
+        },
+        [true] = { -- Checked
+            [false] = {0, 0.5, 0.5, 1}, -- Unhovered
+            [true] = {0, 0.5, 0.5, 0.8}, -- Hovered
+        }
+    }
+
+    -- X margin of square 
     local squarePaddingX = 16
+
+    -- Square X coordinates
     local squareX = borderX - squarePaddingX - squareSize
 
+    -- Limit of square label
     local textLimitX = squareX - squarePaddingX - gapX
 
+    -- Padding between options
     local paddingY = 32
 
+    -- Margin between first element and upper border of background
     local marginY = 100
 
-    local volumes = {"Music", "SFX", "Voicelines"}
+    -- Volume channels
+    local volumes = {{display="Music", id="songs"}, {display="SFX", id="sfx"}, {display="Voicelines", id="voicelines"}}
     for i, v in ipairs(volumes) do
+        -- Square Y position
         local squareY = gapY + (paddingY + squareSize) * (i - 1) + marginY
-        if isHovered(squareX, squareY, squareSize, squareSize) then
-            love.graphics.setColor(squareHoverColor)
-        else
-            love.graphics.setColor(squareColor)
-        end
+
+        -- Gets user color
+        local checked = assets.volume[v.id].muted
+        local hovered = isHovered(squareX, squareY, squareSize, squareSize)
+        local color = squareColors[checked][hovered]
+
+        -- Draws the square
+        love.graphics.setColor(color)
         love.graphics.rectangle(
             "fill",
             squareX, squareY,
             squareSize, squareSize
         )
 
+        -- Sound channel label
         local textY = squareY + (squareSize - f:getHeight())/2
         love.graphics.setColor(ui.pauseMenuInfo.textColor)
-        love.graphics.printf(v, gapX, textY, textLimitX, 'right')
+        love.graphics.printf(v.display, gapX, textY, textLimitX, 'right')
 
+        -- Puts it in event emitters list
         table.insert(ui.eventEmitters, {
             x=squareX, y=squareY,
             width=squareSize, height=squareSize,
-            type="square", properties={v}
+            type="square", properties={id=v.id}
         })
     end
 end
 
-function ui.mouseVolumeControler(mX, mY)
+function ui.mouseVolumeControler()
     for _, e in ipairs(ui.eventEmitters) do
         if isHovered(e.x, e.y, e.width, e.height) then
             if e.type == "square" then
-                print("CLICKED!")
+                -- Inverts muted state and updates the volume of the channels
+                assets.volume[e.properties.id].muted = not assets.volume[e.properties.id].muted
+                assets.updateVolume()
             end
         end
     end

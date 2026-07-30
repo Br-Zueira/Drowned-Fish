@@ -87,6 +87,6 @@ end
 
 function love.mousereleased(mX, mY, mouseButton)
     if mouseButton == 1 then
-        ui.mouseVolumeControler(mX, mY)
+        ui.mouseVolumeControler()
     end
 end
