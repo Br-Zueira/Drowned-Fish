@@ -143,18 +143,31 @@ function assets.songManager.update()
     end
 end
 
+-- Manages audio pausing and unpausing
 assets.isAudioPaused = false
 assets.allPaused = nil
 
+-- Pauses and unpauses audio along with game
 ---@param paused boolean Tells whether the game is paused
 function assets.pauseManager(paused)
     if paused then
+        -- If audio is already paused, there's no need to pause it
         if assets.isAudioPaused then return end
+
+        -- Pauses all playing audio and saves it for later reference
         assets.allPaused = love.audio.pause()
+
+        -- Marks that audio is already paused
         assets.isAudioPaused = true
     else
+        -- If audio is not paused, there's no need to unpause it
+        -- "If not assets.allPaused then return" avoids crashed
         if not assets.isAudioPaused or not assets.allPaused then return end
+
+        -- Unpauses all paused audio
         love.audio.play(assets.allPaused)
+
+        -- Marks that audio is not paused anymore
         assets.isAudioPaused = false
     end
 end

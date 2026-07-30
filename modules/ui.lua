@@ -121,6 +121,12 @@ function ui.drawPauseMenu(f)
     -- Slightly green for terminal style
     love.graphics.setColor(0, 0.1, 0.0, 0.5)
     love.graphics.rectangle('fill', 0, 0, VW, VH)
+
+    local sizeX, sizeY = 650, 400
+    local gapX = (VW-sizeX)/2
+    local gapY = (VH-sizeY)/2
+    love.graphics.setColor(0.8, 1, 1, 0.75)
+    love.graphics.rectangle('fill', gapX, gapY, sizeX, sizeY)
 end
 
 return ui
