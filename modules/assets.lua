@@ -121,42 +121,41 @@ function assets.songManager.load()
 end
 
 -- Updates the song manager
----@param paused boolean Tells if the game is paused
-function assets.songManager.update(paused)
+function assets.songManager.update()
     -- Avoids crashed if no songs
     if #assets.songManager.keys == 0 then return end
 
     -- Gets the current song
     local s = assets.songs[assets.songManager.keys[assets.songManager.current]]
-    if assets.isPlayingAny('songs') then
-        -- Pauses the current song along with the game
-        if paused and not assets.songManager.isSongPaused then
-            s:pause()
-            assets.songManager.isSongPaused = true
-        end
+    if not assets.isPlayingAny('songs') then
+        -- Changes current song for next one
+        s = assets.songs[assets.songManager.keys[assets.songManager.next]]
+        assets.songManager.current = assets.songManager.next
+
+        -- Plays the song
+        s:play()
+
+        -- Gets next index to be played
+        if #assets.songManager.keys == 1 then return end -- Avoids infinite loop (with single song, next will always be equal to current)
+        repeat
+            assets.songManager.next = math.random(#assets.songManager.keys)
+        until assets.songManager.next ~= assets.songManager.current -- Avoids a song playing more than once straight
+    end
+end
+
+assets.isAudioPaused = false
+assets.allPaused = nil
+
+---@param paused boolean Tells whether the game is paused
+function assets.pauseManager(paused)
+    if paused then
+        if assets.isAudioPaused then return end
+        assets.allPaused = love.audio.pause()
+        assets.isAudioPaused = true
     else
-        -- If game is paused, code is not executed
-        if paused then return end
-
-        -- If song is paused, unpauses it
-        if assets.songManager.isSongPaused then
-            s:play()
-            assets.songManager.isSongPaused = false
-        -- Else, gets the next song to be played
-        else
-            -- Changes current song for next one
-            s = assets.songs[assets.songManager.keys[assets.songManager.next]]
-            assets.songManager.current = assets.songManager.next
-
-            -- Plays the song
-            s:play()
-
-            -- Gets next index to be played
-            if #assets.songManager.keys == 1 then return end -- Avoids infinite loop (with single song, next will always be equal to current)
-            repeat
-                assets.songManager.next = math.random(#assets.songManager.keys)
-            until assets.songManager.next ~= assets.songManager.current -- Avoids a song playing more than once straight
-        end
+        if not assets.isAudioPaused or not assets.allPaused then return end
+        love.audio.play(assets.allPaused)
+        assets.isAudioPaused = false
     end
 end
 

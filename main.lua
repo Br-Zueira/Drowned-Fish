@@ -1,6 +1,7 @@
 local world = require 'modules.world'
 local assets = require 'modules.assets'
 local Player = require 'modules.player'
+local voicelines = require 'modules.voicelines'
 local ui = require 'modules.ui'
 
 local player
@@ -64,9 +65,10 @@ function love.update(dt)
     if not paused then
         world.update(dt, player)
         player:update(dt)
+        assets.songManager.update()
     end
-
-    assets.songManager.update(paused)
+    
+    assets.pauseManager(paused)
 end
 
 function love.draw()
