@@ -191,12 +191,12 @@ function ui.drawVolumeControler(f)
     -- Color schema for squares, booleans as index to let logic simple and avoid if hell
     local squareColors = {
         [false] = { -- Unchecked
-            [false] = {0, 0.1, 0, 1}, -- Unhovered
-            [true] = {0, 0.1, 0, 0.8} -- Hovered
-        },
-        [true] = { -- Checked
             [false] = {0, 0.5, 0.1, 1}, -- Unhovered
             [true] = {0, 0.5, 0.1, 0.8}, -- Hovered
+        },
+        [true] = { -- Checked
+            [false] = {0, 0.1, 0, 1}, -- Unhovered
+            [true] = {0, 0.1, 0, 0.8} -- Hovered
         }
     }
 

@@ -38,7 +38,7 @@ function world.update(dt, player)
     if data.update then data.update(dt, player) end
 
     local songsVolume = assets.volume.songs.muted and 0 or assets.volume.songs.volume
-    if assets.isPlayingAny('voicelines') then
+    if assets.isPlayingAny('voicelines') and not assets.volume.voicelines.muted and assets.volume.voicelines.volume ~= 0 then
         assets.songs.planetX:setVolume(songsVolume/2)
     else
         assets.songs.planetX:setVolume(songsVolume)
