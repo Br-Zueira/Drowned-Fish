@@ -84,7 +84,7 @@ function love.draw()
     ui.draw(player, paused)
 end
 
-function love.mousereleased(mX, mY, mouseButton)
+function love.mousereleased(_, _, mouseButton)
     if mouseButton == 1 then
         local response = ui.mouseControler(player)
         if not response then return end

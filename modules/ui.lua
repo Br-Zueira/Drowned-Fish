@@ -243,15 +243,18 @@ function ui.drawVolumeControler(f)
     end
 end
 
+-- Draws the menu screen buttons
+---@param f any The font source
 function ui.drawButtons(f)
+    -- All info needed to render the button
     local sizeX, sizeY = 150, 50
     local buttonColor = {0, 0.5, 0.1, 1}
     local buttonColorHover = {0, 0.5, 0.1, 0.8}
-    local x = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2
-    local gapY = (ui.pauseMenuInfo.gapY + ui.pauseMenuInfo.sizeY) - sizeY
-    local offset = 50
+    local x = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2 -- Centralizes button
+    local gapY = (ui.pauseMenuInfo.gapY + ui.pauseMenuInfo.sizeY) - sizeY -- Puts it relative to the bottom
+    local offset = 50 -- Offset from the menu bottom
 
-    local y = gapY - offset
+    local y = gapY - offset -- Y coordinates of button
 
     if isHovered(x, y, sizeX, sizeY) then
         love.graphics.setColor(buttonColorHover)
@@ -261,17 +264,19 @@ function ui.drawButtons(f)
 
     love.graphics.rectangle('fill', x, y, sizeX, sizeY, 10, 10)
 
+    -- Button label
     local text = "Go back to hub"
     local height = f:getHeight()
     love.graphics.setColor(ui.pauseMenuInfo.textColor)
     love.graphics.printf(
         text,
         ui.pauseMenuInfo.gapX,
-        y + height/2,
+        y + height/2, -- Centralizes text relative to the button
         ui.pauseMenuInfo.sizeX,
-        'center'
+        'center' -- Button covers the whole menu width to be 100% centralized
     )
 
+    -- Saves button in event emitters
     table.insert(ui.eventEmitters, {
         x=x, y=y,
         width=sizeX, height=sizeY,
@@ -279,6 +284,8 @@ function ui.drawButtons(f)
     })
 end
 
+-- Manages mouse interaction with menu
+---@param player Player The player instance
 function ui.mouseControler(player)
     for _, e in ipairs(ui.eventEmitters) do
         if isHovered(e.x, e.y, e.width, e.height) then
@@ -287,7 +294,9 @@ function ui.mouseControler(player)
                 assets.volume[e.properties.id].muted = not assets.volume[e.properties.id].muted
                 assets.updateVolume()
             elseif e.type == "button" and e.properties.onclick == "goToHub" then
+                -- Goes to hub
                 world.loadMap("Special", "Hub", player)
+                -- Tells game to unpause and mute voicelines to avoid some bizarre quirks
                 return { execute="muteVL", unpause=true }
             end
         end
