@@ -1,3 +1,5 @@
+local save = require "modules.save"
+
 --- The asset manager
 local assets = {
     images = {},
@@ -7,7 +9,7 @@ local assets = {
     songs = {}
 }
 
-assets.volume = {
+assets.volume = save.loadJson('settings') or {
     songs = {muted=false, volume=1},
     sfx = {muted=false, volume=1},
     voicelines = {muted=false, volume=1}
@@ -186,6 +188,7 @@ function assets.updateVolume()
             assets.setVolume(channelName, channel.volume)
         end
     end
+    save.saveJson('settings', assets.volume)
 end
 
 return assets
