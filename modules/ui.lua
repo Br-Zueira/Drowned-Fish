@@ -244,27 +244,28 @@ end
 
 function ui.drawButtons(f)
     local sizeX, sizeY = 150, 50
-    local buttonColor = {0, 1, 0, 1}
-    local buttonColorHover = {0, 1, 0, 0.8}
+    local buttonColor = {0, 0.5, 0.1, 1}
+    local buttonColorHover = {0, 0.5, 0.1, 0.8}
     local gapX = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2
     local gapY = (ui.pauseMenuInfo.gapY + ui.pauseMenuInfo.sizeY) - sizeY
+    local offset = 50
 
-    if isHovered(gapX, gapY, sizeX, sizeY) then
+    if isHovered(gapX, gapY - offset, sizeX, sizeY) then
         love.graphics.setColor(buttonColorHover)
     else
         love.graphics.setColor(buttonColor)
     end
 
-    love.graphics.rectangle('fill', gapX, gapY - 50, sizeX, sizeY)
+    love.graphics.rectangle('fill', gapX, gapY - offset, sizeX, sizeY, 10, 10)
 
     local text = "Go back to hub"
-    local width, height = f:getWidth(text), f:getHeight()
+    local height = f:getHeight()
     love.graphics.setColor(ui.pauseMenuInfo.textColor)
     love.graphics.printf(
         text,
         ui.pauseMenuInfo.gapX,
-        gapY-50-height/2,
-        ui.pauseMenuInfo.gapX+ui.pauseMenuInfo.sizeX,
+        gapY-offset+height/2,
+        ui.pauseMenuInfo.sizeX,
         'center'
     )
 end
