@@ -195,6 +195,17 @@ function ui.drawVolumeControler(f)
         }
     }
 
+    local textColors = {
+        [false] = { -- Unselected
+            [false] = ui.pauseMenuInfo.textColor, -- Unhovered
+            [true] = {0, 0, 0, 0.5}, -- Hovered
+        },
+        [true] = { -- Selected
+            [false] = {0, 0.25, 0, 1}, -- Unhovered
+            [true] = {0, 0.25, 0, 0.8} -- Hovered
+        }
+    }
+
     -- X margin of square 
     local squarePaddingX = 16
 
@@ -214,7 +225,7 @@ function ui.drawVolumeControler(f)
     local volumes = {{display="Music", id="songs"}, {display="SFX", id="sfx"}, {display="Voicelines", id="voicelines"}}
     for i, v in ipairs(volumes) do
         -- Square Y position
-        local squareY =ui.pauseMenuInfo.gapY + (paddingY + squareSize) * (i - 1) + marginY
+        local squareY = ui.pauseMenuInfo.gapY + (paddingY + squareSize) * (i - 1) + marginY
 
         -- Gets user color
         local checked = assets.volume[v.id].muted
@@ -229,16 +240,32 @@ function ui.drawVolumeControler(f)
             squareSize, squareSize
         )
 
-        -- Sound channel label
-        local textY = squareY + (squareSize - f:getHeight())/2
-        love.graphics.setColor(ui.pauseMenuInfo.textColor)
-        love.graphics.printf(v.display, ui.pauseMenuInfo.gapX, textY, textLimitX, 'right')
 
-        -- Puts it in event emitters list
+        -- Sound channel label
+        local displayValue = assets.volume[v.id].volume * 100 .. "%"
+        local displayText = v.display .. " [" .. displayValue .. "]"
+
+        -- Y coordinates of label
+        local textY = squareY + (squareSize - f:getHeight())/2
+
+        -- Prints label
+        hovered = isHovered(ui.pauseMenuInfo.gapX, textY, textLimitX, f:getHeight())
+        local selected = false
+        color = textColors[selected][hovered]
+        love.graphics.setColor(color)
+        love.graphics.printf(displayText, ui.pauseMenuInfo.gapX, textY, textLimitX, 'right')
+
+        -- Puts square in event emitters list
         table.insert(ui.eventEmitters, {
             x=squareX, y=squareY,
             width=squareSize, height=squareSize,
             type="square", properties={id=v.id}
+        })
+
+        table.insert(ui.eventEmitters, {
+            x=ui.pauseMenuInfo.gapX, y=textY,
+            width=textLimitX, height=textLimitX,
+            type="volumeControler", properties={id=v.id}
         })
     end
 end
