@@ -126,6 +126,7 @@ ui.eventEmitters = {}
 function ui.drawPauseMenu(f)
     ui.drawPauseBG()
     ui.drawVolumeControler(f)
+    ui.drawButtons(f)
 end
 
 function ui.drawPauseBG()
@@ -137,12 +138,12 @@ function ui.drawPauseBG()
     local sizeX, sizeY = ui.pauseMenuInfo.sizeX, ui.pauseMenuInfo.sizeY
 
     -- Centralizes background
-    local gapX = (VW-sizeX)/2
-    local gapY = (VH-sizeY)/2
+    ui.pauseMenuInfo.gapX = (VW-sizeX)/2
+    ui.pauseMenuInfo.gapY = (VH-sizeY)/2
 
     -- Draws background
     love.graphics.setColor(0, 0.5, 0, 0.75)
-    love.graphics.rectangle('fill', gapX, gapY, sizeX, sizeY)
+    love.graphics.rectangle('fill', ui.pauseMenuInfo.gapX,ui.pauseMenuInfo.gapY, sizeX, sizeY)
 
     -- Draws the 'Game paused' thing
     local offset = 16
@@ -150,7 +151,7 @@ function ui.drawPauseBG()
     love.graphics.setColor(ui.pauseMenuInfo.textColor)
     love.graphics.printf(
         "Game paused", -- Text
-        0, gapY + offset, -- Start
+        0, ui.pauseMenuInfo.gapY + offset, -- Start
         math.floor(VW/scaleFac), -- Maximum Width
         'center', -- Align method
         0, -- Rotation
@@ -175,15 +176,8 @@ function ui.drawVolumeControler(f)
     -- Resets the event limiter list
     ui.eventEmitters = {}
 
-    -- Size of background (aliases to shrink variable names)
-    local sizeX, sizeY = ui.pauseMenuInfo.sizeX, ui.pauseMenuInfo.sizeY
-
-    -- Left and upper gap
-    local gapX = (VW - sizeX)/2
-    local gapY = (VH - sizeY)/2
-
     -- X limit of background
-    local borderX = gapX + sizeX
+    local borderX = ui.pauseMenuInfo.gapX + ui.pauseMenuInfo.sizeX
 
     -- Each square size
     local squareSize = 32
@@ -207,7 +201,7 @@ function ui.drawVolumeControler(f)
     local squareX = borderX - squarePaddingX - squareSize
 
     -- Limit of square label
-    local textLimitX = squareX - squarePaddingX - gapX
+    local textLimitX = squareX - squarePaddingX - ui.pauseMenuInfo.gapX
 
     -- Padding between options
     local paddingY = 32
@@ -219,7 +213,7 @@ function ui.drawVolumeControler(f)
     local volumes = {{display="Music", id="songs"}, {display="SFX", id="sfx"}, {display="Voicelines", id="voicelines"}}
     for i, v in ipairs(volumes) do
         -- Square Y position
-        local squareY = gapY + (paddingY + squareSize) * (i - 1) + marginY
+        local squareY =ui.pauseMenuInfo.gapY + (paddingY + squareSize) * (i - 1) + marginY
 
         -- Gets user color
         local checked = assets.volume[v.id].muted
@@ -237,7 +231,7 @@ function ui.drawVolumeControler(f)
         -- Sound channel label
         local textY = squareY + (squareSize - f:getHeight())/2
         love.graphics.setColor(ui.pauseMenuInfo.textColor)
-        love.graphics.printf(v.display, gapX, textY, textLimitX, 'right')
+        love.graphics.printf(v.display, ui.pauseMenuInfo.gapX, textY, textLimitX, 'right')
 
         -- Puts it in event emitters list
         table.insert(ui.eventEmitters, {
@@ -246,6 +240,33 @@ function ui.drawVolumeControler(f)
             type="square", properties={id=v.id}
         })
     end
+end
+
+function ui.drawButtons(f)
+    local sizeX, sizeY = 150, 50
+    local buttonColor = {0, 1, 0, 1}
+    local buttonColorHover = {0, 1, 0, 0.8}
+    local gapX = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2
+    local gapY = (ui.pauseMenuInfo.gapY + ui.pauseMenuInfo.sizeY) - sizeY
+
+    if isHovered(gapX, gapY, sizeX, sizeY) then
+        love.graphics.setColor(buttonColorHover)
+    else
+        love.graphics.setColor(buttonColor)
+    end
+
+    love.graphics.rectangle('fill', gapX, gapY - 50, sizeX, sizeY)
+
+    local text = "Go back to hub"
+    local width, height = f:getWidth(text), f:getHeight()
+    love.graphics.setColor(ui.pauseMenuInfo.textColor)
+    love.graphics.printf(
+        text,
+        ui.pauseMenuInfo.gapX,
+        gapY-50-height/2,
+        ui.pauseMenuInfo.gapX+ui.pauseMenuInfo.sizeX,
+        'center'
+    )
 end
 
 function ui.mouseVolumeControler()
