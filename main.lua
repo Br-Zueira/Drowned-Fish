@@ -1,7 +1,6 @@
 local world = require 'modules.world'
 local assets = require 'modules.assets'
 local Player = require 'modules.player'
-local voicelines = require 'modules.voicelines'
 local ui = require 'modules.ui'
 
 local player
@@ -67,7 +66,7 @@ function love.update(dt)
         player:update(dt)
         assets.songManager.update()
     end
-    
+
     assets.pauseManager(paused)
 end
 
@@ -87,6 +86,16 @@ end
 
 function love.mousereleased(mX, mY, mouseButton)
     if mouseButton == 1 then
-        ui.mouseVolumeControler()
+        local response = ui.mouseControler(player)
+        if not response then return end
+
+        if response.unpause then
+            paused = false
+            assets.pauseManager(paused)
+        end
+
+        if response.execute == "muteVL" then
+            assets.stopAudio('voicelines')
+        end
     end
 end

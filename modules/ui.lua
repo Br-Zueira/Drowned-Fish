@@ -3,10 +3,15 @@ local world = require 'modules.world'
 
 local ui = {}
 
+ui.eventEmitters = {}
+
 -- Draws all ui elements
 ---@param player Player The player instance
 ---@param paused boolean Tells if game is paused
 function ui.draw(player, paused)
+    -- Resets the event limiter list
+    ui.eventEmitters = {}
+
     local f = assets.fonts.VT323
     love.graphics.setFont(f)
     ui.drawDeathCounter(player, f)
@@ -119,7 +124,6 @@ ui.pauseMenuInfo = {
     textColor = {0, 0, 0, 1},
     sizeX = 650, sizeY = 400
 }
-ui.eventEmitters = {}
 
 -- Draws the pause menu
 ---@param f any The font source
@@ -173,9 +177,6 @@ end
 -- Draws the audio channels volume controler
 ---@param f any The font source
 function ui.drawVolumeControler(f)
-    -- Resets the event limiter list
-    ui.eventEmitters = {}
-
     -- X limit of background
     local borderX = ui.pauseMenuInfo.gapX + ui.pauseMenuInfo.sizeX
 
@@ -246,17 +247,19 @@ function ui.drawButtons(f)
     local sizeX, sizeY = 150, 50
     local buttonColor = {0, 0.5, 0.1, 1}
     local buttonColorHover = {0, 0.5, 0.1, 0.8}
-    local gapX = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2
+    local x = ui.pauseMenuInfo.gapX + (ui.pauseMenuInfo.sizeX - sizeX)/2
     local gapY = (ui.pauseMenuInfo.gapY + ui.pauseMenuInfo.sizeY) - sizeY
     local offset = 50
 
-    if isHovered(gapX, gapY - offset, sizeX, sizeY) then
+    local y = gapY - offset
+
+    if isHovered(x, y, sizeX, sizeY) then
         love.graphics.setColor(buttonColorHover)
     else
         love.graphics.setColor(buttonColor)
     end
 
-    love.graphics.rectangle('fill', gapX, gapY - offset, sizeX, sizeY, 10, 10)
+    love.graphics.rectangle('fill', x, y, sizeX, sizeY, 10, 10)
 
     local text = "Go back to hub"
     local height = f:getHeight()
@@ -264,19 +267,28 @@ function ui.drawButtons(f)
     love.graphics.printf(
         text,
         ui.pauseMenuInfo.gapX,
-        gapY-offset+height/2,
+        y + height/2,
         ui.pauseMenuInfo.sizeX,
         'center'
     )
+
+    table.insert(ui.eventEmitters, {
+        x=x, y=y,
+        width=sizeX, height=sizeY,
+        type="button", properties={ onclick="goToHub" }
+    })
 end
 
-function ui.mouseVolumeControler()
+function ui.mouseControler(player)
     for _, e in ipairs(ui.eventEmitters) do
         if isHovered(e.x, e.y, e.width, e.height) then
             if e.type == "square" then
                 -- Inverts muted state and updates the volume of the channels
                 assets.volume[e.properties.id].muted = not assets.volume[e.properties.id].muted
                 assets.updateVolume()
+            elseif e.type == "button" and e.properties.onclick == "goToHub" then
+                world.loadMap("Special", "Hub", player)
+                return { execute="muteVL", unpause=true }
             end
         end
     end
