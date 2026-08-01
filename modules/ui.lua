@@ -196,14 +196,8 @@ function ui.drawVolumeControler(f)
     }
 
     local textColors = {
-        [false] = { -- Unselected
-            [false] = ui.pauseMenuInfo.textColor, -- Unhovered
-            [true] = {0, 0, 0, 0.5}, -- Hovered
-        },
-        [true] = { -- Selected
-            [false] = {0, 0.25, 0, 1}, -- Unhovered
-            [true] = {0, 0.25, 0, 0.8} -- Hovered
-        }
+        [false] = ui.pauseMenuInfo.textColor, -- Unhovered
+        [true] = {0, 0, 0, 0.5}, -- Hovered
     }
 
     -- X margin of square 
@@ -250,8 +244,7 @@ function ui.drawVolumeControler(f)
 
         -- Prints label
         hovered = isHovered(ui.pauseMenuInfo.gapX, textY, textLimitX, f:getHeight())
-        local selected = false
-        color = textColors[selected][hovered]
+        color = textColors[hovered]
         love.graphics.setColor(color)
         love.graphics.printf(displayText, ui.pauseMenuInfo.gapX, textY, textLimitX, 'right')
 
@@ -264,7 +257,7 @@ function ui.drawVolumeControler(f)
 
         table.insert(ui.eventEmitters, {
             x=ui.pauseMenuInfo.gapX, y=textY,
-            width=textLimitX, height=textLimitX,
+            width=textLimitX, height=f:getHeight(),
             type="volumeControler", properties={id=v.id}
         })
     end
@@ -325,6 +318,22 @@ function ui.mouseControler(player)
                 world.loadMap("Special", "Hub", player)
                 -- Tells game to unpause and mute voicelines to avoid some bizarre quirks
                 return { execute="muteVL", unpause=true }
+            end
+        end
+    end
+end
+
+-- Manages mouse wheel interaction with menu
+---@param y number The amount of wheel movement
+function ui.mouseWheelControler(y)
+    for _, e in ipairs(ui.eventEmitters) do
+        if isHovered(e.x, e.y, e.width, e.height) then
+            if e.type == "volumeControler" then
+                local value = assets.volume[e.properties.id].volume
+                local difference = y * 0.05
+                local newValue = math.max(0, math.min(1, value + difference))
+                assets.volume[e.properties.id].volume = newValue
+                assets.updateVolume()
             end
         end
     end

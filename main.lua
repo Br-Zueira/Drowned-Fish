@@ -99,3 +99,9 @@ function love.mousereleased(_, _, mouseButton)
         end
     end
 end
+
+function love.wheelmoved(_, y)
+    if paused then
+        ui.mouseWheelControler(y)
+    end
+end
