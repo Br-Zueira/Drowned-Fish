@@ -1,0 +1,67 @@
+local prop = require 'modules.props.prop'
+
+---@class Laser : Prop
+---@field group number
+---@field isDisabled boolean
+local Laser = {}
+Laser.__index = Laser
+setmetatable(Laser, prop.Prop)
+
+local laserRay = {}
+laserRay.__index = laserRay
+function laserRay.new(parent1, parent2)
+    local instance = {}
+    setmetatable(instance, laserRay)
+    instance.parent1 = parent1
+    instance.parent2 = parent2
+    instance.isInvisible = true
+    table.insert(prop.propList, instance)
+    return instance
+end
+
+local function colFilter()
+    return 'cross'
+end
+
+function laserRay:update(_, player)
+    local cols, len = World:querySegment(
+        self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
+        self.parent2.x + TileSize/2, self.parent2.y + TileSize/2,
+        colFilter
+    )
+    for i = 1, len do
+        local other = cols[i]
+        if other == player then
+            player:death()
+            return
+        end
+    end
+end
+
+function laserRay:draw()
+    love.graphics.setColor(1, 0, 0, 0.8)
+    love.graphics.setLineWidth(8)
+    love.graphics.line(
+        self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
+        self.parent2.x + TileSize/2, self.parent2.y + TileSize/2
+    )
+    love.graphics.setColor(1, 1, 1, 1)
+end
+
+function Laser.new(x, y, group, isDisabled)
+    y = y - TileSize
+    local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='laser' })
+    ---@cast instance Laser
+    setmetatable(instance, Laser)
+    instance.group = group
+    instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
+    if instance.isDisabled then return instance end
+    for _, p in ipairs(prop.propList) do
+        if getmetatable(p) == Laser and p.group == instance.group and not p.isDisabled then
+            laserRay.new(instance, p)
+        end
+    end
+    return instance
+end
+
+return Laser

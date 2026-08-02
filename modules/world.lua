@@ -100,6 +100,7 @@ function world.draw()
                 love.graphics.print(display, dX, dY)
             end
         end
+        if instance.draw then instance:draw() end
     end
 end
 
@@ -170,6 +171,8 @@ function world.reload(player)
             props.Spring.new(obj.x, obj.y)
         elseif obj.name == "Booster" then
             props.Booster.new(obj.x, obj.y, p.speed, obj.rotation)
+        elseif obj.name == "Laser" then
+            props.Laser.new(obj.x, obj.y, p.group, p.isDisabled)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end

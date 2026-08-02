@@ -100,6 +100,7 @@ function assets.load()
     assets.loadImage('placeholder', 'placeholder.png')
     assets.loadImage('spring', 'spring.png')
     assets.loadImage('booster', 'booster.png')
+    assets.loadImage('laser', 'laser.png')
 
     -- Voicelines
     assets.loadVoiceLine('intro', 'intro.wav')

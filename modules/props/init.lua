@@ -13,5 +13,6 @@ props.Portal = require(p .. 'portal')
 props.Moveable = require(p .. 'moveable')
 props.Spring = require(p .. 'spring')
 props.Booster = require(p ..'booster')
+props.Laser = require(p .. 'laser')
 
 return props
