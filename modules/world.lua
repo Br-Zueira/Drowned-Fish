@@ -18,7 +18,7 @@ world.levelsSchema = {
     [0] = {1},
     [1] = {1, 2, 3, 4, 5},
     [2] = {1, 2, 3, 4, 5},
-    [3] = {1, 2, 3},
+    [3] = {1, 2, 3, 4},
     ["Special"] = {"Hub"}
 }
 
@@ -172,7 +172,7 @@ function world.reload(player)
         elseif obj.name == "Booster" then
             props.Booster.new(obj.x, obj.y, p.speed, obj.rotation)
         elseif obj.name == "Laser" then
-            props.Laser.new(obj.x, obj.y, p.group, p.isDisabled, p.intermiTime)
+            props.Laser.new(obj.x, obj.y, p.group, p.isDisabled, p.intermiTime, p.isFake)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end

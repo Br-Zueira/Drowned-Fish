@@ -5,6 +5,7 @@ local prop = require 'modules.props.prop'
 ---@field isDisabled boolean
 ---@field intermiTime number | nil
 ---@field timer number | nil
+---@field isFake boolean
 local Laser = {}
 Laser.__index = Laser
 setmetatable(Laser, prop.Prop)
@@ -26,7 +27,10 @@ local function colFilter()
 end
 
 function laserRay:update(_, player)
-    if self.parent1.isDisabled or self.parent2.isDisabled then return end
+    if self.parent1.isDisabled or self.parent2.isDisabled
+     or self.parent1.isFake or self.parent2.isFake then
+        return
+    end
     local cols, len = World:querySegment(
         self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
         self.parent2.x + TileSize/2, self.parent2.y + TileSize/2,
@@ -57,13 +61,14 @@ end
 ---@param group number
 ---@param isDisabled boolean | nil
 ---@param intermiTime number | nil
-function Laser.new(x, y, group, isDisabled, intermiTime)
+function Laser.new(x, y, group, isDisabled, intermiTime, isFake)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='laser' })
     ---@cast instance Laser
     setmetatable(instance, Laser)
     instance.group = group
     instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
+    instance.isFake = not not isFake
     if intermiTime then
         instance.intermiTime = intermiTime
         instance.timer = intermiTime
