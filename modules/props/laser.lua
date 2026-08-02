@@ -24,6 +24,7 @@ local function colFilter()
 end
 
 function laserRay:update(_, player)
+    if self.parent1.isDisabled or self.parent2.isDisabled then return end
     local cols, len = World:querySegment(
         self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
         self.parent2.x + TileSize/2, self.parent2.y + TileSize/2,
@@ -39,6 +40,7 @@ function laserRay:update(_, player)
 end
 
 function laserRay:draw()
+    if self.parent1.isDisabled or self.parent2.isDisabled then return end
     love.graphics.setColor(1, 0, 0, 0.8)
     love.graphics.setLineWidth(8)
     love.graphics.line(
@@ -57,7 +59,7 @@ function Laser.new(x, y, group, isDisabled)
     instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
     if instance.isDisabled then return instance end
     for _, p in ipairs(prop.propList) do
-        if getmetatable(p) == Laser and p.group == instance.group and not p.isDisabled then
+        if getmetatable(p) == Laser and p.group == instance.group then
             laserRay.new(instance, p)
         end
     end
