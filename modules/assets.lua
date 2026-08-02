@@ -1,6 +1,6 @@
 local save = require "modules.save"
 
---- The asset manager
+-- The asset manager
 local assets = {
     images = {},
     fonts = {},
@@ -9,6 +9,7 @@ local assets = {
     songs = {}
 }
 
+-- Loads volume settings, or create from scratch if no settings
 assets.volume = save.loadJson('settings') or {
     songs = {muted=false, volume=1},
     sfx = {muted=false, volume=1},
@@ -180,6 +181,7 @@ function assets.pauseManager(paused)
     end
 end
 
+-- Updates every audio channel volume to match assets.volume settings
 function assets.updateVolume()
     for channelName, channel in pairs(assets.volume) do
         if channel.muted then
@@ -188,6 +190,7 @@ function assets.updateVolume()
             assets.setVolume(channelName, channel.volume)
         end
     end
+    -- Saves volume settings
     save.saveJson('settings', assets.volume)
 end
 
