@@ -3,6 +3,8 @@ local prop = require 'modules.props.prop'
 ---@class Laser : Prop
 ---@field group number
 ---@field isDisabled boolean
+---@field intermiTime number | nil
+---@field timer number | nil
 local Laser = {}
 Laser.__index = Laser
 setmetatable(Laser, prop.Prop)
@@ -50,13 +52,22 @@ function laserRay:draw()
     love.graphics.setColor(1, 1, 1, 1)
 end
 
-function Laser.new(x, y, group, isDisabled)
+---@param x number
+---@param y number
+---@param group number
+---@param isDisabled boolean | nil
+---@param intermiTime number | nil
+function Laser.new(x, y, group, isDisabled, intermiTime)
     y = y - TileSize
     local instance = prop.Prop.new(x, y, TileSize, TileSize, { isImg=true, imgName='laser' })
     ---@cast instance Laser
     setmetatable(instance, Laser)
     instance.group = group
     instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
+    if intermiTime then
+        instance.intermiTime = intermiTime
+        instance.timer = intermiTime
+    end
     if instance.isDisabled then return instance end
     for _, p in ipairs(prop.propList) do
         if getmetatable(p) == Laser and p.group == instance.group then
@@ -64,6 +75,15 @@ function Laser.new(x, y, group, isDisabled)
         end
     end
     return instance
+end
+
+function Laser:update(dt)
+    if not self.intermiTime then return end
+    self.timer = math.max(0, self.timer - dt)
+    if self.timer == 0 then
+        self.isDisabled = not self.isDisabled
+        self.timer = self.intermiTime
+    end
 end
 
 return Laser

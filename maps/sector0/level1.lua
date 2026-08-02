@@ -197,7 +197,7 @@ return {
           visible = true,
           properties = {
             ["group"] = 1,
-            ["isDisabled"] = true
+            ["intermiTime"] = 1
           }
         },
         {
@@ -222,8 +222,8 @@ return {
           name = "Laser",
           type = "",
           shape = "rectangle",
-          x = 512,
-          y = 256,
+          x = 544,
+          y = 608,
           width = 32,
           height = 32,
           rotation = 0,
@@ -231,7 +231,8 @@ return {
           gid = 9,
           visible = true,
           properties = {
-            ["group"] = 1
+            ["group"] = 2,
+            ["intermiTime"] = 2
           }
         },
         {
@@ -239,8 +240,8 @@ return {
           name = "Laser",
           type = "",
           shape = "rectangle",
-          x = 256,
-          y = 256,
+          x = 96,
+          y = 64,
           width = 32,
           height = 32,
           rotation = 0,
@@ -248,7 +249,7 @@ return {
           gid = 9,
           visible = true,
           properties = {
-            ["group"] = 1
+            ["group"] = 2
           }
         }
       }
