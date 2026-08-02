@@ -47,6 +47,8 @@ function love.load(args)
     world.loadMap(sector, level, player)
 
     assets.songManager.load()
+
+    assets.updateVolume()
 end
 
 ---@param dt number Delta time for each rendered frame
