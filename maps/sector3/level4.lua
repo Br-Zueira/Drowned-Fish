@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 35,
+  nextobjectid = 46,
   properties = {},
   tilesets = {
     {
@@ -116,15 +116,15 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+        1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -135,7 +135,7 @@ return {
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
       }
     },
     {
@@ -242,7 +242,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 288,
-          y = 640,
+          y = 128,
           width = 32,
           height = 32,
           rotation = 0,
@@ -459,7 +459,184 @@ return {
           visible = true,
           properties = {
             ["id"] = "spawnSaws",
-            ["radius"] = 32
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 35,
+          name = "MovLaser",
+          type = "",
+          shape = "rectangle",
+          x = 576,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["endY"] = 160,
+            ["group"] = 5,
+            ["speed"] = 250
+          }
+        },
+        {
+          id = 36,
+          name = "MovLaser",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 160,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["endY"] = 256,
+            ["group"] = 5,
+            ["speed"] = 250
+          }
+        },
+        {
+          id = 37,
+          name = "FutureLaser",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 160,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["endY"] = 256,
+            ["group"] = 5,
+            ["speed"] = 50
+          }
+        },
+        {
+          id = 38,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "futureLaser",
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 39,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 160,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
+          }
+        },
+        {
+          id = 41,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
+          }
+        },
+        {
+          id = 42,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 384,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
+          }
+        },
+        {
+          id = 43,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 576,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
+          }
+        },
+        {
+          id = 44,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 576,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
+          }
+        },
+        {
+          id = 45,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 416,
+          y = 448,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 6
           }
         }
       }

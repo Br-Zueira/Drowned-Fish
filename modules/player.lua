@@ -138,7 +138,6 @@ function Player:update(dt)
     self.standingOnSpeedY = 0
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
-        if love.keyboard.isDown("n") then return end
         local type = col.other.type
         if type == 'Hazard' then
             self:death()

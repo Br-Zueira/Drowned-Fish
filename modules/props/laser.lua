@@ -6,6 +6,7 @@ local prop = require 'modules.props.prop'
 ---@field intermiTime number | nil
 ---@field timer number | nil
 ---@field isFake boolean
+---@field type 'Laser'
 local Laser = {}
 Laser.__index = Laser
 setmetatable(Laser, prop.Prop)
@@ -31,6 +32,7 @@ function laserRay:update(_, player)
      or self.parent1.isFake or self.parent2.isFake then
         return
     end
+    if love.keyboard.isDown("n") then return end
     local cols, len = World:querySegment(
         self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
         self.parent2.x + TileSize/2, self.parent2.y + TileSize/2,
@@ -69,13 +71,14 @@ function Laser.new(x, y, group, isDisabled, intermiTime, isFake)
     instance.group = group
     instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
     instance.isFake = not not isFake
+    instance.type = 'Laser'
     if intermiTime then
         instance.intermiTime = intermiTime
         instance.timer = intermiTime
     end
     if instance.isDisabled then return instance end
     for _, p in ipairs(prop.propList) do
-        if getmetatable(p) == Laser and p.group == instance.group then
+        if p.type == 'Laser' and p.group == instance.group then
             laserRay.new(instance, p)
         end
     end

@@ -56,6 +56,7 @@ end
 ---@param dt number Delta time for each rendered frame
 function Moveable:update(dt, player)
     self.customUpdate(self, dt, player)
+    if not World:hasItem(self) or not World:hasItem(player) then return end
 
     -- Sees the movement direction
     local pointX, pointY
