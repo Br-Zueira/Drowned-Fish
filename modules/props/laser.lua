@@ -69,14 +69,13 @@ function Laser.new(x, y, group, isDisabled, intermiTime, isFake)
     ---@cast instance Laser
     setmetatable(instance, Laser)
     instance.group = group
-    instance.isDisabled = not not isDisabled -- Turns nil into false and keeps false and true unchanged
-    instance.isFake = not not isFake
+    instance.isDisabled = isDisabled == true -- Turns nil into false and keeps false and true unchanged
+    instance.isFake = isFake == true
     instance.type = 'Laser'
     if intermiTime then
         instance.intermiTime = intermiTime
         instance.timer = intermiTime
     end
-    if instance.isDisabled then return instance end
     for _, p in ipairs(prop.propList) do
         if p.type == 'Laser' and p.group == instance.group then
             laserRay.new(instance, p)
