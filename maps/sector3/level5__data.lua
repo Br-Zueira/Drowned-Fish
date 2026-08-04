@@ -6,6 +6,7 @@ local data = {}
 
 local points = {}
 local isInverted = false
+local spawnPlat, spawnPlatEnd
 
 function data.whenLoaded()
     voicelines.add('oopsie', 2)
@@ -31,6 +32,27 @@ function levelTrigger:update(_, player)
     if self.id == "invertLaser" then
         self:delete()
         isInverted = true
+    elseif self.id == "movTile" then
+        self:delete()
+        for _, prop in ipairs(props.propList) do
+            if prop.isMov then
+                prop:delete()
+                return
+            end
+        end
+    elseif self.id == "spawnPlat" then
+        self:delete()
+        local plat = props.Tile.new(spawnPlat.x, spawnPlat.y - TileSize)
+        props.Moveable.set(
+            plat, plat.x, plat.y,
+            spawnPlatEnd.x, spawnPlatEnd.y,
+            spawnPlat.properties.speed, false, false,
+            function(self)
+                if self.isComingBack then
+                    setmetatable(plat, props.Tile)
+                end
+            end
+        )
     end
 end
 
@@ -42,6 +64,13 @@ function data.ObjHandler(obj)
     elseif obj.name == "Trigger" then
         local t = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
         setmetatable(t, levelTrigger)
+    elseif obj.name == "MovTile" then
+        local t = props.Tile.new(obj.x, obj.y - TileSize)
+        t.isMov = true
+    elseif obj.name == "SpawnPlat" then
+        spawnPlat = obj
+    elseif obj.name == "SpawnPlatEnd" then
+        spawnPlatEnd = obj
     end
 end
 

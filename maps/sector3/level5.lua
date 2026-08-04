@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 64,
+  nextobjectid = 70,
   properties = {},
   tilesets = {
     {
@@ -119,7 +119,7 @@ return {
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
         1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -297,8 +297,108 @@ return {
           visible = true,
           properties = {
             ["id"] = "invertLaser",
+            ["radius"] = 128
+          }
+        },
+        {
+          id = 64,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 768,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "movTile",
+            ["radius"] = 80
+          }
+        },
+        {
+          id = 65,
+          name = "MovTile",
+          type = "",
+          shape = "rectangle",
+          x = 768,
+          y = 128,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 66,
+          name = "InviSpike",
+          type = "",
+          shape = "rectangle",
+          x = 160,
+          y = 288,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          opacity = 1,
+          gid = 4,
+          visible = true,
+          properties = {
             ["radius"] = 64
           }
+        },
+        {
+          id = 67,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "spawnPlat",
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 68,
+          name = "SpawnPlat",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["speed"] = 250
+          }
+        },
+        {
+          id = 69,
+          name = "SpawnPlatEnd",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {}
         }
       }
     }

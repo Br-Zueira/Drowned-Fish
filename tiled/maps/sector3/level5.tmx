@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="64">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="70">
  <editorsettings>
   <export target="../../../maps/sector3/level5.lua" format="lua"/>
  </editorsettings>
@@ -35,7 +35,7 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
 1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -86,8 +86,32 @@
   <object id="62" name="Trigger" gid="2" x="96" y="224" width="32" height="32">
    <properties>
     <property name="id" value="invertLaser"/>
+    <property name="radius" type="int" value="128"/>
+   </properties>
+  </object>
+  <object id="64" name="Trigger" gid="2" x="768" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="movTile"/>
+    <property name="radius" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="65" name="MovTile" gid="1" x="768" y="128" width="32" height="32"/>
+  <object id="66" name="InviSpike" gid="4" x="160" y="288" width="32" height="16">
+   <properties>
     <property name="radius" type="int" value="64"/>
    </properties>
   </object>
+  <object id="67" name="Trigger" gid="2" x="224" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="spawnPlat"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="68" name="SpawnPlat" gid="1" x="192" y="640" width="32" height="32">
+   <properties>
+    <property name="speed" type="int" value="250"/>
+   </properties>
+  </object>
+  <object id="69" name="SpawnPlatEnd" gid="2" x="192" y="288" width="32" height="32"/>
  </objectgroup>
 </map>
