@@ -5,6 +5,7 @@ local voicelines = require 'modules.voicelines'
 local data = {}
 
 local points = {}
+local isInverted = false
 
 function data.whenLoaded()
     voicelines.add('oopsie', 2)
@@ -16,39 +17,78 @@ end
 
 function data.whenReloaded()
     points = {}
+    isInverted = false
 end
 
 function data.update() end
 
+local levelTrigger = {}
+levelTrigger.__index = levelTrigger
+setmetatable(levelTrigger, props.Trigger)
+
+function levelTrigger:update(_, player)
+    if not props.isPlayerInRadius(self, player, self.radius) then return end
+    if self.id == "invertLaser" then
+        self:delete()
+        isInverted = true
+    end
+end
+
 function data.ObjHandler(obj)
+    local p = obj.properties
     if obj.name == "LaserPoint" then
-        local i = { x=obj.x, y=obj.y - TileSize, point=obj.properties.point }
+        local i = { x=obj.x, y=obj.y - TileSize, point=p.point }
         table.insert(points, i)
+    elseif obj.name == "Trigger" then
+        local t = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
+        setmetatable(t, levelTrigger)
+    end
+end
+
+local function searchPoint(index)
+    for _, p in ipairs(points) do
+        if p.point == index then return p end
+    end
+end
+
+local function updateLaser(self, dt, player)
+    props.Laser.update(self, dt, player) -- Basically 'togglable' options for laser emmitter
+    if not self.isComingBack then return end
+
+    self.isComingBack = false
+    self.startX, self.startY = self.endX, self.endY
+
+    local nextIndex
+    if isInverted then
+        nextIndex = self.currentPoint-1
+    else
+        nextIndex = self.currentPoint+1
+    end
+
+    local nextP = searchPoint(nextIndex)
+    if nextP then
+        self.endX, self.endY = nextP.x, nextP.y
+        self.currentPoint = nextIndex
+    else
+        local reset = isInverted and #points or 1
+        self.endX, self.endY = searchPoint(reset).x, searchPoint(reset).y
+        self.currentPoint = reset
     end
 end
 
 function data.MiscHandler(map)
-    for i, p in ipairs(points) do
-        if p.point ~= 1 and p.point ~= 3 then return end
-        local l = props.Laser.new(p.x, p.y + TileSize)
-        l.currentPoint = p.point
-        local endX, endY = points[i+2].x, points[i+2].y
-        props.Moveable.set(
-            l, l.x, l.y,
-            endX, endY,
-            200, false, false,
-            function(self, dt, player)
-                props.Laser.update(self, dt, player)
-                if not self.isComingBack then return end
-                self.isComingBack = false
-                local nextP = points[l.currentPoint + 1]
-                if nextP then
-                    self.endX, self.endY = nextP.x, nextP.y
-                else
-                    self.endX, self.endY = points[1].x, points[i].y
-                end
-            end
-        )
+    for _, p in ipairs(points) do
+        if p.point == 1 or p.point == 3 then
+            local l = props.Laser.new(p.x, p.y + TileSize*2)
+            l.currentPoint = p.point
+            local endX, endY = searchPoint(p.point+1).x, searchPoint(p.point+1).y + TileSize
+            props.Moveable.set(
+                l, l.x, l.y,
+                endX, endY,
+                200, false, false,
+                updateLaser
+            )
+        end
     end
 end
 
