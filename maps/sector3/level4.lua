@@ -552,7 +552,7 @@ return {
           visible = true,
           properties = {
             ["group"] = 6,
-            ["intermiTime"] = 1
+            ["intermiTime"] = 1.5
           }
         },
         {
@@ -587,7 +587,7 @@ return {
           visible = true,
           properties = {
             ["group"] = 6,
-            ["intermiTime"] = 1,
+            ["intermiTime"] = 1.5,
             ["isDisabled"] = true
           }
         },
@@ -623,7 +623,7 @@ return {
           visible = true,
           properties = {
             ["group"] = 6,
-            ["intermiTime"] = 1,
+            ["intermiTime"] = 1.5,
             ["isDisabled"] = true
           }
         },
@@ -657,7 +657,7 @@ return {
           visible = true,
           properties = {
             ["group"] = 6,
-            ["intermiTime"] = 1
+            ["intermiTime"] = 1.5
           }
         }
       }

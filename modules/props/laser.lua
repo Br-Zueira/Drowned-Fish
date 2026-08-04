@@ -11,6 +11,9 @@ local Laser = {}
 Laser.__index = Laser
 setmetatable(Laser, prop.Prop)
 
+---@class laserRay
+---@field parent1 Laser
+---@field parent2 Laser
 local laserRay = {}
 laserRay.__index = laserRay
 function laserRay.new(parent1, parent2)
@@ -23,16 +26,19 @@ function laserRay.new(parent1, parent2)
     return instance
 end
 
+-- Avoids stucking on anything
 local function colFilter()
     return 'cross'
 end
 
 function laserRay:update(_, player)
+    -- Only checks for collisions if parent emitters aren't disabled and aren't fake
     if self.parent1.isDisabled or self.parent2.isDisabled
      or self.parent1.isFake or self.parent2.isFake then
         return
     end
-    if love.keyboard.isDown("n") then return end
+
+    -- Checks for collisions in a direct line (TileSize/2 centralizes the beam)
     local cols, len = World:querySegment(
         self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
         self.parent2.x + TileSize/2, self.parent2.y + TileSize/2,
@@ -41,6 +47,7 @@ function laserRay:update(_, player)
     for i = 1, len do
         local other = cols[i]
         if other == player then
+            -- Kills player
             player:death()
             return
         end
@@ -48,14 +55,36 @@ function laserRay:update(_, player)
 end
 
 function laserRay:draw()
+    -- Only draws ray if parents aren't disabled
     if self.parent1.isDisabled or self.parent2.isDisabled then return end
-    love.graphics.setColor(1, 0, 0, 0.8)
-    love.graphics.setLineWidth(8)
+
+    -- Sets color (pure red, a bit transparent)
+    love.graphics.setColor(1, 0, 0, 0.5)
+
+    -- Makes the line thicker
+    local width = 8 + math.sin(love.timer.getTime() * 35) * 0.5
+    love.graphics.setLineWidth(width)
+
+    -- Draws the line itself (TileSize/2 centralizes the beam)
     love.graphics.line(
         self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
         self.parent2.x + TileSize/2, self.parent2.y + TileSize/2
     )
+
+    -- Sets color (pure white)
     love.graphics.setColor(1, 1, 1, 1)
+
+    -- Makes the line thinner
+    love.graphics.setLineWidth(3)
+
+    -- Draws the line itself (TileSize/2 centralizes the beam)
+    love.graphics.line(
+        self.parent1.x + TileSize/2, self.parent1.y + TileSize/2,
+        self.parent2.x + TileSize/2, self.parent2.y + TileSize/2
+    )
+
+    -- Resets line width back to default
+    love.graphics.setLineWidth(1)
 end
 
 ---@param x number
