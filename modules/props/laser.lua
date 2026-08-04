@@ -62,7 +62,7 @@ function laserRay:draw()
     love.graphics.setColor(1, 0, 0, 0.5)
 
     -- Makes the line thicker
-    local width = 8 + math.sin(love.timer.getTime() * 35) * 0.5
+    local width = 16 + math.sin(love.timer.getTime() * 20) * 2
     love.graphics.setLineWidth(width)
 
     -- Draws the line itself (TileSize/2 centralizes the beam)
@@ -75,7 +75,7 @@ function laserRay:draw()
     love.graphics.setColor(1, 1, 1, 1)
 
     -- Makes the line thinner
-    love.graphics.setLineWidth(3)
+    love.graphics.setLineWidth(6)
 
     -- Draws the line itself (TileSize/2 centralizes the beam)
     love.graphics.line(
