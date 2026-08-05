@@ -17,6 +17,6 @@ echo "Cleaning old bundles"
 rm -f "$OUTPUT" # Remove old build, if any
 
 echo "Creating new bundle"
-zip -rq "$OUTPUT" "${TARGETS[@]}" -x "*.git*" "*.DS_Store" # Zips the game
+zip -9 -rq "$OUTPUT" "${TARGETS[@]}" -x "*.git*" "*.DS_Store" # Zips the game
 
 echo "'$OUTPUT' bundle successfully finished"

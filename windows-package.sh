@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail # Safety flags for any error
+
+source ./bundle.sh # Bundles games before packaging
+
+echo "Setting up folders"
+PACKAGE="drowned-fish-windows"
+FOLDER="out/$PACKAGE"
+LOVE="bundle-dependencies/love-11.5-win64"
+rm -rf "$FOLDER" # Cleans up old build, if any
+mkdir -p "$FOLDER" # Creates brand new folder
+
+echo "Copying dynamic libraries"
+cp "$LOVE"/*.dll "$FOLDER" # Copies all dlls into build folder
+
+echo "Copying licenses"
+cp "$LOVE/license.txt" "$FOLDER/LICENSE-LOVE.txt" # Copies and renames Love license
+cp "LICENSE" "$FOLDER/LICENSE-GAME.txt" # Copies and renames Game license
+
+echo "Merging binaries"
+EXECUTABLE="drowned-fish.exe"
+cat "$LOVE/love.exe" "$OUTPUT" > "$FOLDER/$EXECUTABLE" # Merges love and game bundle into a single executable file
+
+echo "Compressing build"
+(cd out && zip -9 -rq "$PACKAGE".zip "$PACKAGE")
+
+echo "'$EXECUTABLE' compiled successfully"

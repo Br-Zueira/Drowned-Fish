@@ -44,3 +44,7 @@ luac.out
 
 # Compiled game
 *.love
+out
+
+# Things like love standalone
+bundle-dependencies
