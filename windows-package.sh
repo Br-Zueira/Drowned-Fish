@@ -16,9 +16,10 @@ mkdir -p "$FOLDER" # Creates brand new folder
 echo "Copying dynamic libraries"
 cp "$LOVE"/*.dll "$FOLDER" # Copies all dlls into build folder
 
-echo "Copying licenses"
+echo "Copying licenses and readme"
 cp "$LOVE/license.txt" "$FOLDER/LICENSE-LOVE.txt" # Copies and renames Love license
 cp "LICENSE" "$FOLDER/LICENSE-GAME.txt" # Copies and renames Game license
+cp "README.md" "$FOLDER" # Copies readme
 
 echo "Merging binaries"
 EXECUTABLE="drowned-fish.exe"

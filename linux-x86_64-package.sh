@@ -46,10 +46,11 @@ mv "$FOLDER/love.desktop" $DESKTOP
 mv "$FOLDER/love.svg" "$FOLDER/$GAME".svg
 
 # Cleanly separates Love license from game license (and copies game license into folder)
-echo "Handling licenses"
+echo "Handling licenses and readme"
 mv "$FOLDER/license.txt" "$FOLDER/LICENSE-LOVE.txt"
 cp "$PROJECT_ROOT/LICENSE" "$FOLDER"
 mv "$FOLDER/LICENSE" "$FOLDER/LICENSE-GAME.txt"
+cp "$PROJECT_ROOT/README.md" "$FOLDER"
 
 echo "Changing variables"
 # Desktop file variables
@@ -72,7 +73,8 @@ ARCH=x86_64
 
 # Wraps folder into AppImage
 # Warns about error if any, else echoes success message
-if $APPIMAGETOOL "squashfs-root" "$GAME".AppImage > /dev/null 2>&1; then
+rm -f "$GAME"-linux-x86_64.AppImage
+if $APPIMAGETOOL "squashfs-root" "$GAME"-linux.x86_64.AppImage > /dev/null 2>&1; then
     echo "'$GAME'.AppImage successfully created"
 else
     echo "An error occurred"
