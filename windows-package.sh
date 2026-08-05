@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-set -euo pipefail # Safety flags for any error
+# Safety flags for any error
+set -euo pipefail
 
-source ./bundle.sh # Bundles games before packaging
+# Bundles game before packaging
+source ./bundle.sh
 
 echo "Setting up folders"
 PACKAGE="drowned-fish-windows"
@@ -23,6 +25,6 @@ EXECUTABLE="drowned-fish.exe"
 cat "$LOVE/love.exe" "$OUTPUT" > "$FOLDER/$EXECUTABLE" # Merges love and game bundle into a single executable file
 
 echo "Compressing build"
-(cd out && zip -9 -rq "$PACKAGE".zip "$PACKAGE")
+(cd out && zip -9 -rq "$PACKAGE".zip "$PACKAGE") # Packages game into easily distributable zips
 
 echo "'$EXECUTABLE' compiled successfully"
