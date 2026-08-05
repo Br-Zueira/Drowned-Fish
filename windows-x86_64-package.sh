@@ -7,7 +7,7 @@ set -euo pipefail
 source ./bundle.sh
 
 echo "Setting up folders"
-PACKAGE="drowned-fish-windows"
+PACKAGE="drowned-fish-windows-x86_64"
 FOLDER="out/$PACKAGE"
 LOVE="bundle-dependencies/love-11.5-win64"
 rm -rf "$FOLDER" # Cleans up old build, if any
@@ -27,5 +27,8 @@ cat "$LOVE/love.exe" "$OUTPUT" > "$FOLDER/$EXECUTABLE" # Merges love and game bu
 
 echo "Compressing build"
 (cd out && zip -9 -rq "$PACKAGE".zip "$PACKAGE") # Packages game into easily distributable zips
+
+echo "Removing temp"
+rm -rf $FOLDER
 
 echo "'$EXECUTABLE' compiled successfully"

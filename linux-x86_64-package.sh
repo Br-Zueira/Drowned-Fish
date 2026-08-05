@@ -73,10 +73,16 @@ ARCH=x86_64
 
 # Wraps folder into AppImage
 # Warns about error if any, else echoes success message
-rm -f "$GAME"-linux-x86_64.AppImage
-if $APPIMAGETOOL "squashfs-root" "$GAME"-linux.x86_64.AppImage > /dev/null 2>&1; then
-    echo "'$GAME'.AppImage successfully created"
+APPIMAGE="$GAME"-linux-"$ARCH".AppImage
+rm -f "$APPIMAGE"
+if $APPIMAGETOOL "squashfs-root" "$APPIMAGE" > /dev/null 2>&1; then
+    echo "'$APPIMAGE' successfully created"
 else
     echo "An error occurred"
     exit 1
 fi
+
+echo "Removing temp"
+rm -rf squashfs-root
+
+echo "Process successfull!"
