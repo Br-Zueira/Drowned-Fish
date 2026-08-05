@@ -43,7 +43,6 @@ DESKTOP="$FOLDER/$GAME".desktop
 # Changes file names to match game name
 echo "Changing file names"
 mv "$FOLDER/love.desktop" $DESKTOP
-mv "$FOLDER/love.svg" "$FOLDER/$GAME".svg
 
 # Cleanly separates Love license from game license (and copies game license into folder)
 echo "Handling licenses and readme"
@@ -59,7 +58,7 @@ sed -i "s/^Comment=.*/Comment=A simple 2D troll game made with Love2D. The name 
 sed -i "/^MimeType=/d" "$DESKTOP"
 sed -i "s/^Exec=.*/Exec=$GAME %f/" "$DESKTOP"
 sed -i "s/^Categories=.*/Categories=Game;ActionGame;ArcadeGame;X-Troll;X-Love2DGame/" "$DESKTOP"
-sed -i "s/^Icon=.*/Icon=$GAME/" "$DESKTOP"
+sed -i "s/^Icon=.*/Icon=logo/" "$DESKTOP"
 sed -i "/^NoDisplay=/d" "$DESKTOP"
 
 # AppRun binary name
@@ -71,14 +70,19 @@ echo "Compressing into AppImage"
 # Tells AppImageTool we're building AppImage for x86_64 CPUs
 ARCH=x86_64
 
+echo "Handling logo"
+cp "$PROJECT_ROOT/build-assets/logo.png" "$FOLDER"
+rm -f "$FOLDER/love.svg"
+
 # Wraps folder into AppImage
 # Warns about error if any, else echoes success message
 APPIMAGE="$GAME"-linux-"$ARCH".AppImage
+
 rm -f "$APPIMAGE"
-if $APPIMAGETOOL "squashfs-root" "$APPIMAGE" > /dev/null 2>&1; then
+if ERROR=$($APPIMAGETOOL "squashfs-root" "$APPIMAGE" 2>&1 >/dev/null); then
     echo "'$APPIMAGE' successfully created"
 else
-    echo "An error occurred"
+    echo "$ERROR" >&2
     exit 1
 fi
 

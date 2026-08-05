@@ -3,7 +3,7 @@
 set -euo pipefail # Safety flags that quit at any error
 
 echo "Setting up variables"
-OUTPUT="drowned-fish.love" # Sets the final file name
+OUTPUT="out/drowned-fish.love" # Sets the final file name
 TARGETS=( # Files and folders to be included
     "assets"
     "libs"

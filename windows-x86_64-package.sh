@@ -21,6 +21,9 @@ cp "$LOVE/license.txt" "$FOLDER/LICENSE-LOVE.txt" # Copies and renames Love lice
 cp "LICENSE" "$FOLDER/LICENSE-GAME.txt" # Copies and renames Game license
 cp "README.md" "$FOLDER" # Copies readme
 
+echo "Copying icon"
+cp "build-assets/logo.ico" "$FOLDER"
+
 echo "Merging binaries"
 EXECUTABLE="drowned-fish.exe"
 cat "$LOVE/love.exe" "$OUTPUT" > "$FOLDER/$EXECUTABLE" # Merges love and game bundle into a single executable file
@@ -32,3 +35,4 @@ echo "Removing temp"
 rm -rf $FOLDER
 
 echo "'$EXECUTABLE' compiled successfully"
+echo "Process successful!"
