@@ -1,4 +1,5 @@
 local prop = require 'modules.props.prop'
+local assets = require 'modules.assets'
 
 -- Portal that teleports player to its pair
 ---@class Portal : Prop
@@ -69,6 +70,9 @@ function Portal:update(_, player)
             self.otherPortal.hasJustTeleported = true
             self.isInvisible = false
             self.otherPortal.isInvisible = false
+
+            -- Plays portal SFX
+            assets.sfx.portal:clone():play()
         end
     else
         -- Resets this portal if player is not touching

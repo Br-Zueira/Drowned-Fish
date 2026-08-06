@@ -179,7 +179,11 @@ function assets.pauseManager(paused)
         if assets.isAudioPaused then return end
 
         -- Pauses all playing audio and saves it for later reference
+        assets.stopAudio('sfx')
         assets.allPaused = love.audio.pause()
+
+        -- Plays pause sfx
+        assets.sfx.pause:clone():play()
 
         -- Marks that audio is already paused
         assets.isAudioPaused = true
@@ -190,6 +194,9 @@ function assets.pauseManager(paused)
 
         -- Unpauses all paused audio
         love.audio.play(assets.allPaused)
+
+        -- Plays unpause sfx
+        assets.sfx.unpause:clone():play()
 
         -- Cleans state
         assets.allPaused = {}

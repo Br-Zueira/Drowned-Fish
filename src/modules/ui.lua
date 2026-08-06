@@ -313,9 +313,13 @@ function ui.mouseControler(player)
                 -- Inverts muted state and updates the volume of the channels
                 assets.volume[e.properties.id].muted = not assets.volume[e.properties.id].muted
                 assets.updateVolume()
+                -- Plays button SFX
+                assets.sfx.button:clone():play()
             elseif e.type == "button" and e.properties.onclick == "goToHub" then
                 -- Goes to hub
                 world.loadMap("Special", "Hub", player)
+                -- Plays unpause SFX
+                assets.sfx.unpause:clone():play()
                 -- Tells game to unpause and mute voicelines to avoid some bizarre quirks
                 return { execute="muteVL", unpause=true }
             end

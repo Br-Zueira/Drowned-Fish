@@ -95,6 +95,9 @@ function Player:update(dt)
         self.onGround = false
         self.coyoteTimer = 0 -- Resets coyote timer to avoid double jump
         self.jumpBufferTimer = 0 -- Resets the buffer
+
+        -- Jumping SFX
+        assets.sfx.jump:clone():play()
     end
 
     -- Runs to left
@@ -105,6 +108,12 @@ function Player:update(dt)
     -- Runs to right
     if love.keyboard.isDown('d') then
         self.velX = self.velX + self.velSpeed
+    end
+
+    if (love.keyboard.isDown('a') or love.keyboard.isDown('d'))
+     and not assets.sfx.steps:isPlaying()
+     and self.onGround then
+        assets.sfx.steps:play()
     end
 
     -- Fall
@@ -143,6 +152,7 @@ function Player:update(dt)
             self:death()
             return
         elseif type == 'Goal' then
+            assets.sfx.portal:clone():play() -- Plays the same SFX as portals
             world.nextLevel(self)
             return
         end
@@ -153,9 +163,12 @@ function Player:update(dt)
             self.onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
             if type == 'Spring' then
+                assets.sfx.jump:clone():play() -- Plays the same SFX as jumping
                 self.velY = -self.velY
                 return
             else
+                -- Landing sfx (Needs to take gravity in account else sfx will play even with player standing still)
+                if self.velY > self.gravity*dt then assets.sfx.landing:clone():play() end
                 self.velY = 0
             end
         elseif col.normal.y == 1 then -- Hit a ceiling

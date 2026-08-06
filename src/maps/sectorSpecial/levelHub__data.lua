@@ -1,4 +1,5 @@
 local props = require 'modules.props'
+local assets = require 'modules.assets'
 local world = require 'modules.world'
 local voicelines = require 'modules.voicelines'
 
@@ -39,6 +40,7 @@ function sectorGate:update(_, player)
         if col.other == player then
             player.deaths = 0
             world.loadMap(self.sector, 1, player)
+            assets.sfx.portal:clone():play() -- Plays portal SFX
             return
         end
     end
