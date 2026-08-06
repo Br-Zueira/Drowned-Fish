@@ -110,8 +110,10 @@ function assets.load()
     assets.loadVoiceLine('gma', 'gma.wav')
     assets.loadVoiceLine('portals', 'portals.wav')
 
-    -- Song
+    -- Songs
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')
+    assets.loadSong('leavingOutpost', 'Imphenzia - Leaving the Outpost.ogg')
+    assets.loadSong('auraAlien', 'Imphenzia - Aura of the Alien.ogg')
 
     -- Font
     assets.loadFont('VT323', 'VT323-Regular.ttf', 24)
