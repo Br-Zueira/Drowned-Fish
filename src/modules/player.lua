@@ -181,6 +181,8 @@ end
 
 -- Kills player and reloads level, passing self as player instance
 function Player:death()
+    -- Plays death sfx
+    assets.sfx.death:clone():play()
     -- Breaks momentum after death
     self.velX, self.velY, self.boostedX = 0, 0, 0
     -- Death counter

@@ -115,6 +115,16 @@ function assets.load()
     assets.loadSong('leavingOutpost', 'Imphenzia - Leaving the Outpost.ogg')
     assets.loadSong('auraAlien', 'Imphenzia - Aura of the Alien.ogg')
 
+    -- SFX
+    assets.loadSfx('jump', 'jump.mp3')
+    assets.loadSfx('landing', 'landing.mp3')
+    assets.loadSfx('death', 'death.mp3')
+    assets.loadSfx('portal', 'portal.mp3')
+    assets.loadSfx('button', 'button.mp3')
+    assets.loadSfx('steps', 'steps.mp3')
+    assets.loadSfx('pause', 'pause.mp3')
+    assets.loadSfx('unpause', 'unpause.mp3')
+
     -- Font
     assets.loadFont('VT323', 'VT323-Regular.ttf', 24)
 end
