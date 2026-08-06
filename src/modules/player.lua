@@ -163,7 +163,8 @@ function Player:update(dt)
             self.onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
             if type == 'Spring' then
-                assets.sfx.jump:clone():play() -- Plays the same SFX as jumping
+                -- Plays the same SFX as jumping (only if not standing steel on spring)
+                if self.velY > self.gravity*dt then assets.sfx.jump:clone():play() end
                 self.velY = -self.velY
                 return
             else
