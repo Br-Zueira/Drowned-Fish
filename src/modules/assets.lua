@@ -88,8 +88,16 @@ end
 
 -- Loads every game asset
 function assets.load()
-    -- Misc
-    assets.loadImage('background', 'background.jpg')
+    -- Backgrounds
+    assets.loadImage('background1', 'background1.jpg')
+    assets.loadImage('background2', 'background2.jpg')
+    assets.loadImage('background3', 'background3.jpg')
+    assets.loadImage('background4', 'background4.jpg')
+    assets.loadImage('background5', 'background5.jpg')
+    assets.loadImage('background6', 'background6.jpg')
+    assets.loadImage('background7', 'background7.jpg')
+
+    -- Player
     assets.loadImage('player', 'player.png')
 
     -- Props

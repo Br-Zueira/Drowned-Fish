@@ -22,6 +22,14 @@ world.levelsSchema = {
     ["Special"] = {"Hub"}
 }
 
+local bgSchema = {
+    [0] = 'background2',
+    [1] = 'background2',
+    [2] = 'background3',
+    [3] = 'background4',
+    ["Special"] = 'background5'
+}
+
 world.save = save.loadJson("save")
 if not world.save then
     world.save = { [1] = { unlocked=true } }
@@ -48,7 +56,8 @@ end
 -- Renders every prop in the map
 function world.draw()
     -- Draws background before anything
-    love.graphics.draw(assets.images.background, 0, 0)
+    local bg = assets.images[bgSchema[world.sector]]
+    love.graphics.draw(bg, 0, 0, 0, VW/bg:getWidth(), VH/bg:getHeight())
 
     for _, instance in ipairs(props.propList) do
         -- If isImg is true, renders from asset
