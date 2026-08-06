@@ -23,11 +23,11 @@ world.levelsSchema = {
 }
 
 local bgSchema = {
-    [0] = 'background2',
-    [1] = 'background2',
-    [2] = 'background3',
-    [3] = 'background4',
-    ["Special"] = 'background5'
+    [0] = 'deep',
+    [1] = 'cold',
+    [2] = 'purpleish',
+    [3] = 'redish',
+    ["Special"] = 'lunarground'
 }
 
 world.save = save.loadJson("save")
@@ -56,7 +56,7 @@ end
 -- Renders every prop in the map
 function world.draw()
     -- Draws background before anything
-    local bg = assets.images[bgSchema[world.sector]]
+    local bg = assets.backgrounds[bgSchema[world.sector]]
     love.graphics.draw(bg, 0, 0, 0, VW/bg:getWidth(), VH/bg:getHeight())
 
     for _, instance in ipairs(props.propList) do

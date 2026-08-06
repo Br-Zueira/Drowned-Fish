@@ -6,7 +6,8 @@ local assets = {
     fonts = {},
     sfx = {},
     voicelines = {},
-    songs = {}
+    songs = {},
+    backgrounds = {}
 }
 
 -- Loads volume settings, or create from scratch if no settings
@@ -50,6 +51,13 @@ function assets.loadVoiceLine(name, file)
     assets.voicelines[name] = love.audio.newSource('assets/voicelines/' .. file, 'static')
 end
 
+---@param name string The name of the asset
+---@param file string The file name
+function assets.loadBackground(name, file)
+    assets.backgrounds[name] = love.graphics.newImage('assets/backgrounds/' .. file)
+    assets.backgrounds[name]:setFilter('nearest', 'nearest')
+end
+
 -- Helper to stop an specific type of audio
 ---@param type string The type of audio (sfx, voicelines or songs)
 function assets.stopAudio(type)
@@ -89,13 +97,13 @@ end
 -- Loads every game asset
 function assets.load()
     -- Backgrounds
-    assets.loadImage('background1', 'background1.jpg')
-    assets.loadImage('background2', 'background2.jpg')
-    assets.loadImage('background3', 'background3.jpg')
-    assets.loadImage('background4', 'background4.jpg')
-    assets.loadImage('background5', 'background5.jpg')
-    assets.loadImage('background6', 'background6.jpg')
-    assets.loadImage('background7', 'background7.jpg')
+    assets.loadBackground('cold', 'cold.jpg')
+    assets.loadBackground('deep', 'deep.jpg')
+    assets.loadBackground('galaxycore', 'galaxycore.jpg')
+    assets.loadBackground('legacy', 'legacy.jpg')
+    assets.loadBackground('lunarground', 'lunarground.jpg')
+    assets.loadBackground('purpleish', 'purpleish.jpg')
+    assets.loadBackground('redish', 'redish.jpg')
 
     -- Player
     assets.loadImage('player', 'player.png')
