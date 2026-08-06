@@ -14,6 +14,9 @@ end
 
 -- Love standard implementations
 function love.load(args)
+    -- Resets seed for math.random
+    math.randomseed(os.time())
+
     -- Window dimensions
     VW = love.graphics.getWidth()
     VH = love.graphics.getHeight()

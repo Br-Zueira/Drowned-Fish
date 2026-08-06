@@ -33,3 +33,4 @@ Bash, Zip
 * **Pixil** -> Made me able of doing non awful dev arts
 * **Br-Zueira (Myself)** -> The narrator that annoyed (or will annoy) you the whole game
 * **Google Fonts** -> Font (duh)
+* **PixaBay** -> SFX

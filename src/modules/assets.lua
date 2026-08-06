@@ -147,22 +147,24 @@ function assets.songManager.update()
     -- Avoids crashed if no songs
     if #assets.songManager.keys == 0 then return end
 
+    -- Only updates if not playing any songs and audio not paused
+    if assets.isPlayingAny('songs') or assets.isAudioPaused then return end
+
     -- Gets the current song
     local s = assets.songs[assets.songManager.keys[assets.songManager.current]]
-    if not assets.isPlayingAny('songs') then
-        -- Changes current song for next one
-        s = assets.songs[assets.songManager.keys[assets.songManager.next]]
-        assets.songManager.current = assets.songManager.next
 
-        -- Plays the song
-        s:play()
+    -- Changes current song for next one
+    s = assets.songs[assets.songManager.keys[assets.songManager.next]]
+    assets.songManager.current = assets.songManager.next
 
-        -- Gets next index to be played
-        if #assets.songManager.keys == 1 then return end -- Avoids infinite loop (with single song, next will always be equal to current)
-        repeat
-            assets.songManager.next = math.random(#assets.songManager.keys)
-        until assets.songManager.next ~= assets.songManager.current -- Avoids a song playing more than once straight
-    end
+    -- Plays the song
+    s:play()
+
+    -- Gets next index to be played
+    if #assets.songManager.keys == 1 then return end -- Avoids infinite loop (with single song, next will always be equal to current)
+    repeat
+        assets.songManager.next = math.random(#assets.songManager.keys)
+    until assets.songManager.next ~= assets.songManager.current -- Avoids a song playing more than once straight
 end
 
 -- Manages audio pausing and unpausing
@@ -188,6 +190,9 @@ function assets.pauseManager(paused)
 
         -- Unpauses all paused audio
         love.audio.play(assets.allPaused)
+
+        -- Cleans state
+        assets.allPaused = {}
 
         -- Marks that audio is not paused anymore
         assets.isAudioPaused = false
