@@ -66,7 +66,7 @@ function love.update(dt)
     end
 
     if not paused then
-        local maxSubDT = 1/60
+        local maxSubDT = 1/120
         local steps = math.max(1, math.ceil(dt/maxSubDT))
         local subDT = dt/steps
         for _ = 1, steps do
