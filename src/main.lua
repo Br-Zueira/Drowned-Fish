@@ -56,7 +56,6 @@ end
 
 ---@param dt number Delta time for each rendered frame
 function love.update(dt)
-    dt = math.min(dt, 1/30)
     if love.keyboard.isDown("p") then
         if not wasPausePressed then
             paused = not paused
@@ -67,8 +66,13 @@ function love.update(dt)
     end
 
     if not paused then
-        world.update(dt, player)
-        player:update(dt)
+        local maxSubDT = 1/60
+        local steps = math.max(1, math.ceil(dt/maxSubDT))
+        local subDT = dt/steps
+        for _ = 1, steps do
+            world.update(subDT, player)
+            player:update(subDT)
+        end
         assets.songManager.update()
     end
 

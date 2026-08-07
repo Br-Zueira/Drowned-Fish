@@ -335,9 +335,10 @@ function ui.mouseWheelControler(y)
             if e.type == "volumeControler" then
                 local value = assets.volume[e.properties.id].volume
                 local difference = y * 0.05
-                local newValue = math.max(0, math.min(1, value + difference))
+                local newValue = math.max(0, math.min(1, value + difference)) -- Doesnt let volume be negative or bigger than 100%
                 assets.volume[e.properties.id].volume = newValue
-                assets.updateVolume()
+                assets.updateVolume() -- Updates volume
+                assets.sfx.button:clone():play() -- Plays button SFX
             end
         end
     end

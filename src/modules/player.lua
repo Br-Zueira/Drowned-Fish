@@ -81,7 +81,6 @@ function Player:update(dt)
         end
     else
         self.jumpCooldown = false -- Removes cooldown if key not pressed
-        self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
     end
 
     -- Actual jump
@@ -110,10 +109,12 @@ function Player:update(dt)
         self.velX = self.velX + self.velSpeed
     end
 
-    if (love.keyboard.isDown('a') or love.keyboard.isDown('d'))
-     and not assets.sfx.steps:isPlaying()
-     and self.onGround then
-        assets.sfx.steps:play()
+    if (love.keyboard.isDown('a') or love.keyboard.isDown('d')) and self.onGround then
+        if not assets.sfx.steps:isPlaying() then
+            assets.sfx.steps:play()
+        end
+    else
+        assets.sfx.steps:stop()
     end
 
     -- Fall
@@ -143,8 +144,10 @@ function Player:update(dt)
 
     -- Loop through collisions to check if player is standing on the floor
     self.onGround = false
+    self.bonked = false
     self.standingOnSpeedX = 0
     self.standingOnSpeedY = 0
+    self.bonkedSpeedY = 0
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
         local type = col.other.type
@@ -158,22 +161,37 @@ function Player:update(dt)
         end
 
         if col.normal.y == -1 then -- Hit something below player
-            self.standingOnSpeedX = col.other.velX or 0
-            self.standingOnSpeedY = col.other.velY or 0 -- Speed of whatever is below player (0 if it doesnt have a speed)
+            -- Speed of whatever is below player (0 if it doesnt have a speed)
+            if col.other.velX then self.standingOnSpeedX = col.other.velX end
+            if col.other.velY then self.standingOnSpeedY = col.other.velY end
             self.onGround = true -- Player is grounded
             self.coyoteTimer = self.coyoteMax -- Coyote Timer resets
             if type == 'Spring' then
                 -- Plays the same SFX as jumping (only if not standing steel on spring)
                 if self.velY > self.gravity*dt then assets.sfx.jump:clone():play() end
                 self.velY = -self.velY
-                return
             else
                 -- Landing sfx (Needs to take gravity in account else sfx will play even with player standing still)
                 if self.velY > self.gravity*dt then assets.sfx.landing:clone():play() end
                 self.velY = 0
             end
         elseif col.normal.y == 1 then -- Hit a ceiling
+            if col.other.velY then self.bonkedSpeedY = col.other.velY end -- Will be useful later as a death condition
+            self.bonked = true -- Player bonked into a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
+        end
+    end
+
+    -- Query a 1-pixel high band directly above the player's head
+    local topCols, topLen = World:queryRect(self.x + 2, self.y - 3, math.max(1, self.width - 4), 3)
+
+    for i = 1, topLen do
+        local item = topCols[i]
+        if item ~= self then
+            self.bonked = true
+            if item.velY then
+                self.bonkedSpeedY = item.velY
+            end
         end
     end
 
@@ -187,8 +205,10 @@ function Player:update(dt)
     -- Making game feel more responsive
     self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
-    -- Kills player if they go out of screen
-    if self.y > VH or self.x > VW + TileSize or self.x < -TileSize then
+    -- Kill conditions
+    local OOB = (self.y > VH) or (self.x > VW + TileSize) or (self.x < -TileSize)
+    local crushed = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
+    if OOB or crushed then
         self:death()
     end
 end
