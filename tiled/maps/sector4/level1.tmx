@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="2">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
  <tileset firstgid="1" source="../../Props.tsx"/>
  <layer id="1" name="Layout" width="30" height="20">
   <data encoding="csv">
@@ -22,10 +22,18 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="1" name="Spawnpoint" gid="2" x="0" y="32" width="32" height="32"/>
+  <object id="2" name="Goal" gid="5" x="928" y="608" width="32" height="32"/>
+  <object id="3" name="SpiningPlat" gid="1" x="96" y="64" width="32" height="32">
+   <properties>
+    <property name="isAntiClock" type="bool" value="false"/>
+    <property name="speed" type="int" value="100"/>
+    <property name="width" type="int" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
