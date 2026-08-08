@@ -19,6 +19,7 @@ world.levelsSchema = {
     [1] = {1, 2, 3, 4, 5},
     [2] = {1, 2, 3, 4, 5},
     [3] = {1, 2, 3, 4, 5},
+    [4] = {1},
     ["Special"] = {"Hub"}
 }
 
@@ -27,6 +28,7 @@ local bgSchema = {
     [1] = 'cold',
     [2] = 'purpleish',
     [3] = 'redish',
+    [4] = 'galaxycore',
     ["Special"] = 'lunarground'
 }
 

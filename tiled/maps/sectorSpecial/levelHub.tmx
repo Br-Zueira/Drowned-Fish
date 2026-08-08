@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="61">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="64">
  <editorsettings>
   <export target="../../../maps/sectorSpecial/levelHub.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="7" columns="0">
+ <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="8" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Tile">
    <image source="../../../src/assets/images/test.png" width="32" height="32"/>
@@ -26,6 +26,9 @@
   <tile id="7" type="Booster">
    <image source="../../../src/assets/images/booster.png" width="32" height="32"/>
   </tile>
+  <tile id="8" type="Laser">
+   <image source="../../../src/assets/images/laser.png" width="32" height="32"/>
+  </tile>
  </tileset>
  <layer id="1" name="Layout" width="30" height="20">
   <data encoding="csv">
@@ -39,16 +42,16 @@
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1
+1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,1,1
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
@@ -81,5 +84,22 @@
    </properties>
   </object>
   <object id="54" name="Spring" gid="7" x="704" y="608" width="32" height="32"/>
+  <object id="61" name="Sector" gid="2" x="416" y="320" width="32" height="32">
+   <properties>
+    <property name="sector" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="62" name="Laser" gid="9" x="512" y="352" width="32" height="32">
+   <properties>
+    <property name="group" type="int" value="1"/>
+    <property name="intermiTime" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="63" name="Laser" gid="9" x="416" y="192" width="32" height="32">
+   <properties>
+    <property name="group" type="int" value="1"/>
+    <property name="intermiTime" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
