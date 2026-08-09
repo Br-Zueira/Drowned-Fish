@@ -184,7 +184,7 @@ return {
         },
         {
           id = 3,
-          name = "SpiningPlat",
+          name = "SpinningPlat",
           type = "",
           shape = "rectangle",
           x = 96,
@@ -196,9 +196,7 @@ return {
           gid = 1,
           visible = true,
           properties = {
-            ["height"] = 1,
-            ["isAntiClock"] = false,
-            ["speed"] = 100,
+            ["speed"] = 10,
             ["width"] = 3
           }
         }

@@ -14,7 +14,13 @@ end
 
 function data.whenReloaded() end
 function data.update() end
-function data.ObjHandler(obj) end
+function data.ObjHandler(obj)
+    if obj.name == "SpinningPlat" then
+        obj.y = obj.y - TileSize
+        local t = props.Tile.new(obj.x, obj.y)
+        props.Spinner.set(t, t.x + TileSize*2, t.y + TileSize/2, obj.properties.speed)
+    end
+end
 function data.MiscHandler(map) end
 
 return data
