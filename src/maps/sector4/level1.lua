@@ -196,7 +196,8 @@ return {
           gid = 1,
           visible = true,
           properties = {
-            ["speed"] = 10,
+            ["isAntiClock"] = true,
+            ["speed"] = 5,
             ["width"] = 3
           }
         }

@@ -89,6 +89,7 @@ function Moveable:update(dt, player)
         for i = 1, len do
             local col = cols[i]
             local o = col.other
+            -- Corrects user position
             if col.normal.y == 1 and o.type == "Player" then
                 local targetY = o.y - (self.velY*dt)
                 o.x, o.y = World:move(o, o.x, targetY, player.worldFilter)
