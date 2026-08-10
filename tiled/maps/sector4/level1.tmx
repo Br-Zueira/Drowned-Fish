@@ -57,7 +57,7 @@
  <objectgroup id="2" name="Objects">
   <object id="1" name="Spawnpoint" gid="2" x="0" y="32" width="32" height="32"/>
   <object id="2" name="Goal" gid="5" x="928" y="608" width="32" height="32"/>
-  <object id="3" name="SpinningPlat" gid="1" x="96" y="64" width="32" height="32">
+  <object id="3" name="SpinningPlat" gid="1" x="96" y="96" width="32" height="32">
    <properties>
     <property name="isAntiClock" type="bool" value="true"/>
     <property name="speed" type="int" value="5"/>
