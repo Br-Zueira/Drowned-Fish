@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
  <editorsettings>
   <export target="../../../src/maps/sector4/level1.lua" format="lua"/>
  </editorsettings>
@@ -59,9 +59,23 @@
   <object id="2" name="Goal" gid="5" x="928" y="608" width="32" height="32"/>
   <object id="3" name="SpinningPlat" gid="1" x="96" y="96" width="32" height="32">
    <properties>
-    <property name="isAntiClock" type="bool" value="true"/>
+    <property name="isCounterclockwise" type="bool" value="true"/>
     <property name="speed" type="int" value="5"/>
     <property name="width" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="4" name="SpinningPlat" gid="1" x="288" y="96" width="32" height="32">
+   <properties>
+    <property name="isCounterclockwise" type="bool" value="true"/>
+    <property name="speed" type="int" value="5"/>
+    <property name="width" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="5" name="SpinningPlat" gid="1" x="512" y="96" width="32" height="32">
+   <properties>
+    <property name="isCounterclockwise" type="bool" value="false"/>
+    <property name="speed" type="int" value="7"/>
+    <property name="width" type="int" value="4"/>
    </properties>
   </object>
  </objectgroup>

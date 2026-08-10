@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 4,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -196,9 +196,47 @@ return {
           gid = 1,
           visible = true,
           properties = {
-            ["isAntiClock"] = true,
+            ["isCounterclockwise"] = true,
             ["speed"] = 5,
             ["width"] = 3
+          }
+        },
+        {
+          id = 4,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = true,
+            ["speed"] = 5,
+            ["width"] = 3
+          }
+        },
+        {
+          id = 5,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 512,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = false,
+            ["speed"] = 7,
+            ["width"] = 4
           }
         }
       }

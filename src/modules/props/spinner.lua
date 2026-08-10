@@ -17,7 +17,7 @@ setmetatable(Spinner, prop.Prop)
 ---@param rotationY number
 ---@param rotationSpeed number
 ---@param isAntiClock boolean
----@param customUpdate function
+---@param customUpdate? function
 function Spinner.set(instance, rotationX, rotationY, rotationSpeed, isAntiClock, customUpdate)
     setmetatable(instance, Spinner)
     ---@cast instance Spinner

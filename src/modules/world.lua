@@ -184,6 +184,8 @@ function world.reload(player)
             props.Booster.new(obj.x, obj.y, p.speed, obj.rotation)
         elseif obj.name == "Laser" then
             props.Laser.new(obj.x, obj.y, p.group, p.isDisabled, p.intermiTime, p.isFake)
+        elseif obj.name == "SpinningPlat" then
+            props.SpinningPlat.new(obj.x, obj.y, p.width, p.height, p.speed, p.isCounterclockwise)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end
