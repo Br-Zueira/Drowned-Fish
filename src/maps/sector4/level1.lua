@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 13,
+  nextobjectid = 20,
   properties = {},
   tilesets = {
     {
@@ -127,6 +127,7 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -134,8 +135,7 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+        1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1
       }
     },
     {
@@ -172,7 +172,7 @@ return {
           name = "Goal",
           type = "",
           shape = "rectangle",
-          x = 928,
+          x = 896,
           y = 608,
           width = 32,
           height = 32,
@@ -298,7 +298,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 768,
-          y = 384,
+          y = 416,
           width = 32,
           height = 32,
           rotation = 0,
@@ -317,7 +317,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 608,
-          y = 384,
+          y = 416,
           width = 32,
           height = 32,
           rotation = 0,
@@ -336,7 +336,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 448,
-          y = 384,
+          y = 416,
           width = 32,
           height = 32,
           rotation = 0,
@@ -345,6 +345,138 @@ return {
           visible = true,
           properties = {
             ["isCounterclockwise"] = true,
+            ["speed"] = 7,
+            ["width"] = 3
+          }
+        },
+        {
+          id = 13,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 1280,
+          y = 448,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 2
+          }
+        },
+        {
+          id = 14,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 448,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 2
+          }
+        },
+        {
+          id = 15,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 512,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 3,
+            ["isCounterclockwise"] = false,
+            ["speed"] = 7,
+            ["width"] = 3
+          }
+        },
+        {
+          id = 16,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = true,
+            ["speed"] = 7,
+            ["width"] = 3
+          }
+        },
+        {
+          id = 17,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 160,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = false,
+            ["speed"] = 10,
+            ["width"] = 2
+          }
+        },
+        {
+          id = 18,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 3,
+            ["isCounterclockwise"] = false,
+            ["speed"] = 7,
+            ["width"] = 3
+          }
+        },
+        {
+          id = 19,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 736,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 3,
+            ["isCounterclockwise"] = false,
             ["speed"] = 7,
             ["width"] = 3
           }
