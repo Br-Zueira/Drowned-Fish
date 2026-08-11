@@ -4,7 +4,7 @@ local prop = require 'modules.props.prop'
 ---@field rotationX number
 ---@field rotationY number
 ---@field rotationSpeed number
----@field isAntiClock boolean
+---@field isCounterclockwise boolean
 ---@field customUpdate function
 ---@field degrees number
 local Spinner = {}
@@ -16,15 +16,15 @@ setmetatable(Spinner, prop.Prop)
 ---@param rotationX number
 ---@param rotationY number
 ---@param rotationSpeed number
----@param isAntiClock boolean
+---@param isCounterclockwise boolean
 ---@param customUpdate? function
-function Spinner.set(instance, rotationX, rotationY, rotationSpeed, isAntiClock, customUpdate)
+function Spinner.set(instance, rotationX, rotationY, rotationSpeed, isCounterclockwise, customUpdate)
     setmetatable(instance, Spinner)
     ---@cast instance Spinner
     instance.rotationX = rotationX
     instance.rotationY = rotationY
     instance.rotationSpeed = rotationSpeed
-    instance.isAntiClock = isAntiClock == true -- Converts nil into false
+    instance.isCounterclockwise = isCounterclockwise == true -- Converts nil into false
     instance.customUpdate = customUpdate or function() end
     instance.degrees = 0
 end
@@ -53,7 +53,7 @@ function Spinner:update(dt, player)
     local angle = math.atan2(dY, dX)
 
     -- Rotates clockwise or counterclockwise
-    if self.isAntiClock then
+    if self.isCounterclockwise then
         angle = angle - self.rotationSpeed * dt
     else
         angle = angle + self.rotationSpeed * dt

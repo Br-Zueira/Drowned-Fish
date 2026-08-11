@@ -206,7 +206,7 @@ function Player:update(dt)
     self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
     -- Kill conditions
-    local OOB = (self.y > VH) or (self.x > VW + TileSize) or (self.x < -TileSize)
+    local OOB = (self.y > VH + TileSize) or (self.x > VW + TileSize) or (self.x < -TileSize)
     local crushed = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
     if OOB or crushed then
         self:death()
