@@ -66,6 +66,9 @@ function Spinner:update(dt, player)
     -- VelX and velY of spinner prop (deltaV divided by dt to turn it from px/frame to px/secs)
     self.velX, self.velY = (targetX - coreX)/dt, (targetY - coreY)/dt
 
+    -- Avoids bump.lua crashed
+    if not World:hasItem(self) then return end
+
     -- Moves prop through the world
     local realX, realY, cols, len = World:move(self, targetX - self.sizeX / 2, targetY - self.sizeY / 2, colFilter)
     self.x, self.y = realX, realY
