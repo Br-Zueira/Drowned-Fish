@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 6,
+  nextobjectid = 10,
   properties = {},
   tilesets = {
     {
@@ -118,7 +118,7 @@ return {
       data = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -237,6 +237,59 @@ return {
             ["isCounterclockwise"] = false,
             ["speed"] = 7,
             ["width"] = 4
+          }
+        },
+        {
+          id = 6,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 704,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = true,
+            ["speed"] = 7,
+            ["width"] = 4
+          }
+        },
+        {
+          id = 7,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 864,
+          y = 192,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 1
+          }
+        },
+        {
+          id = 8,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = -352,
+          y = 192,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 1
           }
         }
       }
