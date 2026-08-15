@@ -27,7 +27,7 @@ function data.ObjHandler(obj)
                 self.rotationY = spinPoint.y
             end
         )
-        spinPoint = props.Prop.new(sP[1].rotationX, sP[1].rotationY, TileSize, TileSize, { isImg=true, imgName='placeholder' })
+        spinPoint = props.Prop.new(sP[1].rotationX, sP[1].rotationY, TileSize/2, TileSize/2, { isImg=true, imgName='placeholder' })
         spinPoint.isTrigger = true
         props.Moveable.set(spinPoint, spinPoint.x, spinPoint.y, spinPoint.x, TileSize*6, p.speed, false, false)
     end

@@ -7,6 +7,8 @@ local prop = require 'modules.props.prop'
 ---@field isCounterclockwise boolean
 ---@field customUpdate function
 ---@field degrees number
+---@field radius number
+---@field angle number
 local Spinner = {}
 Spinner.__index = Spinner
 setmetatable(Spinner, prop.Prop)
@@ -27,6 +29,10 @@ function Spinner.set(instance, rotationX, rotationY, rotationSpeed, isCounterclo
     instance.isCounterclockwise = isCounterclockwise == true -- Converts nil into false
     instance.customUpdate = customUpdate or function() end
     instance.degrees = 0
+    local dx = instance.rotationX - instance.x
+    local dy = instance.rotationY - instance.y
+    instance.radius = math.sqrt(dx*dx + dy*dy)
+    instance.angle = math.atan2(dy, dx)
 end
 
 -- Returns cross for the player and ignores the rest
@@ -38,36 +44,29 @@ local function colFilter(_, o)
 end
 
 function Spinner:update(dt, player)
+    -- Avoids bump.lua crashes
+    if not World:hasItem(self) then return end
+
     -- Custom update logic, if any
     self.customUpdate(self, dt, player)
-    -- Center of prop
-    local coreX, coreY = self.x + self.sizeX / 2, self.y + self.sizeY / 2
-
-    -- Distance between rotation point and center of prop (X and Y)
-    local dX, dY = coreX - self.rotationX, coreY - self.rotationY
-
-    -- Combined distance between both
-    local dist = math.sqrt(dX*dX + dY*dY)
-
-    -- Angle (in radians)
-    local angle = math.atan2(dY, dX)
 
     -- Rotates clockwise or counterclockwise
     if self.isCounterclockwise then
-        angle = angle - self.rotationSpeed * dt
+        self.angle = self.angle - self.rotationSpeed * dt
     else
-        angle = angle + self.rotationSpeed * dt
+        self.angle = self.angle + self.rotationSpeed * dt
     end
 
     -- Target X and Y of prop
-    local targetX = self.rotationX + math.cos(angle) * dist
-    local targetY = self.rotationY + math.sin(angle) * dist
+    local targetX = self.rotationX + math.cos(self.angle) * self.radius
+    local targetY = self.rotationY + math.sin(self.angle) * self.radius
+
+    -- Get current top-left before moving
+    local currentX, currentY = self.x, self.y
+    local coreX, coreY = currentX + self.sizeX / 2, currentY + self.sizeY / 2
 
     -- VelX and velY of spinner prop (deltaV divided by dt to turn it from px/frame to px/secs)
     self.velX, self.velY = (targetX - coreX)/dt, (targetY - coreY)/dt
-
-    -- Avoids bump.lua crashed
-    if not World:hasItem(self) then return end
 
     -- Moves prop through the world
     local realX, realY, cols, len = World:move(self, targetX - self.sizeX / 2, targetY - self.sizeY / 2, colFilter)
@@ -83,7 +82,7 @@ function Spinner:update(dt, player)
     end
 
     -- Converts angle to degrees then save it
-    self.degrees = math.deg(angle)
+    self.degrees = math.deg(self.angle)
 end
 
 return Spinner
