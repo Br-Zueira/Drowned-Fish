@@ -19,7 +19,8 @@ setmetatable(SpinningPlat, spinner)
 ---@param height? number Height, in tiles, of spinning platform
 ---@param speed number Speed in which the platform rotates
 ---@param isCounterclockwise boolean Defines whether the spinning plat is spinning at counterclockwise
-function SpinningPlat.new(x, y, width, height, speed, isCounterclockwise)
+---@param customUpdate? function Custom update logic to run along with standard update
+function SpinningPlat.new(x, y, width, height, speed, isCounterclockwise, customUpdate)
     -- Creates a reference to the whole platform if ever needed
     local plat = {}
 
@@ -52,7 +53,7 @@ function SpinningPlat.new(x, y, width, height, speed, isCounterclockwise)
 
             -- Tile instance (sets it as spinner and saves its reference) 
             local tileInstance = tile.new(tileX, tileY)
-            spinner.set(tileInstance, coreX, coreY, speed, isCounterclockwise)
+            spinner.set(tileInstance, coreX, coreY, speed, isCounterclockwise, customUpdate)
             table.insert(plat, tileInstance)
         end
     end

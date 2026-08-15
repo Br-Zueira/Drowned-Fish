@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 3,
+  nextobjectid = 10,
   properties = {},
   tilesets = {
     {
@@ -179,6 +179,117 @@ return {
           rotation = 0,
           opacity = 1,
           gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 2,
+            ["speed"] = 5,
+            ["width"] = 2
+          }
+        },
+        {
+          id = 4,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 352,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 2,
+            ["speed"] = 5,
+            ["width"] = 2
+          }
+        },
+        {
+          id = 5,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 576,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["height"] = 4,
+            ["isCounterclockwise"] = true,
+            ["speed"] = 3,
+            ["width"] = 4
+          }
+        },
+        {
+          id = 6,
+          name = "MovSpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 864,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isCounterclockwise"] = true,
+            ["rotationSpeed"] = 3,
+            ["speed"] = 100,
+            ["width"] = 5
+          }
+        },
+        {
+          id = 7,
+          name = "SpinningPlat",
+          type = "",
+          shape = "rectangle",
+          x = 736,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["speed"] = 7,
+            ["width"] = 2
+          }
+        },
+        {
+          id = 9,
+          name = "MovGoal",
+          type = "",
+          shape = "rectangle",
+          x = 864,
+          y = 192,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
           visible = true,
           properties = {}
         }
