@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="10">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="23">
  <editorsettings>
   <export target="../../../src/maps/sector4/level2.lua" format="lua"/>
  </editorsettings>
@@ -33,12 +33,12 @@
  <layer id="1" name="Layout" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -56,7 +56,7 @@
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="1" name="Spawnpoint" gid="2" x="32" y="608" width="32" height="32"/>
-  <object id="2" name="Goal" gid="5" x="896" y="32" width="32" height="32"/>
+  <object id="2" name="Goal" gid="5" x="32" y="96" width="32" height="32"/>
   <object id="3" name="SpinningPlat" gid="1" x="192" y="672" width="32" height="32">
    <properties>
     <property name="height" type="int" value="2"/>
@@ -93,6 +93,53 @@
     <property name="width" type="int" value="2"/>
    </properties>
   </object>
-  <object id="9" gid="2" x="864" y="192" width="32" height="32"/>
+  <object id="9" gid="2" x="864" y="160" width="32" height="32"/>
+  <object id="10" name="Trigger" gid="2" x="864" y="352" width="32" height="32">
+   <properties>
+    <property name="id" value="speedup"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="11" name="FakeMoverSaw" gid="6" x="416" y="288" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="416"/>
+    <property name="endY" type="int" value="128"/>
+    <property name="speed" type="int" value="250"/>
+   </properties>
+  </object>
+  <object id="14" name="Laser" gid="9" x="-128" y="256" width="32" height="32">
+   <properties>
+    <property name="grous" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="15" name="Laser" gid="9" x="736" y="256" width="32" height="32">
+   <properties>
+    <property name="grous" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="16" name="FakeMoverSaw" gid="6" x="544" y="288" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="544"/>
+    <property name="endY" type="int" value="128"/>
+    <property name="speed" type="int" value="250"/>
+   </properties>
+  </object>
+  <object id="17" name="FakeMoverSaw" gid="6" x="672" y="288" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="672"/>
+    <property name="endY" type="int" value="128"/>
+    <property name="speed" type="int" value="250"/>
+   </properties>
+  </object>
+  <object id="18" name="FakeMoverSaw" gid="6" x="272" y="288" width="32" height="32">
+   <properties>
+    <property name="endX" type="int" value="272"/>
+    <property name="endY" type="int" value="128"/>
+    <property name="speed" type="int" value="250"/>
+   </properties>
+  </object>
+  <object id="19" name="DeadlyTile" gid="1" x="352" y="224" width="32" height="32"/>
+  <object id="20" name="DeadlyTile" gid="1" x="480" y="224" width="32" height="32"/>
+  <object id="21" name="DeadlyTile" gid="1" x="608" y="224" width="32" height="32"/>
  </objectgroup>
 </map>
