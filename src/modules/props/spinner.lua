@@ -29,8 +29,13 @@ function Spinner.set(instance, rotationX, rotationY, rotationSpeed, isCounterclo
     instance.isCounterclockwise = isCounterclockwise == true -- Converts nil into false
     instance.customUpdate = customUpdate or function() end
     instance.degrees = 0
-    local dx = instance.rotationX - instance.x
-    local dy = instance.rotationY - instance.y
+
+    local coreX = instance.x + instance.sizeX / 2
+    local coreY = instance.y + instance.sizeY / 2
+
+    local dx = instance.rotationX - coreX
+    local dy = instance.rotationY - coreY
+
     instance.radius = math.sqrt(dx*dx + dy*dy)
     instance.angle = math.atan2(dy, dx)
 end
