@@ -57,7 +57,7 @@ function Portal:update(_, player)
         end
     end
 
-    if touchingPlayer then 
+    if touchingPlayer then
         -- If not just teleported, teleports
         if not self.hasJustTeleported and not self.otherPortal.hasJustTeleported then
             -- Moves player through both physical and logical world
@@ -70,6 +70,10 @@ function Portal:update(_, player)
             self.otherPortal.hasJustTeleported = true
             self.isInvisible = false
             self.otherPortal.isInvisible = false
+
+            -- Shows teleport particles
+            assets.particles.teleportPS:setPosition(player.x, player.y)
+            assets.particles.teleportPS:emit(50)
 
             -- Plays portal SFX
             assets.sfx.portal:clone():play()

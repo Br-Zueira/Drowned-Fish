@@ -181,6 +181,14 @@ function assets.load()
         'deathPS', {1, 1, 0, 1}, 
         100, 0, 0.25, 0.5, 200, 400, math.pi*2, 4, 0
     )
+    assets.newParticleSystem(
+        'goalPS', {0, 0.25, 1, 1},
+        100, 0, 0.25, 0.5, 200, 400, math.pi*2, 4, 0
+    )
+    assets.newParticleSystem(
+        'teleportPS', {0.5, 0, 0.5, 1},
+        100, 0, 0.5, 1, 50, 100, math.pi*2, 2, 0
+    )
 end
 
 -- Song manager status

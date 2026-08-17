@@ -38,9 +38,20 @@ function sectorGate:update(_, player)
     for i = 1, len do
         local col = cols[i]
         if col.other == player then
+            -- Resets death counter
             player.deaths = 0
-            world.loadMap(self.sector, 1, player)
-            assets.sfx.portal:clone():play() -- Plays portal SFX
+
+            -- Freezes player
+            player.frozen = true
+            player.frozenData.frozenCondition = "loadMap"
+            player.frozenData.sector = self.sector
+
+            -- Plays portal SFX
+            assets.sfx.portal:clone():play()
+
+            -- Shows teleport particles
+            assets.particles.teleportPS:setPosition(self.x, self.y)
+            assets.particles.teleportPS:emit(50)
             return
         end
     end

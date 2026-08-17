@@ -23,6 +23,7 @@ local assets = require 'modules.assets'
 ---@field jumpForceDefault integer
 ---@field jumpForce integer
 ---@field boostedX integer
+---@field frozenData table
 ---@field type 'Player'
 local Player = {};
 Player.__index = Player;
@@ -44,7 +45,8 @@ function Player.new()
         type = 'Player',
         onGround = false,
         standingOnSpeedX = 0, standingOnSpeedY = 0,
-        boostedX = 0
+        boostedX = 0,
+        frozen = false, frozenTimer = 0, frozenData = {}
     }
     setmetatable(instance, Player)
     return instance
@@ -52,6 +54,7 @@ end
 
 -- Player methods
 function Player:draw()
+    if self.isInvisible then return end
     love.graphics.draw(assets.images.player, self.x, self.y)
 end
 
@@ -73,6 +76,35 @@ end
 -- Updates player each frame
 ---@param dt integer Delta time for each rendered frame
 function Player:update(dt)
+    -- Can freeze player at time, specially between level loading
+    if self.frozen then
+        -- Makes player invisible
+        self.isInvisible = true
+
+        -- Decreases timer down, while avoiding it to be 0
+        self.frozenTimer = math.max(0, self.frozenTimer - dt)
+
+        -- Switch between frozen conditions
+        local fC = self.frozenData.frozenCondition
+        if self.frozenTimer == 0 then
+            if fC == 'nextLevel' then
+                world.nextLevel(self)
+            elseif fC == 'reload' then
+                world.reload(self)
+            elseif fC == 'loadMap' then
+                world.loadMap(self.frozenData.sector, 1, self)
+            end
+            -- Unfreezes player
+            self.frozen = false
+            -- Makes player visible again
+            self.isInvisible = false
+        end
+        return
+    else
+        -- Resets timer to standard
+        self.frozenTimer = 0.5
+    end
+
     -- Jump manager
     if love.keyboard.isDown('w') then
         if not self.jumpCooldown then
@@ -155,8 +187,16 @@ function Player:update(dt)
             self:death()
             return
         elseif type == 'Goal' then
-            assets.sfx.portal:clone():play() -- Plays the same SFX as portals
-            world.nextLevel(self)
+            -- Shows goal particles
+            assets.particles.goalPS:setPosition(self.x, self.y)
+            assets.particles.goalPS:emit(50)
+
+            -- Plays the same SFX as portals
+            assets.sfx.portal:clone():play()
+
+            -- Freezes player
+            self.frozenData.frozenCondition = 'nextLevel'
+            self.frozen = true
             return
         end
 
@@ -226,7 +266,9 @@ function Player:death()
     self.deaths = self.deaths + 1
     self.levelDeaths = self.levelDeaths + 1
     -- Reloads map
-    world.reload(self)
+    self.frozenData.frozenCondition = 'reload'
+    self.frozen = true
+    return
 end
 
 return Player
