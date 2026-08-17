@@ -7,7 +7,8 @@ local assets = {
     sfx = {},
     voicelines = {},
     songs = {},
-    backgrounds = {}
+    backgrounds = {},
+    particles = {}
 }
 
 -- Loads volume settings, or create from scratch if no settings
@@ -56,6 +57,37 @@ end
 function assets.loadBackground(name, file)
     assets.backgrounds[name] = love.graphics.newImage('assets/backgrounds/' .. file)
     assets.backgrounds[name]:setFilter('nearest', 'nearest')
+end
+
+-- Creates new particle system
+---@param name string Name of particle system
+---@param colorschema table Color schema for particle, defined as {r, g, b, a}
+---@param maxParticles integer Maximum amount of particles that can coexist
+---@param emissionrate integer Particles per second
+---@param particleLifeTimeMin number Minimum a particle can live
+---@param particleLifeTimeMax number Maximum a particle can live
+---@param speedMin number Minimum speed for particle
+---@param speedMax number Maximum speed for particle
+---@param spread number Angle in radians in which the particle system can emit particles
+---@param sizeStart number The starting size for particles
+---@param sizeEnd number The end size for particles
+function assets.newParticleSystem(
+    name, colorschema,
+    maxParticles, emissionrate,
+    particleLifeTimeMin, particleLifeTimeMax,
+    speedMin, speedMax,
+    spread, sizeStart, sizeEnd
+)
+    local data = love.image.newImageData(1, 1)
+    data:setPixel(0, 0, unpack(colorschema))
+    local particle = love.graphics.newImage(data)
+    local pSystem = love.graphics.newParticleSystem(particle, maxParticles)
+    pSystem:setEmissionRate(emissionrate)
+    pSystem:setParticleLifetime(particleLifeTimeMin, particleLifeTimeMax)
+    pSystem:setSpeed(speedMin, speedMax)
+    pSystem:setSpread(spread)
+    pSystem:setSizes(sizeStart, sizeEnd)
+    assets.particles[name] = pSystem
 end
 
 -- Helper to stop an specific type of audio
@@ -143,6 +175,12 @@ function assets.load()
 
     -- Font
     assets.loadFont('VT323', 'VT323-Regular.ttf', 24)
+
+    -- Particle systems
+    assets.newParticleSystem(
+        'deathPS', {1, 1, 0, 1}, 
+        100, 0, 0.25, 0.5, 200, 400, math.pi*2, 4, 0
+    )
 end
 
 -- Song manager status

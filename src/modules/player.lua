@@ -206,7 +206,7 @@ function Player:update(dt)
     self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
     -- Kill conditions
-    local OOB = (self.y > VH + TileSize*3) or (self.x > VW + TileSize) or (self.x < -TileSize)
+    local OOB = (self.y > VH + TileSize) or (self.x > VW + TileSize) or (self.x < -TileSize)
     local crushed = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
     if OOB or crushed then
         self:death()
@@ -215,6 +215,9 @@ end
 
 -- Kills player and reloads level, passing self as player instance
 function Player:death()
+    -- Shows death particles
+    assets.particles.deathPS:setPosition(self.x, self.y)
+    assets.particles.deathPS:emit(50)
     -- Plays death sfx
     assets.sfx.death:clone():play()
     -- Breaks momentum after death

@@ -72,6 +72,9 @@ function love.update(dt)
         for _ = 1, steps do
             world.update(subDT, player)
             player:update(subDT)
+            for _, particleSystem in pairs(assets.particles) do
+                particleSystem:update(subDT)
+            end
         end
         assets.songManager.update()
     end
@@ -88,6 +91,10 @@ function love.draw()
 
     -- Render player
     player:draw()
+
+    for _, particleSystem in pairs(assets.particles) do
+        love.graphics.draw(particleSystem, 0, 0)
+    end
 
     -- Render UI
     ui.draw(player, paused)
