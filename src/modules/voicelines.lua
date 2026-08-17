@@ -31,17 +31,6 @@ function voicelines.add(name, step, odd, of, isStepBiggerThan)
     table.insert(voicelines.v, v)
 end
 
--- Safely restarts a voiceline source before playing it again
----@param name string The voiceline name to play
-function voicelines.play(name)
-    local vc = assets.voicelines and assets.voicelines[name]
-    if not vc then return false end
-
-    if vc.rewind then vc:rewind() end
-    love.audio.play(vc)
-    return true
-end
-
 -- Updates the voiceline manager
 function voicelines.update()
     -- Only updates if not already playing voiceline
@@ -56,9 +45,8 @@ function voicelines.update()
 
         -- If reached step and odds are favorable, plays audio
         if hasReachedStep and math.random(v.of) == v.odd then
-            if voicelines.play(v.name) then
-                return
-            end
+            assets.voicelines[v.name]:play()
+            return
         end
     end
 end

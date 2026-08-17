@@ -251,7 +251,7 @@ function assets.pauseManager(paused)
         assets.isAudioPaused = true
     else
         -- If audio is not paused, there's no need to unpause it
-        -- "If not assets.allPaused then return" avoids crashed
+        -- "If not assets.allPaused then return" avoids crashes
         if not assets.isAudioPaused or not assets.allPaused then return end
 
         -- Unpauses all paused audio

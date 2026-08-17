@@ -255,6 +255,8 @@ end
 
 -- Kills player and reloads level, passing self as player instance
 function Player:death()
+    -- Avoids death while frozen
+    if self.frozen then return end
     -- Shows death particles
     assets.particles.deathPS:setPosition(self.x, self.y)
     assets.particles.deathPS:emit(50)
