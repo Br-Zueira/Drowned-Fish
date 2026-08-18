@@ -112,6 +112,7 @@ function world.draw()
             end
         end
         if instance.draw then instance:draw() end
+        love.graphics.setColor(1, 1, 1, 1)
     end
 end
 
