@@ -320,6 +320,9 @@ function ui.mouseControler(player)
                 world.loadMap("Special", "Hub", player)
                 -- Plays unpause SFX
                 assets.sfx.unpause:clone():play()
+                -- Zeroes player deaths
+                player.deaths = 0
+                player.levelDeaths = 0
                 -- Tells game to unpause and mute voicelines to avoid some bizarre quirks
                 return { execute="muteVL", unpause=true }
             end

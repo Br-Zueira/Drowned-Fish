@@ -242,8 +242,11 @@ function world.nextLevel(player)
         -- Saves all this info
         save.saveJson("save", world.save)
 
-        -- Takes player to sector hub after finishing a sector
+        -- Zeroes all deaths
         player.deaths = 0
+        player.levelDeaths = 0
+
+        -- Takes player to sector hub after finishing a sector
         world.sector = "Special"
         world.level = "Hub"
     end
