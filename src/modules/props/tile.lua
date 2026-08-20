@@ -24,8 +24,17 @@ function Tile.new(x, y)
     return instance
 end
 
-function Tile:update()
-    -- Avoids crashed
+-- Receives the distance between player and tile and returns a ease value clamped between edge0 and edge1
+---@param edge0 number The distance that defines 0%
+---@param edge1 number The distance that defines 100%
+---@param x number The distance between player and tile
+local function ease(edge0, edge1, x)
+    x = math.max(0, math.min(1, (x - edge0) / (edge1 - edge0)))
+    return x*x*(3-2*x)
+end
+
+function Tile:update(_, player)
+    -- Avoids crashes
     if not self.renderTable or not self.renderTable.rgba then return end
 
     -- Configs that can be easily changed
@@ -38,6 +47,16 @@ function Tile:update()
 
     -- Puts rangedSin (0, 1) into (min, max) range
     local greenChannel = rangedSin * (max - min) + min
+
+    -- Puts a radius around tile that makes it glow brighter
+    local dx = player.x - self.x
+    local dy = player.y - self.y
+    local distToPlayer = math.sqrt(dx*dx + dy*dy)
+
+    -- Glows tile brighter using a ease in and out function if player is not frozen
+    if not player.frozen then
+        greenChannel = greenChannel + ease(TileSize*2, TileSize, distToPlayer)
+    end
 
     -- Changes green channel
     self.renderTable.rgba[2] = greenChannel
