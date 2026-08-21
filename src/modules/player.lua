@@ -81,6 +81,13 @@ function Player:update(dt)
         -- Makes player invisible
         self.isInvisible = true
 
+        --[[ 
+            Zeroes buffer to avoid a glitch 
+            where pressing jump right before freezing 
+            makes player jump at unfreezing 
+        ]]
+        self.jumpBufferTimer = 0
+
         -- Decreases timer down, while avoiding it to be 0
         self.frozenTimer = math.max(0, self.frozenTimer - dt)
 
