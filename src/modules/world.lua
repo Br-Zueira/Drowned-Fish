@@ -19,7 +19,7 @@ world.levelsSchema = {
     [1] = {1, 2, 3, 4, 5},
     [2] = {1, 2, 3, 4, 5},
     [3] = {1, 2, 3, 4, 5},
-    [4] = {1, 2, 3},
+    [4] = {1, 2, 3, 4},
     ["Special"] = {"Hub"}
 }
 
@@ -166,7 +166,7 @@ function world.reload(player)
             player.y = obj.y - TileSize
             World:update(player, obj.x, obj.y - TileSize, player.width, player.height)
         elseif obj.name == "Spike" then
-            props.Spike.new(obj.x, obj.y)
+            props.Spike.new(obj.x, obj.y, obj.rotation)
         elseif obj.name == "Goal" then
             props.Goal.new(obj.x, obj.y)
         elseif obj.name == "Saw" then
@@ -174,7 +174,7 @@ function world.reload(player)
         elseif obj.name == "MoverSaw" then
             props.MoverSaw.new(obj.x, obj.y, p.endX, p.endY, p.speed, p.isOneWay, p.isSinglePass)
         elseif obj.name == "InviSpike" then
-            props.InviSpike.new(obj.x, obj.y, p.radius)
+            props.InviSpike.new(obj.x, obj.y, p.radius, obj.rotation)
         elseif obj.name == "FakeGoal" then
             props.FakeGoal.new(obj.x, obj.y, p.newX, p.newY, p.radius)
         elseif obj.name == "Portal" then

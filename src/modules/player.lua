@@ -76,6 +76,9 @@ end
 -- Updates player each frame
 ---@param dt integer Delta time for each rendered frame
 function Player:update(dt)
+    -- Useful for jumping logic
+    local gravityDir = (self.gravity > 0 and 1) or (self.gravity < 0 and -1) or 0
+
     -- Can freeze player at time, specially between level loading
     if self.frozen then
         -- Makes player invisible
@@ -124,7 +127,7 @@ function Player:update(dt)
 
     -- Actual jump
     if (self.onGround or self.coyoteTimer > 0) and self.jumpBufferTimer > 0 then
-        self.velY = self.jumpForce
+        self.velY = self.jumpForce*gravityDir
 
         if self.standingOnSpeedY < 0 then
             self.velY = self.velY + self.standingOnSpeedY
@@ -207,7 +210,7 @@ function Player:update(dt)
             return
         end
 
-        if col.normal.y == -1 then -- Hit something below player
+        if col.normal.y == -1*gravityDir then -- Hit something below player
             -- Speed of whatever is below player (0 if it doesnt have a speed)
             if col.other.velX then self.standingOnSpeedX = col.other.velX end
             if col.other.velY then self.standingOnSpeedY = col.other.velY end
@@ -222,7 +225,7 @@ function Player:update(dt)
                 if self.velY > self.gravity*dt then assets.sfx.landing:clone():play() end
                 self.velY = 0
             end
-        elseif col.normal.y == 1 then -- Hit a ceiling
+        elseif col.normal.y == gravityDir then -- Hit a ceiling
             if col.other.velY then self.bonkedSpeedY = col.other.velY end -- Will be useful later as a death condition
             self.bonked = true -- Player bonked into a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
