@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 5,
-  nextobjectid = 13,
+  nextobjectid = 19,
   properties = {},
   tilesets = {
     {
@@ -151,7 +151,111 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 13,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 2
+          }
+        },
+        {
+          id = 14,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 320,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 2,
+            ["intermiTime"] = 1
+          }
+        },
+        {
+          id = 15,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 2
+          }
+        },
+        {
+          id = 16,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 3
+          }
+        },
+        {
+          id = 17,
+          name = "Laser",
+          type = "",
+          shape = "rectangle",
+          x = 608,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["group"] = 3,
+            ["intermiTime"] = 1,
+            ["isDisabled"] = true
+          }
+        },
+        {
+          id = 18,
+          name = "Goal",
+          type = "",
+          shape = "rectangle",
+          x = 96,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 5,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -322,7 +426,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 800,
-          y = 512,
+          y = 480,
           width = 32,
           height = 32,
           rotation = 0,

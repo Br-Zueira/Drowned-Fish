@@ -4,6 +4,8 @@ local voicelines = require 'modules.voicelines'
 -- Custom, single level data
 local data = {}
 
+local futureObjs = {}
+
 function data.whenLoaded()
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
@@ -28,7 +30,15 @@ function levelTrigger:update(_, player)
                 break
             end
         end
-        -- TODO: Spawn brand new obstacles after messing up with gravity
+        for _, obj in ipairs(futureObjs.objects) do
+            local n = obj.name
+            local p = obj.properties
+            if n == "Laser" then
+                props.Laser.new(obj.x, obj.y, p.group, p.isDisabled, p.intermiTime, p.isFake)
+            elseif n == "Goal" then
+                props.Goal.new(obj.x, obj.y)
+            end
+        end
     end
 end
 
@@ -43,6 +53,8 @@ function data.ObjHandler(obj)
     end
 end
 
-function data.MiscHandler(map) end
+function data.MiscHandler(map)
+    futureObjs = map.layers["FutureObjects"]
+end
 
 return data
