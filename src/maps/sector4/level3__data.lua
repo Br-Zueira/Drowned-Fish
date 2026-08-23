@@ -18,12 +18,17 @@ local levelTrigger = {}
 levelTrigger.__index = levelTrigger
 setmetatable(levelTrigger, props.Trigger)
 
-function levelTrigger:update(_, player)
+function levelTrigger:update(dt, player)
     if not props.isPlayerInRadius(self, player, self.radius) then return end
-    self:delete()
     if self.id == "changeGravity" then
-        player.velY = 0
+        player.velY = math.max(0, math.min(800, player.velY - dt*2000))
         player.gravity = 0
+        if self.alreadyFired then
+            if player.velY == 0 then
+                self:delete()
+            end
+            return
+        end
         for _, prop in ipairs(props.propList) do
             if getmetatable(prop) == props.Goal then
                 prop:delete()
@@ -39,6 +44,13 @@ function levelTrigger:update(_, player)
                 props.Goal.new(obj.x, obj.y)
             end
         end
+        self.alreadyFired = true
+    elseif self.id == "invokeSaw" then
+        self:delete()
+        props.MoverSaw.new(self.x, VH+TileSize, self.x, -TileSize, 2000, true, true)
+    elseif self.id == "invokeSaw2" then
+        self:delete()
+        props.MoverSaw.new(self.x, -TileSize, self.x, VH+TileSize, 2000, true, true)
     end
 end
 
