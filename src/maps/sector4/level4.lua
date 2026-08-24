@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 38,
+  nextobjectid = 40,
   properties = {},
   tilesets = {
     {
@@ -291,7 +291,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 672,
-          y = 64,
+          y = 48,
           width = 32,
           height = 16,
           rotation = 180,
@@ -306,7 +306,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 544,
-          y = 64,
+          y = 48,
           width = 32,
           height = 16,
           rotation = 180,
@@ -321,7 +321,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 416,
-          y = 64,
+          y = 48,
           width = 32,
           height = 16,
           rotation = 180,
@@ -336,7 +336,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 288,
-          y = 64,
+          y = 48,
           width = 32,
           height = 16,
           rotation = 180,
@@ -351,7 +351,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 160,
-          y = 64,
+          y = 48,
           width = 32,
           height = 16,
           rotation = 180,
@@ -359,6 +359,41 @@ return {
           gid = 4,
           visible = true,
           properties = {}
+        },
+        {
+          id = 38,
+          name = "InviSpike",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 288,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          opacity = 1,
+          gid = 4,
+          visible = true,
+          properties = {
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 39,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "spawnSaw",
+            ["radius"] = 64
+          }
         }
       }
     }
