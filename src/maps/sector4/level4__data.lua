@@ -22,7 +22,7 @@ function levelTrigger:update(_, player)
     if self.id == "invertGrav" then
         player.gravity = -player.gravity/2
     elseif self.id == "spawnSaw" then
-        props.MoverSaw.new(VW+TileSize, self.y + TileSize, -TileSize, self.y + TileSize, 1000, true, true)
+        props.MoverSaw.new(VW+TileSize, self.y + TileSize*2, -TileSize, self.y + TileSize, 2000, true, true)
     end
 end
 
