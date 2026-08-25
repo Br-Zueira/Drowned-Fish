@@ -190,6 +190,10 @@ function Player:update(dt)
     self.standingOnSpeedX = 0
     self.standingOnSpeedY = 0
     self.bonkedSpeedY = 0
+    self.didColLeft = false
+    self.didColRight = false
+    self.colLeftSpeed = 0
+    self.colRightSpeed = 0
     for i = 1, len do
         local col = cols[i] -- Colision of colisions
         local type = col.other.type
@@ -230,6 +234,15 @@ function Player:update(dt)
             self.bonked = true -- Player bonked into a ceiling
             self.velY = 0 -- Head bonk, start falling instantly
         end
+
+        -- Checks to make horizontal crushing possible
+        if col.normal.x == -1 then
+            self.colLeftSpeed = col.other.velX or 0
+            self.didColLeft = true
+        elseif col.normal.x == 1 then
+            self.colRightSpeed = col.other.velX or 0
+            self.didColRight = true
+        end
     end
 
     -- Query a 1-pixel high band directly above the player's head
@@ -257,8 +270,9 @@ function Player:update(dt)
 
     -- Kill conditions
     local OOB = (self.y > VH + TileSize) or (self.x > VW + TileSize) or (self.x < -TileSize)
-    local crushed = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
-    if OOB or crushed then
+    local crushedY = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
+    local crushedX = self.didColLeft and self.didColRight and (self.colLeftSpeed > 0 or self.colRightSpeed < 0)
+    if OOB or crushedY or crushedX then
         self:death()
     end
 end

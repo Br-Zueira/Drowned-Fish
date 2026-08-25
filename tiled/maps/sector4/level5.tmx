@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="71">
+ <editorsettings>
+  <export target="../../../src/maps/sector4/level5.lua" format="lua"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="8" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0" type="Tile">
+   <image source="../../../src/assets/images/test.png" width="32" height="32"/>
+  </tile>
+  <tile id="1" type="Placeholder">
+   <image source="../../../src/assets/images/placeholder.png" width="32" height="32"/>
+  </tile>
+  <tile id="3" type="Spike">
+   <image source="../../../src/assets/images/spike.png" width="32" height="16"/>
+  </tile>
+  <tile id="4" type="Goal">
+   <image source="../../../src/assets/images/goal.png" width="32" height="32"/>
+  </tile>
+  <tile id="5" type="Saw">
+   <image source="../../../src/assets/images/saw.png" width="32" height="32"/>
+  </tile>
+  <tile id="6" type="Spring">
+   <image source="../../../src/assets/images/spring.png" width="32" height="32"/>
+  </tile>
+  <tile id="7" type="Booster">
+   <image source="../../../src/assets/images/booster.png" width="32" height="32"/>
+  </tile>
+  <tile id="8" type="Laser">
+   <image source="../../../src/assets/images/laser.png" width="32" height="32"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="Layout" width="30" height="20">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="24" name="Spawnpoint" gid="2" x="64" y="608" width="32" height="32"/>
+  <object id="29" name="Goal" gid="5" x="448" y="384" width="32" height="32"/>
+  <object id="40" name="SpinningPlat" gid="1" x="448" y="352" width="32" height="32">
+   <properties>
+    <property name="speed" type="float" value="0.5"/>
+    <property name="width" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="42" name="SpinningPlat" gid="1" x="448" y="352" width="32" height="32">
+   <properties>
+    <property name="height" type="int" value="40"/>
+    <property name="speed" type="float" value="0.5"/>
+   </properties>
+  </object>
+  <object id="44" name="Saw" gid="6" x="32" y="64" width="32" height="32"/>
+  <object id="45" name="Saw" gid="6" x="896" y="64" width="32" height="32"/>
+  <object id="46" name="Saw" gid="6" x="896" y="608" width="32" height="32"/>
+  <object id="47" name="Saw" gid="6" x="160" y="192" width="32" height="32"/>
+  <object id="48" name="Saw" gid="6" x="768" y="192" width="32" height="32"/>
+  <object id="49" name="Saw" gid="6" x="768" y="416" width="32" height="32"/>
+  <object id="51" name="Saw" gid="6" x="160" y="608" width="32" height="32"/>
+  <object id="52" name="Saw" gid="6" x="288" y="320" width="32" height="32"/>
+  <object id="53" name="Saw" gid="6" x="640" y="320" width="32" height="32"/>
+  <object id="54" name="InviSpike" gid="4" x="672" y="608" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="55" name="InviSpike" gid="4" x="512" y="608" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="56" name="InviSpike" gid="4" x="352" y="608" width="32" height="16">
+   <properties>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="57" name="Saw" gid="6" x="288" y="416" width="32" height="32"/>
+  <object id="58" name="Trigger" gid="2" x="128" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="spawnSaws"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="59" name="FutSaws" gid="6" x="224" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="60" name="FutSaws" gid="6" x="320" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="61" name="FutSaws" gid="6" x="416" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="62" name="FutSaws" gid="6" x="512" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="63" name="FutSaws" gid="6" x="608" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="64" name="FutSaws" gid="6" x="704" y="0" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="65" name="FutSaws" gid="6" x="256" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="66" name="FutSaws" gid="6" x="352" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="67" name="FutSaws" gid="6" x="448" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="68" name="FutSaws" gid="6" x="544" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="69" name="FutSaws" gid="6" x="640" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="70" name="FutSaws" gid="6" x="736" y="672" width="32" height="32">
+   <properties>
+    <property name="isGoingDown" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
