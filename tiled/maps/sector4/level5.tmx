@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="71">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="74">
  <editorsettings>
   <export target="../../../src/maps/sector4/level5.lua" format="lua"/>
  </editorsettings>
@@ -32,7 +32,7 @@
  </tileset>
  <layer id="1" name="Layout" width="30" height="20">
   <data encoding="csv">
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -69,8 +69,8 @@
     <property name="speed" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="44" name="Saw" gid="6" x="32" y="64" width="32" height="32"/>
-  <object id="45" name="Saw" gid="6" x="896" y="64" width="32" height="32"/>
+  <object id="44" name="Saw" gid="6" x="32" y="0" width="32" height="32"/>
+  <object id="45" name="Saw" gid="6" x="896" y="0" width="32" height="32"/>
   <object id="46" name="Saw" gid="6" x="896" y="608" width="32" height="32"/>
   <object id="47" name="Saw" gid="6" x="160" y="192" width="32" height="32"/>
   <object id="48" name="Saw" gid="6" x="768" y="192" width="32" height="32"/>
@@ -100,65 +100,19 @@
     <property name="radius" type="int" value="64"/>
    </properties>
   </object>
-  <object id="59" name="FutSaws" gid="6" x="224" y="0" width="32" height="32">
+  <object id="59" name="FutSaws" gid="6" x="224" y="0" width="32" height="32"/>
+  <object id="60" name="FutSaws" gid="6" x="320" y="0" width="32" height="32"/>
+  <object id="61" name="FutSaws" gid="6" x="416" y="0" width="32" height="32"/>
+  <object id="62" name="FutSaws" gid="6" x="512" y="0" width="32" height="32"/>
+  <object id="63" name="FutSaws" gid="6" x="608" y="0" width="32" height="32"/>
+  <object id="64" name="FutSaws" gid="6" x="704" y="0" width="32" height="32"/>
+  <object id="71" name="Trigger" gid="2" x="864" y="320" width="32" height="32">
    <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
+    <property name="id" value="deleteMovs"/>
+    <property name="radius" type="int" value="64"/>
    </properties>
   </object>
-  <object id="60" name="FutSaws" gid="6" x="320" y="0" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="61" name="FutSaws" gid="6" x="416" y="0" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="62" name="FutSaws" gid="6" x="512" y="0" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="63" name="FutSaws" gid="6" x="608" y="0" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="64" name="FutSaws" gid="6" x="704" y="0" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="65" name="FutSaws" gid="6" x="256" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="66" name="FutSaws" gid="6" x="352" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="67" name="FutSaws" gid="6" x="448" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="68" name="FutSaws" gid="6" x="544" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="69" name="FutSaws" gid="6" x="640" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="70" name="FutSaws" gid="6" x="736" y="672" width="32" height="32">
-   <properties>
-    <property name="isGoingDown" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="72" name="Saw" gid="6" x="128" y="0" width="32" height="32"/>
+  <object id="73" name="Saw" gid="6" x="800" y="0" width="32" height="32"/>
  </objectgroup>
 </map>
