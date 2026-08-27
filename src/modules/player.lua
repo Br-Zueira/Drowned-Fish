@@ -273,7 +273,7 @@ function Player:update(dt)
     self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
     -- Kill conditions
-    local OOB = (self.y > VH + TileSize) or (self.x > VW + TileSize) or (self.x < -TileSize)
+    local OOB = (self.y > VH + TileSize) or (self.y < -TileSize*10) or (self.x > VW + TileSize) or (self.x < -TileSize)
     local crushedY = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
     local crushedX = self.didColLeft and self.didColRight and (self.colLeftSpeed > 0 or self.colRightSpeed < 0)
     if OOB or crushedY or crushedX then
