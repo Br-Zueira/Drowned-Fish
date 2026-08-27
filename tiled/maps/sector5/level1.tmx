@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="2">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
+ <editorsettings>
+  <export target="../../../src/maps/sector5/level1.lua" format="lua"/>
+ </editorsettings>
  <tileset firstgid="1" name="Props" class="Saw" tilewidth="32" tileheight="32" tilecount="8" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Tile">
@@ -47,11 +50,37 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="1" name="Spawnpoint" gid="2" x="32" y="64" width="32" height="32"/>
+  <object id="1" name="Spawnpoint" gid="2" x="32" y="576" width="32" height="32"/>
+  <object id="2" name="Goal" gid="5" x="896" y="576" width="32" height="32"/>
+  <object id="3" name="Trigger" gid="2" x="352" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="swapControls"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="4" name="Trigger" gid="2" x="544" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="swapControls"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="6" name="Trigger" gid="2" x="896" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="swapControls"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="7" name="Trigger" gid="2" x="736" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="swapControls"/>
+    <property name="isFake" type="bool" value="true"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

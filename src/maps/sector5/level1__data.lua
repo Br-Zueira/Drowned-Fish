@@ -1,5 +1,6 @@
 local props = require 'modules.props'
 local voicelines = require 'modules.voicelines'
+local assets = require 'modules.assets'
 
 -- Custom, single level data
 local data = {}
@@ -14,7 +15,35 @@ end
 
 function data.whenReloaded() end
 function data.update() end
-function data.ObjHandler(obj) end
+
+local levelTrigger = {}
+levelTrigger.__index = levelTrigger
+setmetatable(levelTrigger, props.Trigger)
+
+function levelTrigger:update(_, player)
+    if not props.isPlayerInRadius(self, player, self.radius) then return end
+    self:delete()
+    if self.id == "swapControls" then
+        -- Audio clue of control swapping
+        assets.sfx.death:clone():play()
+
+        -- If fake, only plays sounds and skips actual logit
+        if self.isFake then return end
+        local l = player.controls.left
+        local r = player.controls.right
+        player.controls = {left=r, right=l, jump=player.controls.jump}
+    end
+end
+
+function data.ObjHandler(obj)
+    local p = obj.properties
+    if obj.name == "Trigger" then
+        local t = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
+        t.isFake = p.isFake
+        setmetatable(t, levelTrigger)
+    end
+end
+
 function data.MiscHandler(map) end
 
 return data

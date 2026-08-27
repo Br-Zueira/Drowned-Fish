@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 2,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -134,7 +134,7 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
     },
@@ -158,7 +158,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 32,
-          y = 64,
+          y = 576,
           width = 32,
           height = 32,
           rotation = 0,
@@ -166,6 +166,94 @@ return {
           gid = 2,
           visible = true,
           properties = {}
+        },
+        {
+          id = 2,
+          name = "Goal",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 352,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "swapControls",
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 4,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 544,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "swapControls",
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 6,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "swapControls",
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 7,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 736,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "swapControls",
+            ["isFake"] = true,
+            ["radius"] = 64
+          }
         }
       }
     }
