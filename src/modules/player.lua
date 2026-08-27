@@ -26,6 +26,8 @@ local assets = require 'modules.assets'
 ---@field frozenData table
 ---@field defaultControls table
 ---@field controls table
+---@field killHeight number
+---@field killHeightDefault number
 ---@field type 'Player'
 local Player = {};
 Player.__index = Player;
@@ -50,7 +52,8 @@ function Player.new()
         boostedX = 0,
         frozen = false, frozenTimer = 0, frozenData = {},
         defaultControls = {left='a', right='d', jump='w'},
-        controls = {left='a', right='d', jump='w'}
+        controls = {left='a', right='d', jump='w'},
+        killHeight = VH+TileSize, killHeightDefault = VH+TileSize
     }
     setmetatable(instance, Player)
     return instance
@@ -250,7 +253,7 @@ function Player:update(dt)
     end
 
     -- Query a 1-pixel high band directly above the player's head
-    local topCols, topLen = World:queryRect(self.x + 2, self.y - 3, math.max(1, self.width - 4), 3)
+    local topCols, topLen = World:queryRect(self.x + 2, self.y -3*gravityDir, math.max(1, self.width - 4), 3)
 
     for i = 1, topLen do
         local item = topCols[i]
@@ -273,7 +276,7 @@ function Player:update(dt)
     self.jumpBufferTimer = math.max(0, self.jumpBufferTimer - dt)
 
     -- Kill conditions
-    local OOB = (self.y > VH + TileSize) or (self.y < -TileSize*10) or (self.x > VW + TileSize) or (self.x < -TileSize)
+    local OOB = (self.y > self.killHeight) or (self.y < -TileSize*10) or (self.x > VW + TileSize) or (self.x < -TileSize)
     local crushedY = self.onGround and (self.standingOnSpeedY < 0 or self.bonkedSpeedY > 0) and self.bonked
     local crushedX = self.didColLeft and self.didColRight and (self.colLeftSpeed > 0 or self.colRightSpeed < 0)
     if OOB or crushedY or crushedX then
