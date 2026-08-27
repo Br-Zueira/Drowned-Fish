@@ -132,6 +132,7 @@ function world.reload(player)
     player.gravity = player.gravityDefault
     player.jumpForce = player.jumpForceDefault
     player.velSpeed = player.velSpeedDefault
+    player.controls = player.defaultControls
 
     -- Cleans the logic world
     props.propList = {}

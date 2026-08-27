@@ -24,6 +24,8 @@ local assets = require 'modules.assets'
 ---@field jumpForce integer
 ---@field boostedX integer
 ---@field frozenData table
+---@field defaultControls table
+---@field controls table
 ---@field type 'Player'
 local Player = {};
 Player.__index = Player;
@@ -46,7 +48,9 @@ function Player.new()
         onGround = false,
         standingOnSpeedX = 0, standingOnSpeedY = 0,
         boostedX = 0,
-        frozen = false, frozenTimer = 0, frozenData = {}
+        frozen = false, frozenTimer = 0, frozenData = {},
+        defaultControls = {left='a', right='d', jump='w'},
+        controls = {left='a', right='d', jump='w'}
     }
     setmetatable(instance, Player)
     return instance
@@ -116,7 +120,7 @@ function Player:update(dt)
     end
 
     -- Jump manager
-    if love.keyboard.isDown('w') then
+    if love.keyboard.isDown(self.controls.jump) then
         if not self.jumpCooldown then
             self.jumpBufferTimer = self.jumpBufferMax
             self.jumpCooldown = true
@@ -142,16 +146,16 @@ function Player:update(dt)
     end
 
     -- Runs to left
-    if love.keyboard.isDown('a') then
+    if love.keyboard.isDown(self.controls.left) then
         self.velX = self.velX - self.velSpeed
     end
 
     -- Runs to right
-    if love.keyboard.isDown('d') then
+    if love.keyboard.isDown(self.controls.right) then
         self.velX = self.velX + self.velSpeed
     end
 
-    if (love.keyboard.isDown('a') or love.keyboard.isDown('d')) and self.onGround then
+    if (love.keyboard.isDown(self.controls.left) or love.keyboard.isDown(self.controls.right)) and self.onGround then
         if not assets.sfx.steps:isPlaying() then
             assets.sfx.steps:play()
         end
