@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 24,
+  nextobjectid = 27,
   properties = {},
   tilesets = {
     {
@@ -120,7 +120,7 @@ return {
         0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -184,11 +184,11 @@ return {
         },
         {
           id = 22,
-          name = "",
+          name = "Spring",
           type = "",
           shape = "rectangle",
           x = 256,
-          y = 448,
+          y = 640,
           width = 32,
           height = 32,
           rotation = 0,
@@ -199,11 +199,11 @@ return {
         },
         {
           id = 23,
-          name = "",
+          name = "Cursor",
           type = "",
           shape = "rectangle",
           x = -32,
-          y = 224,
+          y = 608,
           width = 32,
           height = 32,
           rotation = 0,
@@ -211,6 +211,57 @@ return {
           gid = 2,
           visible = true,
           properties = {}
+        },
+        {
+          id = 24,
+          name = "Portal",
+          type = "",
+          shape = "rectangle",
+          x = 384,
+          y = 32,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["isInvisible"] = true,
+            ["pair"] = 1
+          }
+        },
+        {
+          id = 25,
+          name = "PortalSpawn",
+          type = "",
+          shape = "rectangle",
+          x = 320,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 26,
+          name = "Trigger",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 2,
+          visible = true,
+          properties = {
+            ["id"] = "spawnCursor",
+            ["radius"] = 128
+          }
         }
       }
     }

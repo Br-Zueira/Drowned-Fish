@@ -15,8 +15,28 @@ function data.whenLoaded()
 end
 
 function data.whenReloaded(player) end
-function data.update() end
-function data.ObjHandler(obj) end
+function data.update(dt, player) end
+
+local levelTrigger = {}
+levelTrigger.__index = levelTrigger
+setmetatable(levelTrigger, props.Trigger)
+
+function levelTrigger:update(_, player)
+    if not props.isPlayerInRadius(self, player, self.radius) then return end
+    self:delete()
+    if self.id == 'spawnCursor' then
+        props.Cursor.new(self.x, self.y)
+    end
+end
+
+function data.ObjHandler(obj)
+    local p = obj.properties
+    if obj.name == "Trigger" then
+        local t = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
+        setmetatable(t, levelTrigger)
+    end
+end
+
 function data.MiscHandler(map) end
 
 return data
