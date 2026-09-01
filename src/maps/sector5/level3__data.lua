@@ -1,6 +1,8 @@
 local props = require 'modules.props'
 local voicelines = require 'modules.voicelines'
 
+-- Cursor idea: Cursor that brings saw while player is at the gap, then a portal reveals itself right at the last second
+
 -- Custom, single level data
 local data = {}
 
