@@ -57,11 +57,21 @@ function world.update(dt, player)
     end
 end
 
+-- Orders props by rendering layers
+---@param a any Comparing object
+---@param b any Compared object
+local function sortList(a, b)
+    return (a.layer or 0) < (b.layer or 0)
+end
+
 -- Renders every prop in the map
 function world.draw()
     -- Draws background before anything
     local bg = assets.backgrounds[bgSchema[world.sector]]
     love.graphics.draw(bg, 0, 0, 0, VW/bg:getWidth(), VH/bg:getHeight())
+
+    -- Orders props by rendering layers
+    table.sort(props.propList, sortList)
 
     for _, instance in ipairs(props.propList) do
         -- If isImg is true, renders from asset

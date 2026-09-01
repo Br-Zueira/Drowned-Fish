@@ -4,6 +4,7 @@ local prop = require 'modules.props.prop'
 ---@class Tile : Prop
 ---@field x number X coordinates of tile
 ---@field y number Y coordinates of tile
+---@field layer number Rendering layer of tile
 local Tile = {}
 Tile.__index = Tile
 
@@ -21,6 +22,9 @@ function Tile.new(x, y)
     ---@cast instance Tile
     -- Binds instance into tile metatable
     setmetatable(instance, Tile)
+
+    -- Rendering order
+    instance.layer = -999
     return instance
 end
 

@@ -5,6 +5,7 @@ local prop = require 'modules.props.prop'
 ---@field x number X coordinates of cursor
 ---@field y number Y coordinates of cursor
 ---@field isTrigger boolean Controls whether the cursor is a solid prop (false by default)
+---@field layer number Rendering layer of cursor
 local Cursor = {}
 Cursor.__index = Cursor
 
@@ -29,6 +30,9 @@ function Cursor.new(x, y, isSolid)
 
     -- Turns cursor into non solid by default
     instance.isTrigger = isSolid ~= true
+
+    -- Rendering order
+    instance.layer = 999
 
     return instance
 end
