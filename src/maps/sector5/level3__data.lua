@@ -14,7 +14,12 @@ function data.whenLoaded()
     voicelines.add('oopsie', 6, 1, 4, true)
 end
 
-function data.whenReloaded(player) end
+local cursor = {}
+
+function data.whenReloaded(player)
+    cursor = {}
+end
+
 function data.update(dt, player) end
 
 local levelTrigger = {}
@@ -25,7 +30,7 @@ function levelTrigger:update(_, player)
     if not props.isPlayerInRadius(self, player, self.radius) then return end
     self:delete()
     if self.id == 'spawnCursor' then
-        props.Cursor.new(self.x, self.y)
+        cursor:goto(player, { isFixedTime=false, speed=500 })
     end
 end
 
@@ -34,6 +39,8 @@ function data.ObjHandler(obj)
     if obj.name == "Trigger" then
         local t = props.Trigger.new(obj.x, obj.y, p.id, p.radius)
         setmetatable(t, levelTrigger)
+    elseif obj.name == "Cursor" then
+        cursor = props.Cursor.new(obj.x, obj.y)
     end
 end
 

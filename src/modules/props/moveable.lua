@@ -54,6 +54,7 @@ end
 
 -- Updates the mover saw, moving and rotating it
 ---@param dt number Delta time for each rendered frame
+---@param player Player
 function Moveable:update(dt, player)
     self.customUpdate(self, dt, player)
     if not World:hasItem(self) or not World:hasItem(player) then return end
@@ -91,8 +92,10 @@ function Moveable:update(dt, player)
             local o = col.other
             -- Corrects user position
             if col.normal.y == 1 and o.type == "Player" then
-                local targetY = o.y - (self.velY*dt)
-                o.x, o.y = World:move(o, o.x, targetY, player.worldFilter)
+                if not o.velY or o.velY >= 0 then
+                    local targetY = o.y - (self.velY*dt)
+                    o.x, o.y = World:move(o, o.x, targetY, player.worldFilter)
+                end
             end
         end
     else
