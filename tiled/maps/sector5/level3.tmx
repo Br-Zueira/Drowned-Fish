@@ -58,7 +58,7 @@
   <object id="1" name="Spawnpoint" gid="2" x="32" y="96" width="32" height="32"/>
   <object id="2" name="Goal" gid="5" x="896" y="608" width="32" height="32"/>
   <object id="22" name="Spring" gid="7" x="256" y="640" width="32" height="32"/>
-  <object id="23" name="Cursor" gid="2" x="-32" y="608" width="32" height="32"/>
+  <object id="23" name="Cursor" gid="2" x="-32" y="624" width="32" height="32"/>
   <object id="24" name="Portal" gid="2" x="384" y="32" width="32" height="32">
    <properties>
     <property name="isInvisible" type="bool" value="true"/>

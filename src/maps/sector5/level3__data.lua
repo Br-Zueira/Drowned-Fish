@@ -30,7 +30,28 @@ function levelTrigger:update(_, player)
     if not props.isPlayerInRadius(self, player, self.radius) then return end
     self:delete()
     if self.id == 'spawnCursor' then
-        cursor:goto(player, { isFixedTime=false, speed=500 })
+        -- Moves cursor to spring location
+        cursor:goto({x=TileSize*8.5, y=cursor.y}, { isFixedTime=true, time=0.2 })
+
+        -- Custom saw that follows cursor
+        local followSaw = props.Saw.new(cursor.x, cursor.y)
+        function followSaw:update(dt)
+            -- Standard saw behavior (rotating)
+            props.Saw.update(self, dt)
+
+            -- Avoids crashing
+            if not World:hasItem(self) then return end
+            self.x, self.y = World:move(
+                self,
+                cursor.x - TileSize/2, -- Cursor pos + arbitrary offset
+                cursor.y - TileSize/2,
+                function () return nil end -- Ignores all collisions
+            )
+
+            -- Makes it so the saw no longer follows cursor after it reaching its goal
+            -- And resets the saw behavior to standard saw behavior
+            if not cursor.goal then self.update = props.Saw.update end
+        end
     end
 end
 
