@@ -59,7 +59,7 @@ function levelTrigger:update(_, player)
         props.Portal.new(portalSpawn.x, portalSpawn.y, portalSpawn.properties.pair)
     elseif self.id == "gotoPlayer" then
         cursor:goto(player, { isFixedTime=false, speed=250 })
-        cursor.isTrigger = false
+        cursor.type = 'Hazard'
     end
 end
 
