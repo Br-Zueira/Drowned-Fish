@@ -15,9 +15,11 @@ function data.whenLoaded()
 end
 
 local cursor = {}
+local portalSpawn = {}
 
 function data.whenReloaded(player)
     cursor = {}
+    portalSpawn = {}
 end
 
 function data.update(dt, player) end
@@ -52,6 +54,12 @@ function levelTrigger:update(_, player)
             -- And resets the saw behavior to standard saw behavior
             if not cursor.goal then self.update = props.Saw.update end
         end
+
+        -- Portal appearing too late (hehe trolling)
+        props.Portal.new(portalSpawn.x, portalSpawn.y, portalSpawn.properties.pair)
+    elseif self.id == "gotoPlayer" then
+        cursor:goto(player, { isFixedTime=false, speed=250 })
+        cursor.isTrigger = false
     end
 end
 
@@ -62,6 +70,8 @@ function data.ObjHandler(obj)
         setmetatable(t, levelTrigger)
     elseif obj.name == "Cursor" then
         cursor = props.Cursor.new(obj.x, obj.y)
+    elseif obj.name == "PortalSpawn" then
+        portalSpawn = obj
     end
 end
 
