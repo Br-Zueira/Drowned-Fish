@@ -35,7 +35,7 @@ function FallTile.new(x, y, radius, endX, endY, isUp, speed, gravity)
     t.radius = radius
 
     t.endX = endX or t.x
-    t.endY = endY or endX and t.y or isUp and (-TileSize or VH + TileSize)
+    t.endY = endY or (endX and t.y) or (isUp and -TileSize) or (VH + TileSize)
 
     t.speed = speed or 1
     if not speed then t.isGrav = true end

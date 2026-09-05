@@ -202,7 +202,7 @@ function world.reload(player)
         elseif obj.name == "SpinningPlat" then
             props.SpinningPlat.new(obj.x, obj.y, p.width, p.height, p.speed, p.isCounterclockwise)
         elseif obj.name == "FallTile" then
-            props.FallTile.new(obj.x, obj.y, p.radius, p.endX, p.endY, p.isUp, p.speed)
+            props.FallTile.new(obj.x, obj.y, p.radius, p.endX, p.endY, p.isUp, p.speed, p.gravity)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end
