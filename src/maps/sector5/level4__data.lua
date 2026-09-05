@@ -12,13 +12,9 @@ function data.whenLoaded()
     voicelines.add('oopsie', 6, 1, 4, true)
 end
 
--- TODO: Make tiles that fall (down or up) after the "buffer overflow" and when player is near
+function data.whenReloaded(player) end
 
 local canOverflow = false
-
-function data.whenReloaded(player)
-    canOverflow = false
-end
 
 function data.update(dt, player)
     if canOverflow then

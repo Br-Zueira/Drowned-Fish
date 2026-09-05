@@ -201,6 +201,8 @@ function world.reload(player)
             props.Laser.new(obj.x, obj.y, p.group, p.isDisabled, p.intermiTime, p.isFake)
         elseif obj.name == "SpinningPlat" then
             props.SpinningPlat.new(obj.x, obj.y, p.width, p.height, p.speed, p.isCounterclockwise)
+        elseif obj.name == "FallTile" then
+            props.FallTile.new(obj.x, obj.y, p.radius, p.endX, p.endY, p.isUp, p.speed)
         else
             -- Level individual props
             if data.ObjHandler then data.ObjHandler(obj) end

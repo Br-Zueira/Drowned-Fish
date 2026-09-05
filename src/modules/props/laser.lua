@@ -22,6 +22,7 @@ function laserRay.new(parent1, parent2)
     instance.parent1 = parent1
     instance.parent2 = parent2
     instance.isInvisible = true
+    instance.layer = -1
     table.insert(prop.propList, instance)
     return instance
 end
