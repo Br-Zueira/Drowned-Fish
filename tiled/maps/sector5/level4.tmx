@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="70">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="72">
  <editorsettings>
   <export target="../../../src/maps/sector5/level4.lua" format="lua"/>
  </editorsettings>
@@ -42,7 +42,7 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,0,1,
+1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1,0,1,0,0,1,0,1,1,1,1,0,0,1,
 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -166,19 +166,21 @@
     <property name="radius" type="int" value="48"/>
    </properties>
   </object>
-  <object id="62" name="FallTile" gid="1" x="544" y="608" width="32" height="32">
+  <object id="62" name="FallTile" gid="1" x="512" y="608" width="32" height="32">
    <properties>
     <property name="isUp" type="bool" value="false"/>
     <property name="radius" type="int" value="48"/>
+    <property name="speed" type="int" value="500"/>
    </properties>
   </object>
-  <object id="63" name="FallTile" gid="1" x="672" y="608" width="32" height="32">
+  <object id="63" name="FallTile" gid="1" x="640" y="608" width="32" height="32">
    <properties>
     <property name="isUp" type="bool" value="true"/>
     <property name="radius" type="int" value="48"/>
+    <property name="speed" type="int" value="100"/>
    </properties>
   </object>
-  <object id="64" name="FallTile" gid="1" x="800" y="608" width="32" height="32">
+  <object id="64" name="FallTile" gid="1" x="768" y="608" width="32" height="32">
    <properties>
     <property name="isUp" type="bool" value="false"/>
     <property name="radius" type="int" value="48"/>
@@ -187,19 +189,31 @@
   <object id="65" name="FallTile" gid="1" x="0" y="608" width="32" height="32">
    <properties>
     <property name="endX" type="int" value="1024"/>
-    <property name="radius" type="int" value="128"/>
+    <property name="radius" type="int" value="160"/>
    </properties>
   </object>
   <object id="67" name="FallTile" gid="1" x="0" y="576" width="32" height="32">
    <properties>
     <property name="endX" type="int" value="1024"/>
-    <property name="radius" type="int" value="128"/>
+    <property name="radius" type="int" value="160"/>
    </properties>
   </object>
   <object id="68" name="FallTile" gid="1" x="0" y="544" width="32" height="32">
    <properties>
     <property name="endX" type="int" value="1024"/>
-    <property name="radius" type="int" value="128"/>
+    <property name="radius" type="int" value="160"/>
+   </properties>
+  </object>
+  <object id="70" name="FallTile" gid="1" x="640" y="352" width="32" height="32">
+   <properties>
+    <property name="isUp" type="bool" value="false"/>
+    <property name="radius" type="int" value="64"/>
+   </properties>
+  </object>
+  <object id="71" name="FallTile" gid="1" x="608" y="352" width="32" height="32">
+   <properties>
+    <property name="isUp" type="bool" value="false"/>
+    <property name="radius" type="int" value="64"/>
    </properties>
   </object>
  </objectgroup>

@@ -10,7 +10,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 3,
-  nextobjectid = 70,
+  nextobjectid = 72,
   properties = {},
   tilesets = {
     {
@@ -126,7 +126,7 @@ return {
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -157,8 +157,8 @@ return {
           name = "Spawnpoint",
           type = "",
           shape = "rectangle",
-          x = 32,
-          y = 32,
+          x = 224,
+          y = 288,
           width = 32,
           height = 32,
           rotation = 0,
@@ -524,7 +524,7 @@ return {
           name = "FallTile",
           type = "",
           shape = "rectangle",
-          x = 544,
+          x = 512,
           y = 608,
           width = 32,
           height = 32,
@@ -534,7 +534,8 @@ return {
           visible = true,
           properties = {
             ["isUp"] = false,
-            ["radius"] = 48
+            ["radius"] = 48,
+            ["speed"] = 500
           }
         },
         {
@@ -542,7 +543,7 @@ return {
           name = "FallTile",
           type = "",
           shape = "rectangle",
-          x = 672,
+          x = 640,
           y = 608,
           width = 32,
           height = 32,
@@ -552,7 +553,8 @@ return {
           visible = true,
           properties = {
             ["isUp"] = true,
-            ["radius"] = 48
+            ["radius"] = 48,
+            ["speed"] = 100
           }
         },
         {
@@ -560,7 +562,7 @@ return {
           name = "FallTile",
           type = "",
           shape = "rectangle",
-          x = 800,
+          x = 768,
           y = 608,
           width = 32,
           height = 32,
@@ -588,7 +590,7 @@ return {
           visible = true,
           properties = {
             ["endX"] = 1024,
-            ["radius"] = 128
+            ["radius"] = 160
           }
         },
         {
@@ -606,7 +608,7 @@ return {
           visible = true,
           properties = {
             ["endX"] = 1024,
-            ["radius"] = 128
+            ["radius"] = 160
           }
         },
         {
@@ -624,7 +626,43 @@ return {
           visible = true,
           properties = {
             ["endX"] = 1024,
-            ["radius"] = 128
+            ["radius"] = 160
+          }
+        },
+        {
+          id = 70,
+          name = "FallTile",
+          type = "",
+          shape = "rectangle",
+          x = 640,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isUp"] = false,
+            ["radius"] = 64
+          }
+        },
+        {
+          id = 71,
+          name = "FallTile",
+          type = "",
+          shape = "rectangle",
+          x = 608,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          opacity = 1,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["isUp"] = false,
+            ["radius"] = 64
           }
         }
       }
