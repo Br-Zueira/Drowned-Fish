@@ -17,5 +17,6 @@ props.Laser = require(p .. 'laser')
 props.Spinner = require(p .. 'spinner')
 props.SpinningPlat = require(p .. 'spinningPlat')
 props.Cursor = require(p .. 'cursor')
+props.FallTile = require(p .. 'falltile')
 
 return props
