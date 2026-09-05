@@ -83,6 +83,13 @@ end
 -- Updates player each frame
 ---@param dt integer Delta time for each rendered frame
 function Player:update(dt)
+    -- Useful for a Sector 5 trolling involving a fake integer overflow
+    if self.levelDeaths > 2147483647 then
+        self.levelDeaths = -2147483648
+    elseif self.levelDeaths < -2147483648 then
+        self.levelDeaths = 2147483647
+    end
+
     -- Useful for jumping logic
     local gravityDir = (self.gravity > 0 and 1) or (self.gravity < 0 and -1) or 0
 
