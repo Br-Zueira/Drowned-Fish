@@ -19,7 +19,7 @@ function data.whenReloaded(player)
 end
 
 function data.update(dt, player)
-    cursor:goto(player, { isFixedTime=false, speed=00 })
+    cursor:goto(player, { isFixedTime=false, speed=80 })
 end
 
 local levelTrigger = {}
@@ -31,6 +31,8 @@ function levelTrigger:update(_, player)
     self:delete()
     if self.id == "spawnSaw" then
         props.MoverSaw.new(self.x, VH+TileSize, self.x, -TileSize, 2000, true, true)
+    elseif self.id == "spawnLaser" then
+        props.Laser.new(512, 416, 1)
     end
 end
 
