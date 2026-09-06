@@ -4,7 +4,7 @@ local prop = require 'modules.props.prop'
 ---@class Cursor : Prop
 ---@field x number X coordinates of cursor
 ---@field y number Y coordinates of cursor
----@field isTrigger boolean Controls whether the cursor is a solid prop (false by default)
+---@field isCross boolean Controls whether the cursor is "passable throughable" (true by default)
 ---@field layer number Rendering layer of cursor
 local Cursor = {}
 Cursor.__index = Cursor
@@ -29,7 +29,7 @@ function Cursor.new(x, y, isSolid)
     setmetatable(instance, Cursor)
 
     -- Turns cursor into non solid by default
-    instance.isTrigger = isSolid ~= true
+    instance.isCross = isSolid ~= true
 
     -- Rendering order
     instance.layer = 999
@@ -92,8 +92,8 @@ function Cursor:update(dt, player)
         self.velY = dirY * speed
         if self.isFixedTime then self.time = math.max(0, self.time - dt) end
 
-        -- Both avoids crashed and improper checks
-        if self.isTrigger or not World:hasItem(player) then return end
+        -- Both avoids crashes and improper checks
+        if self.isCross or not World:hasItem(player) then return end
         for i = 1, len do
             local col = cols[i]
             local o = col.other
