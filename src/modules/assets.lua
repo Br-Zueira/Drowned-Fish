@@ -49,7 +49,15 @@ end
 ---@param name string The name of the asset
 ---@param file string The file name
 function assets.loadVoiceLine(name, file)
-    assets.voicelines[name] = love.audio.newSource('assets/voicelines/' .. file, 'static')
+    -- Doubles volume
+    local sounddata = love.sound.newSoundData('assets/voicelines/' .. file)
+    for i = 0, sounddata:getSampleCount() - 1 do
+        local sample = sounddata:getSample(i)
+        sounddata:setSample(i, sample * 2)
+    end
+
+    -- Assigns it as normal
+    assets.voicelines[name] = love.audio.newSource(sounddata)
 end
 
 ---@param name string The name of the asset
@@ -158,6 +166,24 @@ function assets.load()
     assets.loadVoiceLine('cmon', 'cmon.wav')
     assets.loadVoiceLine('gma', 'gma.wav')
     assets.loadVoiceLine('portals', 'portals.wav')
+    assets.loadVoiceLine('lucky', 'lucky.wav')
+    assets.loadVoiceLine('unlucky', 'unlucky.wav')
+    assets.loadVoiceLine('dip', 'dip.wav')
+    assets.loadVoiceLine('death_highscore', 'death_highscore.wav')
+    assets.loadVoiceLine('end', 'end.wav')
+    assets.loadVoiceLine('finale', 'finale.wav')
+    assets.loadVoiceLine('lasers', 'lasers_presentation.wav')
+    assets.loadVoiceLine('managed', 'managed.wav')
+    assets.loadVoiceLine('mif', 'mif.wav')
+    assets.loadVoiceLine('not_against', 'not_against.wav')
+    assets.loadVoiceLine('osha_boinky', 'osha_boinky.wav')
+    assets.loadVoiceLine('overflow', 'overflow.wav')
+    assets.loadVoiceLine('plug_mouse', 'plug_mouse.wav')
+    assets.loadVoiceLine('scramble', 'scramble.wav')
+    assets.loadVoiceLine('spin_me_round', 'spin_me_round.wav')
+    assets.loadVoiceLine('toasters', 'toasters.wav')
+    assets.loadVoiceLine('end', 'end.wav')
+    assets.loadVoiceLine('finale', 'finale.wav')
 
     -- Songs
     assets.loadSong('planetX', 'Imphenzia - Discovery of Planet X.ogg')

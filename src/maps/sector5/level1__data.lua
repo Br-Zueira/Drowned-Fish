@@ -6,9 +6,10 @@ local assets = require 'modules.assets'
 local data = {}
 
 function data.whenLoaded()
+    voicelines.add('dip', 1)
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
-    voicelines.add('loser', 6)
+    voicelines.add('death_highscore', 6)
     voicelines.add('cmon', 6, 1, 4, true)
     voicelines.add('oopsie', 6, 1, 4, true)
 end

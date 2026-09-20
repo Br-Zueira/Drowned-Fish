@@ -5,9 +5,10 @@ local voicelines = require 'modules.voicelines'
 local data = {}
 
 function data.whenLoaded()
+    voicelines.add('not_against', 1)
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
-    voicelines.add('loser', 6)
+    voicelines.add('death_highscore', 6)
     voicelines.add('cmon', 6, 1, 4, true)
     voicelines.add('oopsie', 6, 1, 4, true)
 end

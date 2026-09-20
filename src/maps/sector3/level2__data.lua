@@ -5,6 +5,7 @@ local voicelines = require 'modules.voicelines'
 local data = {}
 
 function data.whenLoaded()
+    voicelines.add('osha_boinky', 1)
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
     voicelines.add('loser', 6)

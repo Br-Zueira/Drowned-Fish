@@ -12,9 +12,10 @@ local timer = secs
 local step = 1
 
 function data.whenLoaded()
+    voicelines.add('lucky', 1)
     voicelines.add('oopsie', 2)
     voicelines.add('cmon', 4)
-    voicelines.add('loser', 6)
+    voicelines.add('unlucky', 6)
     voicelines.add('cmon', 6, 1, 4, true)
     voicelines.add('oopsie', 6, 1, 4, true)
 end
