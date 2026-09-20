@@ -4,8 +4,8 @@ A simple 2D troll game made with Love2D. The name is a thing as impossible as yo
 ![Screenshot of level hub](screenshot.png)
 
 ## Controls
-**WASD** - Move
-**P** - Pause/unpause
+* **WASD** - Move
+* **P** - Pause/unpause
 
 ## Requirements
 ### To play:
