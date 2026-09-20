@@ -3,6 +3,10 @@ A simple 2D troll game made with Love2D. The name is a thing as impossible as yo
 
 ![Screenshot of level hub](screenshot.png)
 
+## Controls
+**WASD** - Move
+**P** - Pause/unpause
+
 ## Requirements
 ### To play:
 None (except if you want to play the `.love` universal version, which needs Love2D installed). You can download a build on the [GitHub Releases](https://github.com/Br-Zueira/Drowned-Fish/releases) page. It's officially supported for Windows and Linux at x86_64 architectures. For other systems or architectures, you may want to download the `.love` build along with a Love2D runtime, which can be downloaded [at the official Love2D page](https://love2d.org).
